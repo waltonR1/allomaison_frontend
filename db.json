@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "8cf9",
+      "name": "haihang wang",
+      "gender": "male",
+      "birthday": "2025-04-13",
+      "email": "wanghaihang233@gmail.com",
+      "phone": "0750797040",
+      "password": "123456",
+      "confirmPassword": "123456",
+      "role": ""
+    },
+    {
+      "id": "5f06",
+      "name": "我",
+      "gender": "male",
+      "birthday": "2025-04-04",
+      "email": "2131@1",
+      "phone": "0755555555",
+      "password": "123456",
+      "confirmPassword": "123456"
+    }
+  ]
+}
