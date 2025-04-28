@@ -4,12 +4,14 @@ import { useThemeStore } from '@/stores/theme'
 
 const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
+
 const props = defineProps<{showPage: boolean }>()
+
 </script>
 
 <template>
   <section
-    :class="[isDark ? 'bg-gray-800' : 'bg-amber-100','py-16 px-6 transition-colors duration-500']">
+    :class="[isDark ? 'bg-gray-800' : 'bg-amber-100','py-16 px-6 transition-colors duration-500 select-none']">
 
     <h3 class="text-3xl font-semibold text-center mb-10">Latest Requests</h3>
 

@@ -21,5 +21,35 @@
       "password": "123456",
       "confirmPassword": "123456"
     }
-  ]
+  ],
+  "providers": [
+    {
+      "id": "4a47",
+      "categories": {
+        "category": "Cleaning"
+      },
+      "experiences": "1",
+      "city": "Paris",
+      "yearsOfService": 1
+    }
+  ],
+  "postRequest": [
+    {
+      "id": "734b",
+      "title": "123",
+      "category": "Cleaning",
+      "description": "123",
+      "frequency": "Weekly",
+      "city": "Montpellier"
+    },
+    {
+      "id": "6b01"
+    }
+  ],
+  "connectService": [
+    {
+      "id": "536e"
+    }
+  ],
+  "connectRequest": []
 }

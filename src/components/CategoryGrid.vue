@@ -12,7 +12,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <section :class="[isDark ? 'bg-gray-900' : 'bg-white','py-16 px-6 transition-colors duration-500']">
+  <section :class="[isDark ? 'bg-gray-900' : 'bg-white','py-16 px-6 transition-colors duration-500 select-none']">
 
     <h3 class="text-3xl font-semibold text-center mb-10">
       Popular Service Categories
@@ -31,7 +31,7 @@ const props = defineProps<{
         <div :class="[isDark ? 'text-amber-400' : 'text-amber-700','text-xl font-bold mb-4']">
           {{ title }}
         </div>
-        <button class="text-sm text-amber-500 hover:underline">Learn More</button>
+        <RouterLink :to="{ path:'/findServices', query:{ category: title } }" class="text-sm text-amber-500 hover:underline">Learn More</RouterLink>
       </div>
     </div>
   </section>

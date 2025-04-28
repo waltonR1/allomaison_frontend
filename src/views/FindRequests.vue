@@ -3,7 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/theme'
 import { useFormClasses } from '@/utils/useFormClasses'
-import { services } from '@/data/serviceCard.ts'
+import { requests } from '@/data/requestCard.ts'
 import { cities } from '@/data/cities.ts';
 import { categories } from '@/data/categories.ts'
 import { useRoute } from 'vue-router'
@@ -20,7 +20,7 @@ const city     = ref('All')
 
 /* Combine filters in a computed list */
 const filtered = computed(() =>
-  services.filter(item => {
+  requests.filter(item => {
     const matchText = item.title.toLowerCase().includes(search.value.toLowerCase()) || item.description.toLowerCase().includes(search.value.toLowerCase())
     const matchCat = category.value === 'All' || item.category === category.value
     const matchLocation = city.value === 'All' || item.city === city.value
@@ -47,13 +47,13 @@ onMounted(() => {
 
     <div class="flex-1 py-12 px-4 sm:px-6 lg:px-8">
       <div :class="[isDark ? 'bg-gray-800' : 'bg-white', 'w-full max-w-7xl mx-auto p-8 rounded-3xl shadow-2xl transition duration-500']">
-        <h1 class="text-center text-2xl font-bold mb-6">Find Services</h1>
+        <h1 class="text-center text-2xl font-bold mb-6">Find Requests</h1>
 
         <!-- Search & Category Filters -->
         <div class="grid gap-6 sm:grid-cols-2 mb-8">
-          <input v-model="search" :class="inputClass" placeholder="Search services..." />
+          <input v-model="search" :class="inputClass" placeholder="Search requests..." />
           <select v-model="category" :class="inputClass">
-            <option value="All" disabled hidden>Primary Service Category</option>
+            <option value="All" disabled hidden>Primary request Category</option>
             <option value="All">All</option>
             <option v-for="category in categories" :key="category">{{ category }}</option>
           </select>
@@ -64,13 +64,13 @@ onMounted(() => {
           </select>
         </div>
 
-        <!-- Service Cards -->
+        <!-- request Cards -->
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
             v-for="card in filtered"
             :key="card.id"
             :class="[isDark ? 'bg-gray-700' : 'bg-white', 'rounded-2xl shadow-md p-6 hover:shadow-xl transition group']">
-            <RouterLink :to="{ name: 'serviceDetail', params: { id: card.id } }" :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']">{{ card.title }}</RouterLink>
+            <RouterLink :to="{ name: 'requestDetail', params: { id: card.id } }" :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']">{{ card.title }}</RouterLink>
             <p :class="[isDark ? 'text-gray-400' : 'text-sm text-gray-500 mb-4',]">{{ card.city }} • {{ card.category }}</p>
             <p class="text-sm mb-4">{{ card.description }}</p>
             <p class="text-sm text-yellow-500">★ {{ card.rating }}/5</p>

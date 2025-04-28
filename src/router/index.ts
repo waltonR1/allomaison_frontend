@@ -1,13 +1,16 @@
 import { createRouter, createWebHistory, RouterView } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import FindServices from '@/views/FindServices.vue'
+import FindRequests from '@/views/FindRequests.vue'
 import PostRequest from '@/views/PostRequest.vue'
 import BecomeProvider from '@/views/BecomeProvider.vue'
 import Login           from '@/views/Login.vue'
 import Register        from '@/views/Register.vue'
+import ServiceDetail    from '@/views/ServiceDetail.vue'
+import RequestDetail   from '@/views/RequestDetail.vue'
 
-import LoginRegister from '@/views/LoginRegister.vue'
-import OldHome from  '@/components/Home.vue'
+// import LoginRegister from '@/views/LoginRegister.vue'
+// import OldHome from  '@/components/Home.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +30,11 @@ const router = createRouter({
       component: FindServices
     },
     {
+      path: '/findRequests',
+      name: 'FindRequests',
+      component: FindRequests
+    },
+    {
       path: '/postRequest',
       name: 'PostRequest',     
       component: PostRequest
@@ -44,17 +52,29 @@ const router = createRouter({
         { path: 'register', name: 'Register', component: Register }
       ]
     },
-
-
     {
-      path: '/login',
-      name: 'LoginRegister',
-      component: LoginRegister
+      path: '/services/:id',
+      name: 'serviceDetail',
+      component: ServiceDetail,
+      props: true
     },
     {
-      path:'/oldhome',
-      component:OldHome,
+      path: '/requests/:id',
+      name: 'requestDetail',
+      component: RequestDetail,
+      props: true
     }
+
+
+    // {
+    //   path: '/login',
+    //   name: 'LoginRegister',
+    //   component: LoginRegister
+    // },
+    // {
+    //   path:'/oldhome',
+    //   component:OldHome,
+    // }
   ],
 })
 

@@ -7,26 +7,51 @@ import { categories } from '@/data/categories.ts'
 
 import HeaderBar from '@/components/HeaderBar.vue'
 import FooterBar from '@/components/FooterBar.vue'
+import axios from 'axios'
+import { urls } from '@/utils/urls.ts'
+import Router from '@/router'
+import { useUserStore } from '@/stores/user.ts'
+import { cities } from '@/data/cities.ts'
 
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
+const userStore = useUserStore()
+const token = ref(userStore.checkToken())
+
+
+const loading = ref(false)
 const form = reactive({
   title: '',
-  category: 'Cleaning',
+  category: '',
   description: '',
-  frequency: 'One‑time',
+  frequency: '',
   city: ''
 })
 
-const submitted = ref(false)
 
-function submit () {
-  console.log('PostRequest data', { ...form })
-  submitted.value = true
+const submit = async () => {
+  if (!token.value) {
+    await Router.push('/auth/login')
+    return
+  }
+  try {
+    await axios.post(urls.postRequest, {...form}, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+    });
+
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || error.response?.data || 'Failed');
+  }
+  alert('Successfully, Please wait for approval.')
+  await Router.push('/')
 }
 
 const { inputClass, buttonClass } = useFormClasses()
+
 </script>
 
 <template>
@@ -37,12 +62,12 @@ const { inputClass, buttonClass } = useFormClasses()
       <div :class="[isDark ? 'bg-gray-800' : 'bg-white', 'w-full max-w-3xl space-y-8 p-8 rounded-3xl shadow-2xl transition duration-500']">
         <h1 class="text-center text-2xl font-bold mb-6">Post a Service Request</h1>
 
-        <form v-if="!submitted" @submit.prevent="submit" class="space-y-6">
+        <form  @submit.prevent="submit" class="space-y-6">
           <input id="title" v-model="form.title" type="text" required :class="inputClass" placeholder="Title" />
 
           <select id="category" v-model="form.category" :class="inputClass">
-            <option value="All" selected >Primary Service Category</option>
-            <option v-for="category in categories" :key="category">{{ category }}</option>
+            <option value="" selected disabled hidden>Primary Service Category</option>
+            <option :value=category v-for="category in categories" :key="category">{{ category }}</option>
           </select>
 
 
@@ -50,20 +75,19 @@ const { inputClass, buttonClass } = useFormClasses()
           <textarea id="description" v-model="form.description" rows="4" required :class="[inputClass, 'resize-none']" placeholder="Describe your request"></textarea>
 
           <select id="frequency" v-model="form.frequency" :class="inputClass">
-            <option>One‑time</option>
-            <option>Weekly</option>
-            <option>Monthly</option>
+            <option value="" selected disabled hidden>Frequence</option>
+            <option value="OneTime">One‑time</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
           </select>
 
-          <input id="city" v-model="form.city" type="text" required :class="inputClass" placeholder="City" />
+          <select  v-model="form.city" :class="inputClass">
+            <option value="" disabled selected hidden>City</option>
+            <option v-for="city in cities" :key="city">{{ city }}</option>
+          </select>
 
-          <button type="submit" :class="buttonClass">Submit Request</button>
+          <button type="submit" :class="buttonClass" :disabled="loading">Submit Request</button>
         </form>
-
-        <div v-else class="text-center space-y-4">
-          <p>Your request has been posted successfully! 🎉</p>
-          <router-link to="/" :class="buttonClass">Back to Home</router-link>
-        </div>
       </div>
     </div>
 

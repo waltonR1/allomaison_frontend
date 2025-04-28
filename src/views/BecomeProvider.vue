@@ -11,6 +11,7 @@ import HeaderBar from '@/components/HeaderBar.vue'
 import FooterBar from '@/components/FooterBar.vue'
 import axios from 'axios'
 import { urls } from '@/utils/urls.ts'
+import { cities } from '@/data/cities.ts'
 
 const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
@@ -39,12 +40,15 @@ function LoginClick() {
 
 const loading = ref(false)
 const form = reactive({
-
+      categories: '',
+      experiences:'',
+      city:'',
+      yearsOfService:''
 })
 
 const submit = async () => {
   try {
-    await axios.post(urls.register, {...form}, {
+    await axios.post(urls.becomeProvider, {...form}, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -52,10 +56,10 @@ const submit = async () => {
     });
 
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || error.response?.data || 'register failed');
+    throw new Error(error.response?.data?.message || error.response?.data || 'Failed');
   }
-  alert('Successfully registered')
-  await Router.push('/auth/login')
+  alert('Successfully, Please wait for approval.')
+  await Router.push('/')
 }
 
 </script>
@@ -83,15 +87,17 @@ const submit = async () => {
           </button>
         </div>
 
-        <form v-if="formVisible" class="grid sm:grid-cols-2 gap-6 mt-8" @submit.prevent="alert('Registration submitted!')">
-          <input placeholder="Full Name" :class="[inputClass]" required />
-          <input placeholder="Email" type="email" :class="[inputClass]" required />
-          <input placeholder="Phone Number" required :class="[inputClass]" />
-          <select :class="[inputClass]" required>
-            <option disabled selected hidden>Primary Service Category</option>
-            <option v-for="category in categories" :key="category">{{ category }}</option>
+        <form v-if="formVisible" class="grid sm:grid-cols-2 gap-6 mt-8" @submit.prevent="submit">
+          <input v-model="form.yearsOfService" placeholder="Years of service" type="number" :class="[inputClass]" required />
+          <select  v-model="form.city" :class="inputClass">
+            <option value="" disabled selected hidden>City</option>
+            <option v-for="city in cities" :key="city">{{ city }}</option>
           </select>
-          <textarea placeholder="Tell us about your experience..." rows="4" :class="[inputClass,'sm:col-span-2']"></textarea>
+          <select v-model="form.categories" :class="[inputClass]" required>
+            <option value="" disabled selected hidden>Primary Service Category</option>
+            <option :value='{category}' v-for="category in categories" :key="category">{{ category }}</option>
+          </select>
+          <textarea v-model="form.experiences" placeholder="Tell us about your experience..." rows="4" :class="[inputClass,'sm:col-span-2']"></textarea>
           <button type="submit" :class="[buttonClass,'sm:col-span-2']" :disabled="loading"> Submit Application </button>
         </form>
 
