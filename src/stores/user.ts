@@ -12,8 +12,8 @@ interface UserState {
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
     token: 'ww',
-    // role: 'customer'
-    role: 'provider'
+    role: 'customer'
+    // role: 'provider'
   }),
   actions: {
     async login(values: { email: string; password: string }) {

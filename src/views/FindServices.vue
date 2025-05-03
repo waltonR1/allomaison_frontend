@@ -71,7 +71,8 @@ onMounted(() => {
             :key="card.id"
             :class="[isDark ? 'bg-gray-700' : 'bg-white', 'rounded-2xl shadow-md p-6 hover:shadow-xl transition group']">
             <RouterLink :to="{ name: 'serviceDetail', params: { id: card.id } }" :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']">{{ card.title }}</RouterLink>
-            <p :class="[isDark ? 'text-gray-400' : 'text-sm text-gray-500 mb-4',]">{{ card.city }} • {{ card.category }}</p>
+            <p :class="[isDark ? 'text-gray-400' : 'text-gray-500 ','mb-4 text-sm']">{{ card.city }} • {{ card.category }}</p>
+            <p class="text-sm ">{{ card.provider }}</p>
             <p class="text-sm mb-4">{{ card.description }}</p>
             <p class="text-sm text-yellow-500">★ {{ card.rating }}/5</p>
           </div>

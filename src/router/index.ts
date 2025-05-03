@@ -9,9 +9,6 @@ import Register        from '@/views/Register.vue'
 import ServiceDetail    from '@/views/ServiceDetail.vue'
 import RequestDetail   from '@/views/RequestDetail.vue'
 
-// import LoginRegister from '@/views/LoginRegister.vue'
-// import OldHome from  '@/components/Home.vue'
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -65,16 +62,6 @@ const router = createRouter({
       props: true
     }
 
-
-    // {
-    //   path: '/login',
-    //   name: 'LoginRegister',
-    //   component: LoginRegister
-    // },
-    // {
-    //   path:'/oldhome',
-    //   component:OldHome,
-    // }
   ],
 })
 

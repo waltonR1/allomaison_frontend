@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/theme'
 import { useFormClasses } from '@/utils/useFormClasses'
@@ -32,7 +32,7 @@ const formVisible = ref(false);
 
 function LoginClick() {
   if (!token.value) {
-    Router.push('/auth/login')
+    Router.push('/auth/register')
     return
   }
   formVisible.value = !formVisible.value
