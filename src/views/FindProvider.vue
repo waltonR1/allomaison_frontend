@@ -3,13 +3,10 @@ import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/theme'
 import { useFormClasses } from '@/utils/useFormClasses'
-import { services } from '@/data/serviceCard.ts'
+import { providerCards } from '@/data/serviceCard.ts'
 import { cities } from '@/data/cities.ts';
 import { categories } from '@/data/categories.ts'
 import { useRoute } from 'vue-router'
-
-import HeaderBar from '@/components/HeaderBar.vue'
-import FooterBar from '@/components/FooterBar.vue'
 
 const route = useRoute(); // 获取当前路由
 
@@ -20,10 +17,10 @@ const city     = ref('All')
 
 /* Combine filters in a computed list */
 const filtered = computed(() =>
-  services.filter(item => {
-    const matchText = item.title.toLowerCase().includes(search.value.toLowerCase()) || item.description.toLowerCase().includes(search.value.toLowerCase())
-    const matchCat = category.value === 'All' || item.category === category.value
-    const matchLocation = city.value === 'All' || item.city === city.value
+  providerCards.filter(s => {
+    const matchText = s.description.toLowerCase().includes(search.value.toLowerCase())
+    const matchCat = category.value === 'All' || s.category === category.value
+    const matchLocation = city.value === 'All' || s.city === city.value
     return matchText && matchCat && matchLocation
   })
 )
@@ -42,9 +39,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="[isDark ? 'bg-gray-900 text-gray-100' : 'bg-white', 'min-h-screen flex flex-col transition-colors duration-500']">
-    <HeaderBar />
-
     <div class="flex-1 py-12 px-4 sm:px-6 lg:px-8">
       <div :class="[isDark ? 'bg-gray-800' : 'bg-white', 'w-full max-w-7xl mx-auto p-8 rounded-3xl shadow-2xl transition duration-500']">
         <h1 class="text-center text-2xl font-bold mb-6">Find Services</h1>
@@ -70,18 +64,14 @@ onMounted(() => {
             v-for="card in filtered"
             :key="card.id"
             :class="[isDark ? 'bg-gray-700' : 'bg-white', 'rounded-2xl shadow-md p-6 hover:shadow-xl transition group']">
-            <RouterLink :to="{ name: 'serviceDetail', params: { id: card.id } }" :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']">{{ card.title }}</RouterLink>
+            <RouterLink :to="{ name: 'serviceDetail', params: { id: card.id } }" :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']">{{ card.provider }}</RouterLink>
             <p :class="[isDark ? 'text-gray-400' : 'text-gray-500 ','mb-4 text-sm']">{{ card.city }} • {{ card.category }}</p>
-            <p class="text-sm ">{{ card.provider }}</p>
             <p class="text-sm mb-4">{{ card.description }}</p>
             <p class="text-sm text-yellow-500">★ {{ card.rating }}/5</p>
           </div>
         </div>
       </div>
     </div>
-
-    <FooterBar />
-  </div>
 </template>
 
 <style scoped>

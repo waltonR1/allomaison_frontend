@@ -22,6 +22,20 @@ export function useFormClasses () {
     ].join(' ')
   )
 
+  /**
+   * 选择框样式（根据当前选中的值动态变色）
+   * @param value 当前 select 绑定的值，如 form.gender
+   */
+  const noPlaceholderInputClass = (value: string) =>
+    [
+      'w-full px-4 py-3 rounded-xl border focus:ring-2 focus:outline-none transition',
+      isDark.value
+        ? 'bg-gray-700 border-gray-700 focus:ring-amber-400'
+        : 'bg-white border-gray-300 focus:ring-amber-400',
+      value === '' ? (isDark.value ? 'text-gray-400' : 'text-gray-500')  : (isDark.value ? 'text-gray-100' : 'text-gray-900')
+    ].join(' ')
+
+
   /** 按钮样式 */
   const buttonClass = computed(() =>
     [
@@ -32,5 +46,16 @@ export function useFormClasses () {
     ].join(' ')
   )
 
-  return { inputClass, buttonClass }
+  /** 文件上传样式 */
+  const fileInputClass = computed(() =>
+    [
+      'block w-full text-sm text-gray-500 rounded-xl file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm  file:text-white',
+      isDark.value
+        ? 'bg-gray-700 text-gray-100 file:bg-amber-500 hover:file:bg-amber-600'
+        : 'bg-white text-gray-900 file:bg-amber-400 hover:file:bg-amber-500'
+    ].join(' ')
+  )
+
+
+  return { inputClass, noPlaceholderInputClass, buttonClass, fileInputClass }
 }

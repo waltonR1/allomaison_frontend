@@ -14,9 +14,9 @@ const token = ref(userStore.checkToken())
 
 const showLogout = ref(false)
 
-const FindService = () => Router.push('/findServices')
+const FindService = () => Router.push('/findProvider')
 const FindRequest = () => Router.push('/findRequests')
-const PostRequest = () => Router.push('/postRequest')
+const PostRequest = () => Router.push('/postTask')
 const BecomeProvider = () => Router.push('/becomeProvider')
 const LoginRegister = () => Router.push('/auth/login')
 
@@ -36,8 +36,8 @@ const handleLogout = () => {
 
     <nav class="flex items-center space-x-4">
       <button v-if="role === 'provider'" class="hover:text-amber-500 transition select-none" @click="FindRequest">Find Request</button>
-      <button class="hover:text-amber-500 transition select-none" @click="FindService">Find Services</button>
-      <button class="hover:text-amber-500 transition select-none" @click="PostRequest">Post a Request</button>
+      <button class="hover:text-amber-500 transition select-none" @click="FindService">Find Providers</button>
+      <button class="hover:text-amber-500 transition select-none" @click="PostRequest">Post a Task</button>
       <button v-if="role !== 'provider'" class="hover:text-amber-500 transition select-none" @click="BecomeProvider">Become a Provider</button>
 
       <template v-if="token">

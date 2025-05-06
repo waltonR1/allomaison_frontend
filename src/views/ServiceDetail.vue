@@ -3,9 +3,7 @@ import { computed, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/theme'
-import HeaderBar from '@/components/HeaderBar.vue'
-import FooterBar from '@/components/FooterBar.vue'
-import { services } from '@/data/serviceCard'
+import { providerCards } from '@/data/serviceCard'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import Router from '@/router'
 import axios from 'axios'
@@ -22,7 +20,7 @@ const id     = Number(route.params.id)
 
 const service = computed(() =>
   // 非空断言 `!`：告诉 TS 这里必有值
-  services.find(item => item.id === id)!
+  providerCards.find(item => item.id === id)!
 )
 
 const userStore = useUserStore()
@@ -56,9 +54,6 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div :class="[isDark ? 'bg-gray-900 text-gray-100' : 'bg-white', 'min-h-screen flex flex-col transition-colors duration-500']">
-    <HeaderBar />
-
     <main class="flex-1 py-12 px-4 sm:px-6 lg:px-8">
       <article :class="[isDark ? 'bg-gray-800' : 'bg-white', 'w-full max-w-3xl mx-auto p-8 rounded-3xl shadow-2xl transition duration-500']">
 
@@ -66,7 +61,7 @@ watchEffect(() => {
           ← Back
         </button>
 
-        <h1 class="text-3xl font-bold mb-2">{{ service.title }}</h1>
+        <h1 class="text-3xl font-bold mb-2">{{ service.provider }}</h1>
         <p :class="[isDark ? 'text-gray-400' : 'text-gray-500', 'mb-6']">
           {{ service.city }} • {{ service.category }}
         </p>
@@ -81,11 +76,7 @@ watchEffect(() => {
 
         <button @click="submit" :class="[buttonClass,'mt-6']"> Connect </button>
       </article>
-
     </main>
-
-    <FooterBar />
-  </div>
 </template>
 
 

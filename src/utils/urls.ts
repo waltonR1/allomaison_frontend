@@ -5,7 +5,7 @@ export const urls = {
   login: `${BASE_URL}/user/login`,
   register:`${BASE_URL}/users`,
   becomeProvider: `${BASE_URL}/providers`,
-  postRequest: `${BASE_URL}/postRequest`,
+  postTask: `${BASE_URL}/postTask`,
   connectService: `${BASE_URL}/connectService`,
   connectRequest: `${BASE_URL}/connectRequest`,
 }

@@ -30,8 +30,8 @@ const year = new Date().getFullYear()
           Quick Links
         </h4>
         <ul class="space-y-1">
-          <li><RouterLink to="/findServices" class="hover:underline">Find Services</RouterLink></li>
-          <li><RouterLink to="/postRequest" class="hover:underline">Post a Request</RouterLink></li>
+          <li><RouterLink to="/findProvider" class="hover:underline">Find Providers</RouterLink></li>
+          <li><RouterLink to="/postTask" class="hover:underline">Post a Task</RouterLink></li>
           <li><RouterLink to="/becomeProvider" class="hover:underline">Become a Provider</RouterLink></li>
         </ul>
       </div>

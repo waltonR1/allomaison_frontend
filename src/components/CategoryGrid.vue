@@ -31,7 +31,7 @@ const props = defineProps<{
         <div :class="[isDark ? 'text-amber-400' : 'text-amber-700','text-xl font-bold mb-4']">
           {{ title }}
         </div>
-        <RouterLink :to="{ path:'/findServices', query:{ category: title } }" class="text-sm text-amber-500 hover:underline">Learn More</RouterLink>
+        <RouterLink :to="{ path:'/findProvider', query:{ category: title } }" class="text-sm text-amber-500 hover:underline">Learn More</RouterLink>
       </div>
     </div>
   </section>

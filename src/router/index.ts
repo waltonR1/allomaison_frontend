@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory, RouterView } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import FindServices from '@/views/FindServices.vue'
+import FindProvider from '@/views/FindProvider.vue'
 import FindRequests from '@/views/FindRequests.vue'
-import PostRequest from '@/views/PostRequest.vue'
+import PostTask from '@/views/PostTask.vue'
 import BecomeProvider from '@/views/BecomeProvider.vue'
 import Login           from '@/views/Login.vue'
 import Register        from '@/views/Register.vue'
 import ServiceDetail    from '@/views/ServiceDetail.vue'
 import RequestDetail   from '@/views/RequestDetail.vue'
+import Terms from '@/views/Terms.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,9 +23,9 @@ const router = createRouter({
       component:HomeView,
     },
     {
-      path: '/findServices',
-      name: 'FindServices',
-      component: FindServices
+      path: '/findProvider',
+      name: 'FindProvider',
+      component: FindProvider
     },
     {
       path: '/findRequests',
@@ -32,9 +33,9 @@ const router = createRouter({
       component: FindRequests
     },
     {
-      path: '/postRequest',
-      name: 'PostRequest',     
-      component: PostRequest
+      path: '/postTask',
+      name: 'PostTask',
+      component: PostTask
     },
     {
       path: '/becomeProvider',
@@ -46,8 +47,10 @@ const router = createRouter({
       component: RouterView, // 简单占位
       children: [
         { path: 'login',    name: 'Login',    component: Login    },
-        { path: 'register', name: 'Register', component: Register }
-      ]
+        { path: 'register', name: 'Register', component: Register },
+        { path:'terms',     name: 'Terms',    component: Terms },
+      ],
+      redirect: '/auth/login',
     },
     {
       path: '/services/:id',

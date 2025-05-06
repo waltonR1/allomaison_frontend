@@ -7,13 +7,15 @@ interface UserState {
   token: string | null;
   // customer/provider
   role: string | null;
+  user_id: string | null;
 }
 
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
     token: 'ww',
-    role: 'customer'
+    role: 'customer',
     // role: 'provider'
+    user_id:''
   }),
   actions: {
     async login(values: { email: string; password: string }) {
@@ -28,6 +30,7 @@ export const useUserStore = defineStore('user', {
 
         this.token = response.data.token;
         this.role = response.data.role;
+        this.user_id = response.data.id;
       } catch (error: any) {
         throw new Error(error.response?.data?.message || error.response?.data || 'Login failed');
       }
@@ -35,6 +38,7 @@ export const useUserStore = defineStore('user', {
     logout() {
       this.token = null;
       this.role = null;
+      this.user_id = null;
     },
     /** 判断本地 token 是否仍然有效；无效就自动登出 */
     checkToken() {

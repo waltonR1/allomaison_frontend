@@ -1,54 +1,90 @@
 {
   "users": [
     {
-      "id": "8cf9",
-      "name": "haihang wang",
+      "id": "3223",
+      "first_name": "haihang",
+      "last_name": "wang",
       "gender": "male",
-      "birthday": "2025-04-13",
+      "birthday": "2025-05-01",
       "email": "wanghaihang233@gmail.com",
       "phone": "0750797040",
       "password": "123456",
       "confirmPassword": "123456",
-      "role": ""
-    },
-    {
-      "id": "5f06",
-      "name": "我",
-      "gender": "male",
-      "birthday": "2025-04-04",
-      "email": "2131@1",
-      "phone": "0755555555",
-      "password": "123456",
-      "confirmPassword": "123456"
+      "agree": true
     }
   ],
-  "providers": [
+  "providers": [],
+  "postTask": [
     {
-      "id": "4a47",
-      "categories": {
-        "category": "Cleaning"
-      },
-      "experiences": "1",
-      "city": "Paris",
-      "yearsOfService": 1
-    }
-  ],
-  "postRequest": [
-    {
-      "id": "734b",
-      "title": "123",
+      "id": "be0b",
+      "title": "为",
       "category": "Cleaning",
-      "description": "123",
-      "frequency": "Weekly",
-      "city": "Montpellier"
+      "frequency": "OneTime",
+      "city": "Dijon",
+      "datetime": "2025-05-24T22:26",
+      "address": "额外",
+      "budget": 234234,
+      "contact": "342",
+      "description": "42342"
     },
     {
-      "id": "6b01"
+      "id": "a763",
+      "title": "312",
+      "category": "Cleaning",
+      "frequency": "OneTime",
+      "city": "Marseille",
+      "datetime": "",
+      "address": "312",
+      "budget": 312,
+      "contact": "312",
+      "description": "123"
+    },
+    {
+      "id": "7186",
+      "user_id": {
+        "_object": {
+          "$id": "user",
+          "token": "ww",
+          "role": "customer",
+          "user_id": "",
+          "_isOptionsAPI": true
+        },
+        "_key": "user_id",
+        "__v_isRef": true
+      },
+      "title": "321",
+      "category": "Cleaning",
+      "frequency": "Weekly",
+      "city": "Rennes",
+      "datetime": "2025-05-04T22:48",
+      "address": "123",
+      "budget": 32,
+      "contact": "321",
+      "description": "321"
+    },
+    {
+      "id": "b227",
+      "user_id": "",
+      "title": "321",
+      "category": "Cleaning",
+      "frequency": "OneTime",
+      "city": "Nîmes",
+      "datetime": "",
+      "address": "312",
+      "budget": 312,
+      "contact": "321",
+      "description": "123"
     }
   ],
   "connectService": [
     {
       "id": "536e"
+    },
+    {
+      "id": "e9ea"
+    },
+    {
+      "id": "89e9"
     }
   ],
   "connectRequest": []

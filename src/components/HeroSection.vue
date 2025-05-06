@@ -15,11 +15,11 @@ const { isDark } = storeToRefs(theme)
     <p class="text-lg mb-10 select-none">Certified helpers available nationwide at your doorstep</p>
 
     <div class="flex justify-center space-x-6">
-      <RouterLink to="/findServices" class="px-8 py-3 bg-amber-400 hover:bg-amber-500 text-white rounded-xl text-lg transition select-none">
-        Find a Provider
+      <RouterLink to="/findProvider" class="px-8 py-3 bg-amber-400 hover:bg-amber-500 text-white rounded-xl text-lg transition select-none">
+        Find Providers
       </RouterLink>
-      <RouterLink to="/postRequest" class="px-8 py-3 border-2 border-amber-400 text-amber-600 hover:bg-amber-100 rounded-xl text-lg transition select-none">
-        Post My Request
+      <RouterLink to="/postTask" class="px-8 py-3 border-2 border-amber-400 text-amber-600 hover:bg-amber-100 rounded-xl text-lg transition select-none">
+        Post My Task
       </RouterLink>
     </div>
   </section>
