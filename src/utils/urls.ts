@@ -6,6 +6,6 @@ export const urls = {
   register:`${BASE_URL}/users`,
   becomeProvider: `${BASE_URL}/providers`,
   postTask: `${BASE_URL}/postTask`,
-  connectService: `${BASE_URL}/connectService`,
+  connectProvider: `${BASE_URL}/connectProvider`,
   connectRequest: `${BASE_URL}/connectRequest`,
 }

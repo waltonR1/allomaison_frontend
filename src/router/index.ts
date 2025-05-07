@@ -6,7 +6,7 @@ import PostTask from '@/views/PostTask.vue'
 import BecomeProvider from '@/views/BecomeProvider.vue'
 import Login           from '@/views/Login.vue'
 import Register        from '@/views/Register.vue'
-import ServiceDetail    from '@/views/ServiceDetail.vue'
+import ProviderDetail    from '@/views/ProviderDetail.vue'
 import RequestDetail   from '@/views/RequestDetail.vue'
 import Terms from '@/views/Terms.vue'
 
@@ -53,9 +53,9 @@ const router = createRouter({
       redirect: '/auth/login',
     },
     {
-      path: '/services/:id',
-      name: 'serviceDetail',
-      component: ServiceDetail,
+      path: '/provider/:id',
+      name: 'providerDetail',
+      component: ProviderDetail,
       props: true
     },
     {

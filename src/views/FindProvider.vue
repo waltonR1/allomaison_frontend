@@ -60,14 +60,11 @@ onMounted(() => {
 
         <!-- Service Cards -->
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
-            v-for="card in filtered"
-            :key="card.id"
-            :class="[isDark ? 'bg-gray-700' : 'bg-white', 'rounded-2xl shadow-md p-6 hover:shadow-xl transition group']">
-            <RouterLink :to="{ name: 'serviceDetail', params: { id: card.id } }" :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']">{{ card.provider }}</RouterLink>
-            <p :class="[isDark ? 'text-gray-400' : 'text-gray-500 ','mb-4 text-sm']">{{ card.city }} • {{ card.category }}</p>
-            <p class="text-sm mb-4">{{ card.description }}</p>
-            <p class="text-sm text-yellow-500">★ {{ card.rating }}/5</p>
+          <div v-for="providerCard in filtered" :key="providerCard.id" :class="[isDark ? 'bg-gray-700' : 'bg-white', 'rounded-2xl shadow-md p-6 hover:shadow-xl transition group']">
+            <RouterLink :to="{ name: 'providerDetail', params: { id: providerCard.id } }" :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']">{{ providerCard.provider }}</RouterLink>
+            <p :class="[isDark ? 'text-gray-400' : 'text-gray-500 ','mb-4 text-sm']">{{ providerCard.city }} • {{ providerCard.category }}</p>
+            <p class="text-sm mb-4">{{ providerCard.description }}</p>
+            <p class="text-sm text-yellow-500">★ {{ providerCard.rating }}/5</p>
           </div>
         </div>
       </div>
