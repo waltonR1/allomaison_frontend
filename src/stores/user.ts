@@ -8,6 +8,8 @@ interface UserState {
   // customer/provider
   role: string | null;
   user_id: string | null;
+  avatarUrl: string | null;
+  user_name: string | null;
 }
 
 export const useUserStore = defineStore('user', {
@@ -15,7 +17,9 @@ export const useUserStore = defineStore('user', {
     token: 'ww',
     role: 'customer',
     // role: 'provider'
-    user_id:''
+    user_id:'',
+    avatarUrl:'',
+    user_name:'binbin'
   }),
   actions: {
     async login(values: { email: string; password: string }) {
@@ -31,6 +35,8 @@ export const useUserStore = defineStore('user', {
         this.token = response.data.token;
         this.role = response.data.role;
         this.user_id = response.data.id;
+        this.avatarUrl = response.data.avatarUrl;
+        this.user_name = response.data.user_name;
       } catch (error: any) {
         throw new Error(error.response?.data?.message || error.response?.data || 'Login failed');
       }
@@ -39,6 +45,8 @@ export const useUserStore = defineStore('user', {
       this.token = null;
       this.role = null;
       this.user_id = null;
+      this.avatarUrl = null;
+      this.user_name = null;
     },
     /** 判断本地 token 是否仍然有效；无效就自动登出 */
     checkToken() {

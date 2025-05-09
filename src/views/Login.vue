@@ -34,7 +34,7 @@ const { inputClass, buttonClass } = useFormClasses()
 </script>
 
 <template>
-    <div class="flex flex-1 items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <main class="flex flex-1 items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div :class="[isDark ? 'bg-gray-800' :'bg-white','w-full max-w-md space-y-8 p-8 rounded-3xl shadow-2xl transition duration-500']">
         <h1 class="text-center text-2xl font-bold mb-6">Login</h1>
 
@@ -48,10 +48,8 @@ const { inputClass, buttonClass } = useFormClasses()
           Don’t have an account? Register
         </router-link>
       </div>
-    </div>
+    </main>
 </template>
 
-
 <style scoped>
-
 </style>

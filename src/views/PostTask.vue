@@ -58,7 +58,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
 </script>
 
 <template>
-    <div class="flex flex-1 items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <main class="flex flex-1 items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div :class="[isDark ? 'bg-gray-800' : 'bg-white', 'w-full max-w-3xl space-y-8 p-8 rounded-3xl shadow-2xl transition duration-500']">
         <h1 class="text-center text-2xl font-bold mb-6">Post a Task</h1>
 
@@ -86,7 +86,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
           <button type="submit" :class="buttonClass" :disabled="loading">Submit Request</button>
         </form>
       </div>
-    </div>
+    </main>
 </template>
 
 <style scoped>

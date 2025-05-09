@@ -104,7 +104,7 @@ const submit = async () => {
 </script>
 
 <template>
-    <div class="flex-1 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <main class="flex-1 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <h2 :class="[isDark ? 'text-amber-400' : '', 'text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-10']">Become a Provider</h2>
 
       <div :class="[isDark ? 'bg-gray-800' : 'bg-white','w-full max-w-4xl rounded-3xl shadow-xl p-6 sm:p-10 space-y-8']">
@@ -143,7 +143,7 @@ const submit = async () => {
         </form>
 
       </div>
-    </div>
+    </main>
 </template>
 
 <style scoped>

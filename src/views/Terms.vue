@@ -9,7 +9,7 @@ const { isDark } = storeToRefs(theme)
 
 <template>
 
-    <div class="flex flex-1 items-center justify-center py-12 px-4">
+    <main class="flex flex-1 items-center justify-center py-12 px-4">
       <div :class="[isDark ? 'bg-gray-800' : 'bg-white', 'w-full max-w-7xl space-y-8 p-8 rounded-3xl shadow-2xl transition duration-500']">
         <h1 class="text-center text-2xl font-bold mb-6">Terms of Service</h1>
         <p class="mb-4">
@@ -64,7 +64,7 @@ const { isDark } = storeToRefs(theme)
 
         <p class="mt-8 text-sm text-gray-500">Last updated: May 3, 2025</p>
       </div>
-    </div>
+    </main>
 
 </template>
 

@@ -9,16 +9,10 @@ const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
 const userStore = useUserStore()
-const { role } = storeToRefs(userStore)
+const { role,avatarUrl,user_name } = storeToRefs(userStore)
 const token = ref(userStore.checkToken())
 
-const showLogout = ref(false)
-
-const FindService = () => Router.push('/findProvider')
-const FindRequest = () => Router.push('/findRequests')
-const PostRequest = () => Router.push('/postTask')
-const BecomeProvider = () => Router.push('/becomeProvider')
-const LoginRegister = () => Router.push('/auth/login')
+const showCard = ref(false)
 
 const handleLogout = () => {
   userStore.logout()
@@ -35,38 +29,31 @@ const handleLogout = () => {
     </h1>
 
     <nav class="flex items-center space-x-4">
-      <button v-if="role === 'provider'" class="hover:text-amber-500 transition select-none" @click="FindRequest">Find Request</button>
-      <button class="hover:text-amber-500 transition select-none" @click="FindService">Find Providers</button>
-      <button class="hover:text-amber-500 transition select-none" @click="PostRequest">Post a Task</button>
-      <button v-if="role !== 'provider'" class="hover:text-amber-500 transition select-none" @click="BecomeProvider">Become a Provider</button>
+      <router-link v-if="role === 'provider'" class="hover:text-amber-500 transition select-none" to="/findProvider">Find Request</router-link>
+      <router-link class="hover:text-amber-500 transition select-none" to="/findProvider">Find Providers</router-link>
+      <router-link class="hover:text-amber-500 transition select-none" to="/postTask">Post a Task</router-link>
+      <router-link v-if="role !== 'provider'" class="hover:text-amber-500 transition select-none" to="/becomeProvider">Become a Provider</router-link>
 
       <template v-if="token">
-        <div
-          class="relative"
-          @mouseenter="showLogout = true"
-          @mouseleave="showLogout = false"
-        >
-          <button :class="[isDark ? 'border border-amber-400 text-amber-400 hover:bg-amber-500 hover:text-white' : 'border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white', 'px-4 py-2 rounded-lg font-semibold transition-colors select-none']">
-            Personal Information
-          </button>
+        <div class="relative" @mouseenter="showCard = true" @mouseleave="showCard = false">
+          <div class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center border-2 border-yellow-400 shadow-md hover:shadow-xl hover:bg-gray-300 hover:scale-110">
+            <img v-if="avatarUrl" :src="avatarUrl" alt="User avatar" class="w-full h-full object-cover" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14c-3.5 0-6 2.5-6 5.5v.5h12v-.5c0-3-2.5-5.5-6-5.5zm0-2a4 4 0 100-8 4 4 0 000 8z" />
+            </svg>
+          </div>
 
-          <!-- logout dropdown -->
-          <transition>
-            <div
-              v-if="showLogout"
-              class="absolute right-0 top-full w-full shadow-lg z-20 rounded-lg overflow-hidden"
-            >
-              <button @click="handleLogout"  :class="[isDark ? 'border border-amber-400 text-amber-400 hover:bg-amber-500 hover:text-white' : 'border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white', 'w-full text-center px-4 py-2 rounded-lg font-semibold transition-colors select-none']">
-                Logout
-              </button>
-            </div>
-          </transition>
+          <div v-if="showCard" :class="[isDark ? 'bg-gray-800' : 'bg-white','absolute right-0 top-full w-64 rounded-2xl shadow-2xl p-4 z-10']">
+            <div class="w-full text-center px-3 py-2 text-xl border-b  select-none ">{{ user_name?.valueOf() || 'Guest'}}</div>
+            <button :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Personal Information</button>
+            <button @click="handleLogout"  :class="[isDark ? 'border border-amber-400 text-amber-400 hover:bg-amber-500 hover:text-white' : 'border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white', 'w-full text-center px-4 py-2 mt-4 rounded-lg font-semibold transition-colors select-none']">Logout</button>
+          </div>
         </div>
       </template>
       <template v-else>
-        <button @click="LoginRegister" :class="[isDark? 'bg-amber-500 hover:bg-amber-600 text-white': 'bg-amber-400 hover:bg-amber-500 text-white','px-4 py-2 rounded-lg']">
+        <router-link to="/auth/login" :class="[isDark? 'bg-amber-500 hover:bg-amber-600 text-white': 'bg-amber-400 hover:bg-amber-500 text-white','px-4 py-2 rounded-lg']">
           Login / Register
-        </button>
+        </router-link>
       </template>
 
 

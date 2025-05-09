@@ -36,7 +36,7 @@ const submit = async () => {
 
   if (passwordDifferent.value) {
     alert('The two passwords do not match')
-    return; // 阻止提交
+    return;
   }
   try {
     loading.value = true
@@ -63,7 +63,7 @@ const { inputClass, noPlaceholderInputClass, buttonClass } = useFormClasses()
 </script>
 
 <template>
-    <div class="flex flex-1 items-center justify-center py-12 px-4">
+    <main class="flex flex-1 items-center justify-center py-12 px-4">
       <div :class="[isDark ? 'bg-gray-800' :'bg-white','w-full max-w-md space-y-8 p-8 rounded-2xl shadow-2xl transition duration-500']">
         <h1 class="text-center text-2xl font-bold mb-6">Create account</h1>
 
@@ -98,7 +98,7 @@ const { inputClass, noPlaceholderInputClass, buttonClass } = useFormClasses()
           Already have an account? Login
         </router-link>
       </div>
-    </div>
+    </main>
 </template>
 
 
