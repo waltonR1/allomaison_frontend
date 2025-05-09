@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import {computed, ref, watch, watchEffect} from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/theme'
-import { providerCards } from '@/data/serviceCard'
+import { providerCards } from '@/data/providerCard.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import Router from '@/router'
 import axios from 'axios'
@@ -24,6 +24,11 @@ const service = computed(() =>
 
 const userStore = useUserStore()
 const token = ref(userStore.checkToken())
+
+const showImage = ref(true)
+const handleImgError = () => {
+  showImage.value = false
+}
 
 const submit = async () => {
   if (!token.value) {
@@ -49,6 +54,9 @@ const submit = async () => {
 watchEffect(() => {
   if (!service.value) router.replace('/')
 })
+watch(() => service.value.avatarUrl, () => {
+  showImage.value = true
+})
 </script>
 
 <template>
@@ -59,61 +67,54 @@ watchEffect(() => {
 
       <div class="flex items-center gap-8 mb-6">
         <div class="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center border-4 border-yellow-400 shadow-md">
-          <img v-if="service.avatarUrl" :src="service.avatarUrl" alt="User avatar" class="w-full h-full object-cover" />
+          <img v-if="showImage && service.avatarUrl" :src="service.avatarUrl" alt="User avatar" class="w-full h-full object-cover" @error="handleImgError"/>
           <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14c-3.5 0-6 2.5-6 5.5v.5h12v-.5c0-3-2.5-5.5-6-5.5zm0-2a4 4 0 100-8 4 4 0 000 8z" />
           </svg>
         </div>
         <div>
-          <h1 class="text-3xl font-bold mb-1">{{ service.provider }}</h1>
-          <p class="text-sm text-gray-500">{{ service.city }} • {{ service.category }}</p>
+          <h1 :class="[isDark ? 'text-white' : 'text-gray-900', 'text-3xl font-bold mb-1']">{{ service.provider }}</h1>
+          <p :class="[isDark ? 'text-gray-400' : 'text-gray-500', 'text-sm']">{{ service.city }} • {{ service.category }}</p>
           <p class="text-yellow-500 font-semibold">★ {{ service.rating }}/5</p>
         </div>
       </div>
 
+      <!--技能标签-->
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span v-for="(providerLabel, i) in service.providerLabels" :key="i" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">{{ providerLabel }}</span>
+      </div>
+
       <!-- 描述 -->
-      <p class="leading-relaxed text-gray-700 mb-6">{{ service.description }}</p>
+      <p :class="[isDark ? 'text-gray-300' : 'text-gray-700', 'leading-relaxed mb-4']">{{ service.description }}</p>
+      <p :class="[isDark ? 'text-gray-300' : 'text-gray-700', 'text-xl mb-2']"><strong>Rate:</strong> {{ service.priceRange }}</p>
 
       <!-- 服务明细 -->
       <div class="mb-6">
         <h2 class="text-xl font-semibold mb-2">Services Offered</h2>
-        <ul class="list-disc list-inside text-gray-600 space-y-1">
-          <li>Kitchen deep cleaning</li>
-          <li>Bathroom sanitization</li>
-          <li>Dusting and vacuuming</li>
-          <li>Window cleaning (interior)</li>
+        <ul class="list-disc list-inside space-y-1" :class="[isDark ? 'text-gray-300' : 'text-gray-600']">
+          <li v-for="(item, i) in service.servicesOffered" :key="i">{{ item }}</li>
         </ul>
       </div>
 
-      <div class="mb-6 flex flex-wrap gap-2">
-        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs">Eco-Friendly</span>
-        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Pet-Friendly</span>
-        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Child Safe</span>
-      </div>
-
       <!-- 服务区域和时间 -->
-      <div class="mb-6 text-sm text-gray-600 space-y-1">
-        <p><strong>Service Area:</strong> Paris + up to 15km</p>
-        <p><strong>Availability:</strong> Mon–Fri: 09:00–18:00, Sat: 10:00–14:00</p>
+      <div class="mb-6 text-sm space-y-1" :class="[isDark ? 'text-gray-400' : 'text-gray-600']">
+        <p><strong>Service Area:</strong> {{ service.serviceArea }}</p>
+        <p><strong>Availability:</strong> {{ service.availabilityTime }}</p>
       </div>
 
       <!-- 客户评论 -->
       <div class="mb-6">
         <h2 class="text-xl font-semibold mb-3">Customer Reviews</h2>
         <div class="space-y-3">
-          <div class="bg-gray-50 p-4 rounded-xl shadow-sm">
-            <p class="italic text-gray-700">"Very punctual and professional. My kitchen has never been cleaner!"</p>
-            <p class="text-right text-xs text-gray-500">– Marie L., Paris</p>
-          </div>
-          <div class="bg-gray-50 p-4 rounded-xl shadow-sm">
-            <p class="italic text-gray-700">"Superb work and very polite. Highly recommended."</p>
-            <p class="text-right text-xs text-gray-500">– Ahmed R., Paris</p>
+          <div v-for="(review, i) in service.customerReview" :key="i" :class="[isDark ? 'bg-gray-700' : 'bg-gray-50', 'p-4 rounded-xl shadow-sm']">
+            <p class="italic" :class="[isDark ? 'text-gray-300' : 'text-gray-700']">"{{ review.content }}"</p>
+            <p class="text-right text-xs" :class="[isDark ? 'text-gray-400' : 'text-gray-500']">– {{ review.author }}</p>
           </div>
         </div>
       </div>
 
       <!-- 认证和保障 -->
-      <div class="mb-6 text-sm text-gray-600">
+      <div class="mb-6 text-sm" :class="[isDark ? 'text-gray-400' : 'text-gray-600']">
         <div class="flex items-center gap-2 mb-1">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />

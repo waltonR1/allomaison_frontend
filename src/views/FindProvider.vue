@@ -3,7 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/theme'
 import { useFormClasses } from '@/utils/useFormClasses'
-import { providerCards } from '@/data/serviceCard.ts'
+import { providerCards } from '@/data/providerCard.ts'
 import { cities } from '@/data/cities.ts';
 import { categories } from '@/data/categories.ts'
 import { useRoute } from 'vue-router'
