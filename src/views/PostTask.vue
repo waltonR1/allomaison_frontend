@@ -39,7 +39,7 @@ const submit = async () => {
     return
   }
   try {
-    await axios.post(urls.postTask, {user_id: user_id.value,...form}, {
+    await axios.post(urls.postTask, {user_id: user_id.value,provider_id : -1, ...form}, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -83,7 +83,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
           <input type="number" v-model="form.budget" placeholder="Budget (€)" :class="inputClass" min="0" required />
           <input type="text" v-model="form.contact" placeholder="Contact Info (Phone or Email)" :class="inputClass" required />
           <textarea id="description" v-model="form.description" rows="4" required :class="[inputClass, 'resize-none']" placeholder="Task Description"></textarea>
-          <button type="submit" :class="buttonClass" :disabled="loading">Submit Request</button>
+          <button type="submit" :class="buttonClass" :disabled="loading">Submit Task</button>
         </form>
       </div>
     </main>

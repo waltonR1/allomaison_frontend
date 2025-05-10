@@ -44,8 +44,9 @@ const handleLogout = () => {
           </div>
 
           <div v-if="showCard" :class="[isDark ? 'bg-gray-800' : 'bg-white','absolute right-0 top-full w-64 rounded-2xl shadow-2xl p-4 z-10']">
-            <div class="w-full text-center px-3 py-2 text-xl border-b  select-none ">{{ user_name?.valueOf() || 'Guest'}}</div>
-            <button :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Personal Information</button>
+            <div class="w-full text-center px-3 py-2 text-xl border-b  select-none ">{{ username?.valueOf() || 'Guest'}}</div>
+            <router-link to="/auth/information" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Personal Information</router-link>
+            <button :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Chat</button>
             <button @click="handleLogout"  :class="[isDark ? 'border border-amber-400 text-amber-400 hover:bg-amber-500 hover:text-white' : 'border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white', 'w-full text-center px-4 py-2 mt-4 rounded-lg font-semibold transition-colors select-none']">Logout</button>
           </div>
         </div>
