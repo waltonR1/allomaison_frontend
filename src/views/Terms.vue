@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
+import { useThemeStore } from '@/stores/themeStore.ts'
 
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)

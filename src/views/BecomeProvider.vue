@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
-import { useFormClasses } from '@/utils/useFormClasses'
-import { useUserStore } from '@/stores/user.ts'
+import { useThemeStore } from '@/stores/themeStore.ts'
+import { useFormClasses } from '@/utils/useFormClasses.ts'
+import { useUserStore } from '@/stores/userStore.ts'
 import { categories } from '@/data/categories.ts'
 import Router from '@/router'
 
 import axios from 'axios'
 import { urls } from '@/utils/urls.ts'
-import { cities } from '@/data/cities.ts'
+// import { cities } from '@/data/cities.ts'
+import { useCityStore } from '@/stores/cityStore.ts'
+const cityStore = useCityStore()
+
+onMounted(() => {
+  cityStore.fetchCities()
+})
+
 
 const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
@@ -128,7 +135,7 @@ const submit = async () => {
           <input v-model="form.yearsOfService" placeholder="Years of service" type="number" :class="inputClass" required />
           <select  v-model="form.city" :class="noPlaceholderInputClass(form.city)">
             <option value="" disabled selected hidden>City</option>
-            <option v-for="city in cities" :key="city">{{ city }}</option>
+            <option v-for="city in cityStore.cities" :key="city.zipcode" :value="city">{{ city.city }}</option>
           </select>
           <select v-model="form.categories" :class="noPlaceholderInputClass(form.categories)" required>
             <option value="" disabled selected hidden>Primary Service Category</option>

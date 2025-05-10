@@ -8,4 +8,9 @@ export const urls = {
   postTask: `${BASE_URL}/postTask`,
   connectProvider: `${BASE_URL}/connectProvider`,
   connectRequest: `${BASE_URL}/connectRequest`,
+
+  getCities: `${BASE_URL}/cities`,
+  getUserInfo: `${BASE_URL}/userInfo/fabb`,
+  updateUserInfo: `${BASE_URL}/userInfo/fabb`,
+  uploadAvatar: `${BASE_URL}/userInfo/fabb`,
 }

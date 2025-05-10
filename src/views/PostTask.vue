@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
-import { useFormClasses } from '@/utils/useFormClasses'
+import { useThemeStore } from '@/stores/themeStore.ts'
+import { useFormClasses } from '@/utils/useFormClasses.ts'
 import { categories } from '@/data/categories.ts'
 
 import axios from 'axios'
 import { urls } from '@/utils/urls.ts'
 import Router from '@/router'
-import { useUserStore } from '@/stores/user.ts'
-import { cities } from '@/data/cities.ts'
+import { useUserStore } from '@/stores/userStore.ts'
+import { useCityStore } from '@/stores/cityStore.ts'
+
+const cityStore = useCityStore()
+
+onMounted(() => {
+  cityStore.fetchCities()
+})
 
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
@@ -76,7 +82,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
           </select>
           <select  v-model="form.city" :class="noPlaceholderInputClass(form.city)">
             <option value="" disabled selected hidden>City</option>
-            <option v-for="city in cities" :key="city">{{ city }}</option>
+            <option v-for="city in cityStore.cities" :key="city.zipcode">{{ city.city }}</option>
           </select>
           <input v-if="form.frequency !== 'OneTime'" type="datetime-local" v-model="form.datetime" :class="inputClass" required />
           <input type="text" v-model="form.address" placeholder="Street Address" :class="inputClass" required />

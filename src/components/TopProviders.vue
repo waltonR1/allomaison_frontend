@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
-import { providers }  from '@/data/providers'
+import { useThemeStore } from '@/stores/themeStore.ts'
+import { providers }  from '@/data/providers.ts'
 
 
 const theme  = useThemeStore()

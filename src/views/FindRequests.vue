@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
-import { useFormClasses } from '@/utils/useFormClasses'
+import { useThemeStore } from '@/stores/themeStore.ts'
+import { useFormClasses } from '@/utils/useFormClasses.ts'
 import { requests } from '@/data/requestCard.ts'
 import { cities } from '@/data/cities.ts';
 import { categories } from '@/data/categories.ts'

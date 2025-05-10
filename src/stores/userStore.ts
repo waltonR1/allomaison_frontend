@@ -9,7 +9,7 @@ interface UserState {
   role: string | null;
   user_id: string | null;
   avatarUrl: string | null;
-  user_name: string | null;
+  username: string | null;
 }
 
 export const useUserStore = defineStore('user', {
@@ -18,14 +18,14 @@ export const useUserStore = defineStore('user', {
     role: 'customer',
     // role: 'provider'
     user_id:'',
-    avatarUrl:'',
-    user_name:'binbin'
+    avatarUrl:'/1',
+    username:'binbin'
   }),
   actions: {
     async login(values: { email: string; password: string }) {
       try {
         const response = await axios.post(urls.login,
-          { ...values ,userType: 'user'}, {
+          { ...values}, {
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
@@ -36,7 +36,7 @@ export const useUserStore = defineStore('user', {
         this.role = response.data.role;
         this.user_id = response.data.id;
         this.avatarUrl = response.data.avatarUrl;
-        this.user_name = response.data.user_name;
+        this.username = response.data.username;
       } catch (error: any) {
         throw new Error(error.response?.data?.message || error.response?.data || 'Login failed');
       }
@@ -46,7 +46,7 @@ export const useUserStore = defineStore('user', {
       this.role = null;
       this.user_id = null;
       this.avatarUrl = null;
-      this.user_name = null;
+      this.username = null;
     },
     /** 判断本地 token 是否仍然有效；无效就自动登出 */
     checkToken() {
@@ -73,5 +73,5 @@ export const useUserStore = defineStore('user', {
     //   }
     // },
   },
-  // persist: true
+  persist: true
 });

@@ -2,15 +2,15 @@
 import { computed, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
+import { useThemeStore } from '@/stores/themeStore.ts'
 import HeaderBar from '@/components/HeaderBar.vue'
 import FooterBar from '@/components/FooterBar.vue'
-import { requests } from '@/data/requestCard'
+import { requests } from '@/data/requestCard.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import Router from '@/router'
 import axios from 'axios'
 import { urls } from '@/utils/urls.ts'
-import { useUserStore } from '@/stores/user.ts'
+import { useUserStore } from '@/stores/userStore.ts'
 
 const { buttonClass } = useFormClasses()
 

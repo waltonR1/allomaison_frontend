@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
-import { useFormClasses } from '@/utils/useFormClasses'
+import { useThemeStore } from '@/stores/themeStore.ts'
+import { useFormClasses } from '@/utils/useFormClasses.ts'
 import { providerCards } from '@/data/providerCard.ts'
-import { cities } from '@/data/cities.ts';
+// import { cities } from '@/data/cities.ts';
+import { useCityStore } from '@/stores/cityStore.ts'
 import { categories } from '@/data/categories.ts'
 import { useRoute } from 'vue-router'
 
@@ -13,6 +14,9 @@ const route = useRoute();
 const search   = ref('')
 const category = ref('All')
 const city     = ref('All')
+
+const cityStore = useCityStore()
+
 
 const filtered = computed(() =>
   providerCards.filter(s => {
@@ -28,6 +32,7 @@ const { isDark } = storeToRefs(theme)
 const { inputClass } = useFormClasses()
 
 onMounted(() => {
+  cityStore.fetchCities()
   const categoryFromQuery = route.query.category as string;
   if (categoryFromQuery) {
     category.value = categoryFromQuery;
@@ -50,7 +55,7 @@ onMounted(() => {
           <select v-model="city" :class="inputClass">
             <option value="All" disabled hidden>City</option>
             <option value="All">All</option>
-            <option v-for="city in cities" :key="city">{{ city }}</option>
+            <option v-for="city in cityStore.cities" :key="city.zipcode">{{ city.city }}</option>
           </select>
         </div>
 

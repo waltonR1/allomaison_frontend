@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
-import { useUserStore } from '@/stores/user'
-import { useFormClasses } from '@/utils/useFormClasses'
+import { useThemeStore } from '@/stores/themeStore.ts'
+import { useUserStore } from '@/stores/userStore.ts'
+import { useFormClasses } from '@/utils/useFormClasses.ts'
 import Router from '@/router'
 
 const theme = useThemeStore()

@@ -101,5 +101,128 @@
       "id": "89e9"
     }
   ],
-  "connectRequest": []
+  "connectRequest": [],
+  "cities": [
+    {
+      "zipcode": "75000",
+      "city": "Paris",
+      "id": "c70a"
+    },
+    {
+      "zipcode": "13000",
+      "city": "Marseille",
+      "id": "4e2f"
+    },
+    {
+      "zipcode": "69000",
+      "city": "Lyon",
+      "id": "462b"
+    },
+    {
+      "zipcode": "31000",
+      "city": "Toulouse",
+      "id": "3f46"
+    },
+    {
+      "zipcode": "06000",
+      "city": "Nice",
+      "id": "6c9a"
+    },
+    {
+      "zipcode": "44000",
+      "city": "Nantes",
+      "id": "997a"
+    },
+    {
+      "zipcode": "67000",
+      "city": "Strasbourg",
+      "id": "c791"
+    },
+    {
+      "zipcode": "34000",
+      "city": "Montpellier",
+      "id": "25a9"
+    },
+    {
+      "zipcode": "33000",
+      "city": "Bordeaux",
+      "id": "c80e"
+    },
+    {
+      "zipcode": "59000",
+      "city": "Lille",
+      "id": "c529"
+    },
+    {
+      "zipcode": "35000",
+      "city": "Rennes",
+      "id": "092f"
+    },
+    {
+      "zipcode": "51100",
+      "city": "Reims",
+      "id": "796a"
+    },
+    {
+      "zipcode": "76600",
+      "city": "Le Havre",
+      "id": "d4e9"
+    },
+    {
+      "zipcode": "42000",
+      "city": "Saint-Étienne",
+      "id": "8bc3"
+    },
+    {
+      "zipcode": "83000",
+      "city": "Toulon",
+      "id": "bc26"
+    },
+    {
+      "zipcode": "38000",
+      "city": "Grenoble",
+      "id": "bbab"
+    },
+    {
+      "zipcode": "21000",
+      "city": "Dijon",
+      "id": "7694"
+    },
+    {
+      "zipcode": "49000",
+      "city": "Angers",
+      "id": "e499"
+    },
+    {
+      "zipcode": "30000",
+      "city": "Nîmes",
+      "id": "9fa6"
+    },
+    {
+      "zipcode": "13090",
+      "city": "Aix-en-Provence",
+      "id": "9d62"
+    }
+  ],
+  "userInfo": [
+    {
+      "user_id": "usr_20250510_001",
+      "first_name": "Julie",
+      "last_name": "Chen",
+      "username": "sylvain",
+      "gender": "female",
+      "birthday": "1995-08-20",
+      "email": "julie.chen@example.com",
+      "phone": "0612345678",
+      "avatarUrl": "https://example.com/avatars/julie.jpg",
+      "address": "12 Rue des Fleurs",
+      "city": "Paris",
+      "country": "France",
+      "zipCode": "75008",
+      "createdAt": "2024-11-15T10:24:00Z",
+      "lastLogin": "2025-05-10T08:12:00Z",
+      "role": "customer",
+      "id": "fabb"
+    }
+  ]
 }

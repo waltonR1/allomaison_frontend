@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
-import { useUserStore } from '@/stores/user'
+import { useThemeStore } from '@/stores/themeStore.ts'
+import { useUserStore } from '@/stores/userStore.ts'
 import Router from '@/router'
 
 const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
 const userStore = useUserStore()
-const { role,avatarUrl,user_name } = storeToRefs(userStore)
+const { role,avatarUrl,username } = storeToRefs(userStore)
 const token = ref(userStore.checkToken())
 
 const showCard = ref(false)
@@ -19,6 +19,14 @@ const handleLogout = () => {
   Router.push('/')
 }
 
+const showImage = ref(true)
+const handleImgError = () => {
+  showImage.value = false
+}
+
+watch(() => avatarUrl, () => {
+  showImage.value = true
+})
 </script>
 
 <template>
@@ -37,14 +45,14 @@ const handleLogout = () => {
       <template v-if="token">
         <div class="relative" @mouseenter="showCard = true" @mouseleave="showCard = false">
           <div class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center border-2 border-yellow-400 shadow-md hover:shadow-xl hover:bg-gray-300 hover:scale-110">
-            <img v-if="avatarUrl" :src="avatarUrl" alt="User avatar" class="w-full h-full object-cover" />
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <img v-if="showImage && avatarUrl" :src="avatarUrl" alt="User avatar" class="w-full h-full object-cover" @error="handleImgError"/>
+            <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14c-3.5 0-6 2.5-6 5.5v.5h12v-.5c0-3-2.5-5.5-6-5.5zm0-2a4 4 0 100-8 4 4 0 000 8z" />
             </svg>
           </div>
 
           <div v-if="showCard" :class="[isDark ? 'bg-gray-800' : 'bg-white','absolute right-0 top-full w-64 rounded-2xl shadow-2xl p-4 z-10']">
-            <div class="w-full text-center px-3 py-2 text-xl border-b  select-none ">{{ username?.valueOf() || 'Guest'}}</div>
+            <div class="w-full text-center px-3 py-2 text-xl border-b mb-1 select-none ">{{ username || 'Guest'}}</div>
             <router-link to="/auth/information" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Personal Information</router-link>
             <button :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Chat</button>
             <button @click="handleLogout"  :class="[isDark ? 'border border-amber-400 text-amber-400 hover:bg-amber-500 hover:text-white' : 'border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white', 'w-full text-center px-4 py-2 mt-4 rounded-lg font-semibold transition-colors select-none']">Logout</button>

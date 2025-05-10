@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
-import { useFormClasses } from '@/utils/useFormClasses'
+import { useThemeStore } from '@/stores/themeStore.ts'
+import { useFormClasses } from '@/utils/useFormClasses.ts'
 
 import Router from '@/router'
 import axios from 'axios'
@@ -15,6 +15,7 @@ const loading = ref(false)
 const form = reactive({
   first_name: '',
   last_name:'',
+  username: '',
   gender:'',
   birthday:'',
   email: '',
@@ -70,6 +71,7 @@ const { inputClass, noPlaceholderInputClass, buttonClass } = useFormClasses()
         <form @submit.prevent="submit" class="space-y-6">
           <input v-model="form.first_name" type="text" :class="inputClass" placeholder="First Name*" required />
           <input v-model="form.last_name" type="text" :class="inputClass" placeholder="Last Name*" required />
+          <input v-model="form.username" type="text" :class="inputClass" placeholder="Username*" required />
           <select v-model="form.gender" type="text" :class="noPlaceholderInputClass(form.gender)" required>
             <option value="" disabled selected hidden>Gender*</option>
             <option value="male">Male</option>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/theme'
+import { useThemeStore } from '@/stores/themeStore.ts'
 
 const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
@@ -10,8 +10,7 @@ const year = new Date().getFullYear()
 </script>
 
 <template>
-  <footer
-    :class="[isDark ? 'bg-gray-800 text-gray-400' : 'bg-gray-100 text-gray-600','py-10 px-6 transition-colors duration-500']">
+  <footer :class="[isDark ? 'bg-gray-800 text-gray-400' : 'bg-gray-100 text-gray-600','py-10 px-6 transition-colors duration-500']">
 
     <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
       <!-- 品牌简述 -->
@@ -43,9 +42,9 @@ const year = new Date().getFullYear()
           Follow Us
         </h4>
         <div class="flex flex-col space-x-4">
-          <a href="#" class="hover:underline">Twitter</a>
-          <a href="#" class="hover:underline">Facebook</a>
-          <a href="#" class="hover:underline">Instagram</a>
+          <RouterLink to="#" class="hover:underline">Twitter</RouterLink>
+          <RouterLink to="#" class="hover:underline">Facebook</RouterLink>
+          <RouterLink to="#" class="hover:underline">Instagram</RouterLink>
         </div>
       </div>
     </div>
