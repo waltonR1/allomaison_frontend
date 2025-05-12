@@ -1,15 +1,16 @@
 import { createRouter, createWebHistory, RouterView } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import FindProvider from '@/views/FindProvider.vue'
-import FindRequests from '@/views/FindRequests.vue'
+import FindTasks from '@/views/FindTasks.vue'
 import PostTask from '@/views/PostTask.vue'
 import BecomeProvider from '@/views/BecomeProvider.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import ProviderDetail from '@/views/ProviderDetail.vue'
-import RequestDetail from '@/views/RequestDetail.vue'
+import TaskDetail from '@/views/TaskDetail.vue'
 import Terms from '@/views/Terms.vue'
-import Information from '@/views/information.vue'
+import Information from '@/views/Information.vue'
+import Orders from '@/views/Orders.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,14 +25,20 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/findProvider',
-      name: 'FindProvider',
+      path: '/becomeProvider',
+      name: 'BecomeProvider',
+      component: BecomeProvider
+    },
+    {
+      path: '/providers',
+      name: 'providers',
       component: FindProvider
     },
     {
-      path: '/findRequests',
-      name: 'FindRequests',
-      component: FindRequests
+      path: '/providers/:id',
+      name: 'providerDetail',
+      component: ProviderDetail,
+      props: true
     },
     {
       path: '/postTask',
@@ -39,9 +46,15 @@ const router = createRouter({
       component: PostTask
     },
     {
-      path: '/becomeProvider',
-      name: 'BecomeProvider',
-      component: BecomeProvider
+      path: '/tasks',
+      name: 'tasks',
+      component: FindTasks
+    },
+    {
+      path: '/tasks/:id',
+      name: 'taskDetail',
+      component: TaskDetail,
+      props: true
     },
     {
       path: '/auth',
@@ -55,16 +68,9 @@ const router = createRouter({
       redirect: '/auth/login'
     },
     {
-      path: '/provider/:id',
-      name: 'providerDetail',
-      component: ProviderDetail,
-      props: true
-    },
-    {
-      path: '/requests/:id',
-      name: 'requestDetail',
-      component: RequestDetail,
-      props: true
+      path: '/order',
+      name: 'order',
+      component: Orders,
     }
 
   ]

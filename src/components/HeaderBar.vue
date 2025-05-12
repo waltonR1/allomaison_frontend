@@ -9,17 +9,16 @@ const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
 const userStore = useUserStore()
-const { role,avatarUrl,username } = storeToRefs(userStore)
-const token = ref(userStore.checkToken())
+const { role,avatarUrl,username,isLoggedIn } = storeToRefs(userStore)
 
 const showCard = ref(false)
+const showImage = ref(true)
 
 const handleLogout = () => {
   userStore.logout()
   Router.push('/')
 }
 
-const showImage = ref(true)
 const handleImgError = () => {
   showImage.value = false
 }
@@ -37,12 +36,12 @@ watch(() => avatarUrl, () => {
     </h1>
 
     <nav class="flex items-center space-x-4">
-      <router-link v-if="role === 'provider'" class="hover:text-amber-500 transition select-none" to="/findProvider">Find Request</router-link>
-      <router-link class="hover:text-amber-500 transition select-none" to="/findProvider">Find Providers</router-link>
+      <router-link class="hover:text-amber-500 transition select-none" to="/tasks">Find Tasks</router-link>
+      <router-link class="hover:text-amber-500 transition select-none" to="/providers">Find Providers</router-link>
       <router-link class="hover:text-amber-500 transition select-none" to="/postTask">Post a Task</router-link>
       <router-link v-if="role !== 'provider'" class="hover:text-amber-500 transition select-none" to="/becomeProvider">Become a Provider</router-link>
 
-      <template v-if="token">
+      <template v-if="isLoggedIn">
         <div class="relative" @mouseenter="showCard = true" @mouseleave="showCard = false">
           <div class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center border-2 border-yellow-400 shadow-md hover:shadow-xl hover:bg-gray-300 hover:scale-110">
             <img v-if="showImage && avatarUrl" :src="avatarUrl" alt="User avatar" class="w-full h-full object-cover" @error="handleImgError"/>
@@ -54,6 +53,8 @@ watch(() => avatarUrl, () => {
           <div v-if="showCard" :class="[isDark ? 'bg-gray-800' : 'bg-white','absolute right-0 top-full w-64 rounded-2xl shadow-2xl p-4 z-10']">
             <div class="w-full text-center px-3 py-2 text-xl border-b mb-1 select-none ">{{ username || 'Guest'}}</div>
             <router-link to="/auth/information" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Personal Information</router-link>
+            <router-link to="/order" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">My Order</router-link>
+
             <button :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Chat</button>
             <button @click="handleLogout"  :class="[isDark ? 'border border-amber-400 text-amber-400 hover:bg-amber-500 hover:text-white' : 'border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white', 'w-full text-center px-4 py-2 mt-4 rounded-lg font-semibold transition-colors select-none']">Logout</button>
           </div>

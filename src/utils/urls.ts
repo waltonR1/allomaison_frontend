@@ -2,15 +2,34 @@ const BASE_URL = 'http://localhost:3000';
 
 export const urls = {
   // login:'http://localhost:8080/api/auth/login',
+
+
+  connectProvider: `${BASE_URL}/connectProvider`,
+  connectTask: `${BASE_URL}/connectTask`,
+
+  //重置完的
+
+  //用户信息相关
   login: `${BASE_URL}/user/login`,
   register:`${BASE_URL}/users`,
-  becomeProvider: `${BASE_URL}/providers`,
-  postTask: `${BASE_URL}/postTask`,
-  connectProvider: `${BASE_URL}/connectProvider`,
-  connectRequest: `${BASE_URL}/connectRequest`,
 
+  getUserInfo: (user_id: string) => `${BASE_URL}/userInfo?user_id=${user_id}`,
+  updateUserInfo:(user_id: string) => `${BASE_URL}/userInfo/${user_id}`,
+  uploadAvatar:(user_id: string) => `${BASE_URL}/userInfo/${user_id}`,
+  becomeProvider: `${BASE_URL}/becomeProviders`,
+  getProvider: `${BASE_URL}/providers`,
+
+
+
+  //订单相关
+  getTask: `${BASE_URL}/tasks`,
+  postTask: `${BASE_URL}/postTask`,
+
+  getOrders:(user_id: string) => `${BASE_URL}/orders?customerId=${user_id}`,
+
+  //静态选项
+  getCategories: `${BASE_URL}/categories`,
   getCities: `${BASE_URL}/cities`,
-  getUserInfo: `${BASE_URL}/userInfo/fabb`,
-  updateUserInfo: `${BASE_URL}/userInfo/fabb`,
-  uploadAvatar: `${BASE_URL}/userInfo/fabb`,
+
+
 }

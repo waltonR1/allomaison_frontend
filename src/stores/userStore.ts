@@ -1,12 +1,9 @@
 import { defineStore } from 'pinia';
-import {urls} from '@/utils/urls.ts'
-import axios from 'axios';
-import { toRef } from 'vue'
+import { login } from '@/api/noTokenAPI.ts'
 
-interface UserState {
+type UserState = {
   token: string | null;
-  // customer/provider
-  role: string | null;
+  role: 'customer' | 'provider' | 'admin' | null;
   user_id: string | null;
   avatarUrl: string | null;
   username: string | null;
@@ -16,21 +13,19 @@ export const useUserStore = defineStore('user', {
   state: (): UserState => ({
     token: 'ww',
     role: 'customer',
-    // role: 'provider'
-    user_id:'',
+    user_id:'usr_20250510_001',
     avatarUrl:'/1',
     username:'binbin'
   }),
+
+  getters: {
+    isLoggedIn: (state) => !!state.token
+  },
+
   actions: {
     async login(values: { email: string; password: string }) {
       try {
-        const response = await axios.post(urls.login,
-          { ...values}, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-        });
+        const response = await login(values);
 
         this.token = response.data.token;
         this.role = response.data.role;
@@ -49,9 +44,6 @@ export const useUserStore = defineStore('user', {
       this.username = null;
     },
     /** 判断本地 token 是否仍然有效；无效就自动登出 */
-    checkToken() {
-      return toRef(this, 'token');
-    }
     // async checkToken(): Promise<boolean> {
     //   if (!this.token) return false;           // 本地连 token 都没有
     //
@@ -73,5 +65,5 @@ export const useUserStore = defineStore('user', {
     //   }
     // },
   },
-  persist: true
+  // persist: true
 });

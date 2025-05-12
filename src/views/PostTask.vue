@@ -1,32 +1,42 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@/stores/themeStore.ts'
-import { useFormClasses } from '@/utils/useFormClasses.ts'
-import { categories } from '@/data/categories.ts'
-
-import axios from 'axios'
-import { urls } from '@/utils/urls.ts'
 import Router from '@/router'
+
+import { useFormClasses } from '@/utils/useFormClasses.ts'
+import { useThemeStore } from '@/stores/themeStore.ts'
+import {useCategoriesStore} from '@/stores/categoriesStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useCityStore } from '@/stores/cityStore.ts'
+import { postTask } from '@/api/withTokenAPI.ts'
 
+// stores
+const categoriesStore = useCategoriesStore()
 const cityStore = useCityStore()
-
-onMounted(() => {
-  cityStore.fetchCities()
-})
-
+const userStore = useUserStore()
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
-const userStore = useUserStore()
-const { user_id } = storeToRefs(userStore)
-const token = ref(userStore.checkToken())
+// state -> ref
+const { user_id,isLoggedIn } = storeToRefs(userStore)
 
-
+// variable
 const loading = ref(false)
-const form = reactive({
+
+// form
+export type TaskForm = {
+  title: string,
+  category: string,
+  frequency: string,
+  city: string,
+  datetime: string,
+  address: string,
+  budget:string,
+  contact:string,
+  description: string
+}
+
+const form:TaskForm = reactive({
   title: '',
   category: '',
   frequency: '',
@@ -38,29 +48,36 @@ const form = reactive({
   description: ''
 })
 
-
+// post a task
 const submit = async () => {
-  if (!token.value) {
+  if (!isLoggedIn.value) {
     await Router.push('/auth/login')
     return
   }
   try {
-    await axios.post(urls.postTask, {user_id: user_id.value,provider_id : -1, ...form}, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-    });
+    loading.value = true
 
+    await postTask(user_id.value ?? '', form)
+
+    alert('Successfully, Please wait for approval.')
+    await Router.push('/')
   } catch (error: any) {
     throw new Error(error.response?.data?.message || error.response?.data || 'Failed');
+  } finally {
+    loading.value = false
   }
-  alert('Successfully, Please wait for approval.')
-  await Router.push('/')
 }
 
-const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
+// loading
+onMounted(async () => {
+  await Promise.all([
+    cityStore.fetchCities(),
+    categoriesStore.fetchCategories()
+  ])
+})
 
+// css utils
+const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
 </script>
 
 <template>
@@ -72,15 +89,15 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
           <input id="title" v-model="form.title" type="text" required :class="inputClass" placeholder="Task Title" />
           <select id="category" v-model="form.category" :class="noPlaceholderInputClass(form.category)">
             <option value="" selected disabled hidden>Service Category</option>
-            <option :value=category v-for="category in categories" :key="category">{{ category }}</option>
+            <option v-for="category in categoriesStore.categories" :key="category.category">{{ category.category }}</option>
           </select>
-          <select id="frequency" v-model="form.frequency" :class="noPlaceholderInputClass(form.frequency)">
+          <select id="frequency" v-model="form.frequency" :class="noPlaceholderInputClass(form.frequency)" required>
             <option value="" selected disabled hidden>Frequence</option>
             <option value="OneTime">One‑time</option>
             <option value="Weekly">Weekly</option>
             <option value="Monthly">Monthly</option>
           </select>
-          <select  v-model="form.city" :class="noPlaceholderInputClass(form.city)">
+          <select  v-model="form.city" :class="noPlaceholderInputClass(form.city)" required>
             <option value="" disabled selected hidden>City</option>
             <option v-for="city in cityStore.cities" :key="city.zipcode">{{ city.city }}</option>
           </select>

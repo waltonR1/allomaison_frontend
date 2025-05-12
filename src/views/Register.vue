@@ -1,18 +1,33 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 
 import Router from '@/router'
-import axios from 'axios'
-import { urls } from '@/utils/urls.ts'
+import { register } from '@/api/noTokenAPI.ts'
+import router from '@/router'
+import { useUserStore } from '@/stores/userStore.ts'
 
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
 const loading = ref(false)
-const form = reactive({
+
+export type registerForm = {
+  first_name: string,
+  last_name:string,
+  username: string,
+  gender:string,
+  birthday:string,
+  email: string,
+  phone:string,
+  password: string,
+  confirmPassword: string,
+  agree: boolean,
+}
+
+const form:registerForm = reactive({
   first_name: '',
   last_name:'',
   username: '',
@@ -41,12 +56,7 @@ const submit = async () => {
   }
   try {
     loading.value = true
-    await axios.post(urls.register, {...form}, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-      });
+    await register(form)
 
     // 或者提示邮箱验证？后端去发送？
     alert('Successfully registered')
@@ -58,6 +68,14 @@ const submit = async () => {
     loading.value = false
   }
 }
+
+const userStore = useUserStore()
+const { isLoggedIn } = storeToRefs(userStore)
+onMounted(() => {
+  if (isLoggedIn) {
+    router.replace('/')
+  }
+})
 
 const { inputClass, noPlaceholderInputClass, buttonClass } = useFormClasses()
 

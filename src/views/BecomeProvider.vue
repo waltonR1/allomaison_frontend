@@ -1,32 +1,28 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import Router from '@/router'
+
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import { useUserStore } from '@/stores/userStore.ts'
-import { categories } from '@/data/categories.ts'
-import Router from '@/router'
-
-import axios from 'axios'
-import { urls } from '@/utils/urls.ts'
-// import { cities } from '@/data/cities.ts'
+import {useCategoriesStore} from '@/stores/categoriesStore.ts'
 import { useCityStore } from '@/stores/cityStore.ts'
+import { submitProviderApplication } from '@/api/withTokenAPI.ts'
+
+// stores
+const categoriesStore = useCategoriesStore()
 const cityStore = useCityStore()
-
-onMounted(() => {
-  cityStore.fetchCities()
-})
-
-
 const theme  = useThemeStore()
-const { isDark } = storeToRefs(theme)
-
-const { inputClass, noPlaceholderInputClass, buttonClass, fileInputClass } = useFormClasses()
-
 const userStore = useUserStore()
-const { user_id } = storeToRefs(userStore)
-const token = ref(userStore.checkToken())
 
+// state -> ref
+const { isDark } = storeToRefs(theme)
+const { user_id, isLoggedIn } = storeToRefs(userStore)
+
+// variable
+const formVisible = ref(false);
+const loading = ref(false)
 const benefits = [
   "Access to thousands of local clients",
   "Flexible schedules – set your own hours",
@@ -34,26 +30,35 @@ const benefits = [
   "24/7 support from our team",
 ];
 
-const formVisible = ref(false);
+// form
+export type ProviderApplicationForm = {
+  idNumber: string
+  yearsOfService: string
+  city: string
+  categories: string
+  experiences: string
+  certifications: File[]
+}
 
+const form: ProviderApplicationForm= reactive({
+      idNumber: '',
+      yearsOfService: '',
+      city: '',
+      categories: '',
+      experiences: '',
+      certifications: []
+})
+
+// check login
 function LoginClick() {
-  if (!token.value) {
+  if (!isLoggedIn.value) {
     Router.push('/auth/login')
     return
   }
   formVisible.value = !formVisible.value
 }
 
-const loading = ref(false)
-const form = reactive({
-      idNumber: '',
-      yearsOfService: '',
-      city: '',
-      categories: '',
-      experiences: '',
-      certifications: [] as File[]
-})
-
+// limit of files
 function handleCertUpload(event: Event) {
   const target = event.target as HTMLInputElement | null
   if (target && target.files) {
@@ -77,28 +82,12 @@ function handleCertUpload(event: Event) {
   }
 }
 
-
+// submit the application
 const submit = async () => {
   try {
     loading.value = true
 
-    const formData = new FormData()
-    formData.append('user_id', user_id.value ?? '')
-    formData.append('idNumber', form.idNumber)
-    formData.append('yearsOfService', form.yearsOfService)
-    formData.append('city', form.city)
-    formData.append('categories', form.categories)
-    formData.append('experiences', form.experiences)
-    form.certifications.forEach((file) => {
-      formData.append('certifications', file) // 后端用 List<MultipartFile>
-    })
-
-    await axios.post(urls.becomeProvider, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      },
-    });
-
+    await submitProviderApplication(user_id.value ?? '', form)
     alert('Successfully, Please wait for approval.')
     await Router.push('/')
   } catch (error: any) {
@@ -108,6 +97,14 @@ const submit = async () => {
   }
 }
 
+/* loading */
+onMounted(() => {
+  cityStore.fetchCities()
+  categoriesStore.fetchCategories()
+})
+
+/* css utils */
+const { inputClass, noPlaceholderInputClass, buttonClass, fileInputClass } = useFormClasses()
 </script>
 
 <template>
@@ -139,7 +136,7 @@ const submit = async () => {
           </select>
           <select v-model="form.categories" :class="noPlaceholderInputClass(form.categories)" required>
             <option value="" disabled selected hidden>Primary Service Category</option>
-            <option :value="category" v-for="category in categories" :key="category">{{ category }}</option>
+            <option :value="category.category" v-for="category in categoriesStore.categories" :key="category">{{ category.category }}</option>
           </select>
           <textarea v-model="form.experiences" placeholder="Briefly describe your past work experience, specialties, and notable clients..." rows="4" :class="[inputClass,'sm:col-span-2']"></textarea>
           <div class="flex flex-col gap-2 col-span-2">

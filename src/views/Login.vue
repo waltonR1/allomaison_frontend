@@ -1,17 +1,24 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import Router from '@/router'
+import router from '@/router'
 
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 const userStore = useUserStore()
 
 const loading = ref(false)
-const form = reactive({
+
+export type loginForm ={
+  email: string,
+  password: string,
+}
+
+const form: loginForm = reactive({
   email: '',
   password: ''
 })
@@ -28,6 +35,13 @@ const submit = async () => {
     loading.value = false
   }
 }
+
+const { isLoggedIn } = storeToRefs(userStore)
+onMounted(() => {
+  if (isLoggedIn) {
+    router.replace('/')
+  }
+})
 
 const { inputClass, buttonClass } = useFormClasses()
 

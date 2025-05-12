@@ -1,0 +1,328 @@
+{
+  "users": [
+    {
+      "id": "3223",
+      "first_name": "haihang",
+      "last_name": "wang",
+      "gender": "male",
+      "birthday": "2025-05-01",
+      "email": "wanghaihang233@gmail.com",
+      "phone": "0750797040",
+      "password": "123456",
+      "confirmPassword": "123456",
+      "agree": true
+    }
+  ],
+  "providers": [
+    {
+      "id": 1,
+      "category": "Cleaning",
+      "city": "Paris",
+      "provider": "Julie C.",
+      "description": "Sparkling kitchens and spotless bathrooms — your home will shine like new.",
+      "rating": 4.9,
+      "avatarUrl": "/images/avatars/julie.png",
+      "servicesOffered": ["Kitchen deep cleaning", "Bathroom sanitization", "Dusting and vacuuming", "Window cleaning (interior)"],
+      "serviceArea": "Paris + 15km",
+      "availabilityTime": "Mon–Fri: 09:00–18:00, Sat: 10:00–14:00",
+      "customerReview": [
+        { "content": "Julie was incredibly thorough and left our apartment spotless.", "author": "Emma T., Paris" },
+        { "content": "Punctual, kind, and efficient. Will book again!", "author": "Lucas D., Paris" }
+      ],
+      "providerLabels": ["Licensed Cleaner", "Eco Friendly"],
+      "priceRange": "€25–€35/hour"
+    },
+    {
+      "id": 2,
+      "category": "Childcare",
+      "city": "Lyon",
+      "provider": "Amélie B.",
+      "description": "CPR-certified babysitter with 5 years of experience. Safe and caring environment guaranteed.",
+      "rating": 4.8,
+      "avatarUrl": "/images/avatars/amelie.png",
+      "servicesOffered": ["After-school care", "Meal prep for kids", "Storytime and creative play", "Homework supervision"],
+      "serviceArea": "Lyon center + 10km",
+      "availabilityTime": "Mon–Fri: 15:00–20:00, Sat–Sun: 10:00–18:00",
+      "customerReview": [
+        { "content": "My kids adore Amélie! She’s trustworthy and creative.", "author": "Sophie R., Lyon" },
+        { "content": "Reliable and flexible. A real help for busy parents.", "author": "Karim M., Lyon" }
+      ],
+      "providerLabels": ["CPR Certified", "Early Education Qualified"],
+      "priceRange": "€20–€30/hour"
+    },
+    {
+      "id": 3,
+      "category": "Home Repairs",
+      "city": "Marseille",
+      "provider": "Marc V.",
+      "description": "Fixing appliances, plumbing issues, and home hardware with professionalism.",
+      "rating": 4.7,
+      "avatarUrl": "/images/avatars/marc.png",
+      "servicesOffered": ["Appliance repair", "Leaky taps and plumbing fixes", "Furniture assembly", "Door & window repair"],
+      "serviceArea": "Marseille city + 20km",
+      "availabilityTime": "Daily: 08:00–20:00",
+      "customerReview": [
+        { "content": "Marc fixed my washing machine quickly and explained everything clearly.", "author": "Nina G., Marseille" },
+        { "content": "Very professional and polite. Honest pricing too.", "author": "Antoine F., Marseille" }
+      ],
+      "providerLabels": ["Certified Handyman", "Quick Estimate Provided"],
+      "priceRange": "€20–€30/hour"
+    },
+    {
+      "id": 4,
+      "category": "Pet Sitting",
+      "city": "Toulouse",
+      "provider": "Camille R.",
+      "description": "Loving care for your furry friends when you’re away.",
+      "rating": 5.0,
+      "avatarUrl": "/images/avatars/camille.png",
+      "servicesOffered": ["Daily dog walking", "Cat feeding and playtime", "Overnight pet sitting", "Medication administration"],
+      "serviceArea": "Toulouse + 10km",
+      "availabilityTime": "Mon–Sun: 07:00–22:00",
+      "customerReview": [
+        { "content": "Camille took such great care of my senior cat. Highly recommend!", "author": "Pauline L., Toulouse" },
+        { "content": "Even sent daily photos and updates. Amazing!", "author": "Hugo V., Toulouse" }
+      ],
+      "providerLabels": ["CPR Certified", "Overnight Care"],
+      "priceRange": "€20–€30/hour"
+    },
+    {
+      "id": 5,
+      "category": "Elderly Care",
+      "city": "Nice",
+      "provider": "Youssef A.",
+      "description": "Compassionate support for seniors, including companionship and daily tasks.",
+      "rating": 4.6,
+      "avatarUrl": "/images/avatars/youssef.png",
+      "servicesOffered": ["Grocery shopping", "Meal preparation", "Medication reminders", "Conversation & companionship"],
+      "serviceArea": "Nice + 10km",
+      "availabilityTime": "Mon–Fri: 08:00–19:00",
+      "customerReview": [
+        { "content": "Youssef was a true companion for my father. Very patient and respectful.", "author": "Isabelle D., Nice" },
+        { "content": "Always on time and attentive. Great support for our family.", "author": "Mickael S., Nice" }
+      ],
+      "providerLabels": ["Certified Caregiver", "Mobility Assistance"],
+      "priceRange": "€20–€30/hour"
+    }
+  ],
+  "postTask": [
+    {
+      "id": "be0b",
+      "title": "为",
+      "category": "Cleaning",
+      "frequency": "OneTime",
+      "city": "Dijon",
+      "datetime": "2025-05-24T22:26",
+      "address": "额外",
+      "budget": 234234,
+      "contact": "342",
+      "description": "42342"
+    },
+    {
+      "id": "a763",
+      "title": "312",
+      "category": "Cleaning",
+      "frequency": "OneTime",
+      "city": "Marseille",
+      "datetime": "",
+      "address": "312",
+      "budget": 312,
+      "contact": "312",
+      "description": "123"
+    },
+    {
+      "id": "7186",
+      "user_id": {
+        "_object": {
+          "$id": "user",
+          "token": "ww",
+          "role": "customer",
+          "user_id": "",
+          "_isOptionsAPI": true
+        },
+        "_key": "user_id",
+        "__v_isRef": true
+      },
+      "title": "321",
+      "category": "Cleaning",
+      "frequency": "Weekly",
+      "city": "Rennes",
+      "datetime": "2025-05-04T22:48",
+      "address": "123",
+      "budget": 32,
+      "contact": "321",
+      "description": "321"
+    },
+    {
+      "id": "b227",
+      "user_id": "",
+      "title": "321",
+      "category": "Cleaning",
+      "frequency": "OneTime",
+      "city": "Nîmes",
+      "datetime": "",
+      "address": "312",
+      "budget": 312,
+      "contact": "321",
+      "description": "123"
+    },
+    {
+      "id": "53fd",
+      "user_id": "",
+      "provider_id": -1,
+      "title": "sd",
+      "category": "Cleaning",
+      "frequency": "OneTime",
+      "city": "Dijon",
+      "datetime": "",
+      "address": "w",
+      "budget": 2,
+      "contact": "21",
+      "description": "wq"
+    }
+  ],
+  "connectService": [
+    {
+      "id": "536e"
+    },
+    {
+      "id": "e9ea"
+    },
+    {
+      "id": "89e9"
+    }
+  ],
+  "connectTask": [],
+  "cities": [
+    {
+      "zipcode": "75000",
+      "city": "Paris",
+      "id": "c70a"
+    },
+    {
+      "zipcode": "13000",
+      "city": "Marseille",
+      "id": "4e2f"
+    },
+    {
+      "zipcode": "69000",
+      "city": "Lyon",
+      "id": "462b"
+    },
+    {
+      "zipcode": "31000",
+      "city": "Toulouse",
+      "id": "3f46"
+    },
+    {
+      "zipcode": "06000",
+      "city": "Nice",
+      "id": "6c9a"
+    },
+    {
+      "zipcode": "44000",
+      "city": "Nantes",
+      "id": "997a"
+    },
+    {
+      "zipcode": "67000",
+      "city": "Strasbourg",
+      "id": "c791"
+    },
+    {
+      "zipcode": "34000",
+      "city": "Montpellier",
+      "id": "25a9"
+    },
+    {
+      "zipcode": "33000",
+      "city": "Bordeaux",
+      "id": "c80e"
+    },
+    {
+      "zipcode": "59000",
+      "city": "Lille",
+      "id": "c529"
+    },
+    {
+      "zipcode": "35000",
+      "city": "Rennes",
+      "id": "092f"
+    },
+    {
+      "zipcode": "51100",
+      "city": "Reims",
+      "id": "796a"
+    },
+    {
+      "zipcode": "76600",
+      "city": "Le Havre",
+      "id": "d4e9"
+    },
+    {
+      "zipcode": "42000",
+      "city": "Saint-Étienne",
+      "id": "8bc3"
+    },
+    {
+      "zipcode": "83000",
+      "city": "Toulon",
+      "id": "bc26"
+    },
+    {
+      "zipcode": "38000",
+      "city": "Grenoble",
+      "id": "bbab"
+    },
+    {
+      "zipcode": "21000",
+      "city": "Dijon",
+      "id": "7694"
+    },
+    {
+      "zipcode": "49000",
+      "city": "Angers",
+      "id": "e499"
+    },
+    {
+      "zipcode": "30000",
+      "city": "Nîmes",
+      "id": "9fa6"
+    },
+    {
+      "zipcode": "13090",
+      "city": "Aix-en-Provence",
+      "id": "9d62"
+    }
+  ],
+  "categories": [
+    {"category": "Cleaning"},
+    {"category": "Childcare"},
+    {"category": "Elderly Care"},
+    {"category": "Appliance Cleaning"},
+    {"category": "Home Repairs"},
+    {"category": "Private Chef"},
+    {"category": "Pet Sitting"}
+  ],
+  "userInfo": [
+    {
+      "user_id": "usr_20250510_001",
+      "first_name": "Julie",
+      "last_name": "Chen",
+      "username": "sylvain",
+      "gender": "female",
+      "birthday": "1995-08-20",
+      "email": "julie.chen@example.com",
+      "phone": "0612345678",
+      "avatarUrl": "https://example.com/avatars/julie.jpg",
+      "address": "12 Rue des Fleurs",
+      "city": "Paris",
+      "country": "France",
+      "zipCode": "75008",
+      "createdAt": "2024-11-15T10:24:00Z",
+      "lastLogin": "2025-05-10T08:12:00Z",
+      "role": "customer",
+      "id": "fabb"
+    }
+  ]
+}
