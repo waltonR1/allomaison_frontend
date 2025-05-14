@@ -78,7 +78,7 @@ watchEffect(() => {
               <h1 class="text-3xl font-extrabold mb-1">{{ task.title }}</h1>
               <p class="text-sm opacity-80">{{ task.city }} • {{ task.category }} • {{ task.frequency }}</p>
             </div>
-            <span v-if="task.budget" class="inline-block bg-green-600 text-white text-xl sm:text-2xl px-5 py-1.5 rounded-full shadow">{{ task.budget }}€</span>
+            <span class="inline-block bg-amber-400 text-white text-xl sm:text-2xl px-5 py-1.5 rounded-full shadow">{{ task.budget }}€</span>
           </div>
 
           <p class="leading-relaxed mb-8">{{ task.description }}</p>

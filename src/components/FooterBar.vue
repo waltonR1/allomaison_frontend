@@ -15,7 +15,7 @@ const year = new Date().getFullYear()
     <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
       <!-- 品牌简述 -->
       <div>
-        <h4 :class="[isDark ? 'text-amber-700' : 'text-amber-400','text-lg font-semibold mb-3']">
+        <h4 :class="[isDark ? 'text-amber-600' : 'text-amber-400','text-lg font-semibold mb-3']">
           AlloMaison
         </h4>
         <p class="text-sm leading-relaxed">
@@ -25,7 +25,7 @@ const year = new Date().getFullYear()
 
       <!-- 快速链接 -->
       <div>
-        <h4 :class="[isDark ? 'text-amber-700' : 'text-amber-400','text-lg font-semibold mb-3']">
+        <h4 :class="[isDark ? 'text-amber-600' : 'text-amber-400','text-lg font-semibold mb-3']">
           Quick Links
         </h4>
         <ul class="space-y-1">
@@ -38,7 +38,7 @@ const year = new Date().getFullYear()
       <!-- 社交媒体 -->
       <div>
         <h4 class="text-lg font-semibold mb-3"
-            :class="[isDark ? 'text-amber-700' : 'text-amber-400']">
+            :class="[isDark ? 'text-amber-600' : 'text-amber-400']">
           Follow Us
         </h4>
         <div class="flex flex-col space-x-4">

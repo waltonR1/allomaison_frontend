@@ -4,7 +4,7 @@ import { login } from '@/api/noTokenAPI.ts'
 type UserState = {
   token: string | null;
   role: 'customer' | 'provider' | 'admin' | null;
-  userId: Number | null;
+  userId: number | null;
   avatarUrl: string | null;
   userName: string | null;
 }

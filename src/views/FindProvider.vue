@@ -61,7 +61,7 @@ const { inputClass } = useFormClasses()
 <template>
   <main class="flex-1 py-12 px-4 sm:px-6 lg:px-8">
     <div :class="[isDark ? 'bg-gray-800' : 'bg-white', 'w-full max-w-7xl mx-auto p-8 rounded-3xl shadow-2xl transition duration-500']">
-      <h1 class="text-center text-2xl font-bold mb-6">Find Providers</h1>
+      <h1 class="text-center text-4xl font-bold mb-6">Find Providers</h1>
 
       <div class="grid gap-6 sm:grid-cols-2 mb-8">
         <input v-model="search" :class="inputClass" placeholder="Search services..." />

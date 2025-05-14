@@ -9,7 +9,7 @@ export type Order = {
   category: string
   datetime: string
   address: string
-  description?: string
+  description: string
   title:string
   frequency: string
   city: string

@@ -1,0 +1,41 @@
+<script setup lang="ts">
+
+import {ref} from "vue";
+import {storeToRefs} from "pinia";
+
+import {useThemeStore} from "@/stores/themeStore.ts";
+
+const theme  = useThemeStore()
+const { isDark } = storeToRefs(theme)
+
+const showPanel = ref(false)
+
+function togglePanel() {
+  showPanel.value = !showPanel.value
+}
+
+</script>
+
+<template>
+
+  <!-- 悬浮添加按钮 -->
+  <button @click="togglePanel" :class="[isDark ? 'bg-amber-500 hover:bg-amber-600 ' : 'bg-amber-400 hover:bg-amber-500 ','fixed bottom-8 right-8  text-white rounded-full w-14 h-14 text-3xl flex items-center justify-center shadow-lg transition duration-300 z-50 hover:scale-130 hover:text-4xl']">
+    <span v-if="!showPanel">+</span>
+    <span v-else>-</span>
+  </button>
+
+  <!-- 展开的浮动面板 -->
+  <div
+      v-if="showPanel"
+      class="fixed bottom-28 right-8 w-80 bg-white shadow-xl rounded-xl p-4 border border-gray-200 z-40"
+      :class="{ 'dark:bg-gray-800 dark:text-white': isDark }"
+  >
+    <h3 class="text-lg font-semibold mb-2">新订单</h3>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">这里可以放表单、按钮或链接。</p>
+  </div>
+
+</template>
+
+<style scoped>
+
+</style>

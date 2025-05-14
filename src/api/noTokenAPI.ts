@@ -24,8 +24,8 @@ export async function fetchProviders(): Promise<ProviderCard[]> {
   const response = await axios.get<ProviderCard[]>(urls.getProvider)
   return response.data.map(p => ({
     ...p,
-    providerId: Number(p.providerId),               // 强制转为 number
-    rating: Number(p.rating),       // 若你担心 rating 被转成 string，也清洗
+    providerId: Number(p.providerId),
+    rating: Number(p.rating),
   }))
 }
 

@@ -13,7 +13,7 @@ const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
 const userStore = useUserStore()
-const { userId: userId } = storeToRefs(userStore)
+const { userId } = storeToRefs(userStore)
 
 const statusFilter = ref<'All' | string>('All')
 
@@ -31,7 +31,7 @@ const filteredOrders = computed(() => {
 })
 
 const statusOptions = [
-  { value: 'All', label: '全部' },
+  { value: 'All', label: 'All' },
   { value: 'pending', label: '待确认' },
   { value: 'confirmed', label: '已确认' },
   { value: 'completed', label: '已完成' },
@@ -61,49 +61,42 @@ const { buttonClass } = useFormClasses()
   <main class="flex-1 py-12 px-4 sm:px-6 lg:px-8">
     <div
       :class="[isDark ? 'bg-gray-800' : 'bg-white', 'w-full max-w-7xl mx-auto p-8 rounded-3xl shadow-2xl transition duration-500']">
-      <h1 class="text-center text-2xl font-bold mb-6">My Order</h1>
+      <h1 class="text-center text-4xl font-bold mb-6">My Order</h1>
 
-      <!-- 筛选栏：状态单选 -->
-      <div class="flex flex-col md:flex-row gap-4 items-start md:items-center mb-5">
-        <label class="font-medium">筛选状态:</label>
+      <div class="flex flex-col text-xl md:flex-row gap-4 items-start md:items-center mb-5">
+        <label class="font-bold">Filter by Status: </label>
         <div class="flex flex-wrap gap-4">
           <label v-for="option in statusOptions" :key="option.value" class="flex items-center space-x-2">
-            <input
-              v-model="statusFilter"
-              :value="option.value"
-              class="form-radio text-blue-600"
-              name="status"
-              type="radio"
-            />
+            <input v-model="statusFilter" :value="option.value" class="form-radio " name="status" type="radio"/>
             <span>{{ option.label }}</span>
           </label>
         </div>
       </div>
 
-      <!-- 加载状态 -->
       <div v-if="orderStore.loading">Loading...</div>
       <div v-else-if="filteredOrders.length === 0" class="text-gray-500">暂无订单</div>
 
       <!-- 订单列表 -->
-      <div v-for="order in filteredOrders"
-           :key="order.orderId"
-           :class="[isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900', 'mb-2 relative p-6 rounded-2xl shadow-md transition duration-300 hover:shadow-xl']">
+      <div v-for="order in filteredOrders" :key="order.orderId" :class="[isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900', 'mb-2 relative p-6 rounded-2xl shadow-md transition duration-300 hover:shadow-xl']">
 
-        <div>
-          <h3 class="text-lg font-semibold">{{ order.providerName }}</h3>
-          <p>服务项目：{{ order.service }}</p>
-          <p>预约时间：{{ new Date(order.appointmentDate).toLocaleString() }}</p>
-          <p>地址：{{ order.address }}</p>
-          <p>状态：<span :class="statusColor(order.status)">{{ order.status }}</span></p>
-          <p v-if="order.note">备注：{{ order.note }}</p>
+        <div class="grid grid-cols-2 gap-2">
+          <h3 class="text-lg font-semibold col-span-2">{{ order.title }}</h3>
+          <p>Provider : {{ order.providerName }}</p>
+          <p>Catagory：{{ order.category }}</p>
+          <p>Reservation Time：{{ new Date(order.datetime).toLocaleString() }}</p>
+          <p>Address：{{ order.address }}</p>
+          <p>State：<span :class="statusColor(order.status)">{{ order.status }}</span></p>
         </div>
+
+        <div :class="[isDark ? 'bg-amber-500' : 'bg-amber-400', 'absolute text-white top-15 right-11 text-xl w-18 h-10 items-center text-center flex justify-center rounded-full shadow']">{{ order.budget }}€</div>
+
 
         <!-- 绝对定位到卡片右下角 -->
         <div class="absolute bottom-4 right-4 flex space-x-2">
-          <button :class="[buttonClass, 'w-24 h-10 text-sm flex items-center justify-center bg-gray-500']"
+          <button :class="[buttonClass, 'w-36 h-10 text-sm flex items-center justify-center bg-gray-500']"
                   @click="handleOrderAction(order)">查看
           </button>
-          <button :class="[buttonClass, 'w-24 h-10 text-sm flex items-center justify-center']"
+          <button :class="[buttonClass, 'w-36 h-10 text-sm flex items-center justify-center']"
                   @click="handleOrderAction(order)">取消
           </button>
         </div>

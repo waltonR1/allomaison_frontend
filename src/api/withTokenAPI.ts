@@ -25,7 +25,7 @@ export async function submitProviderApplication(userId: number, form: ProviderAp
 }
 
 // 发布Task
-export async function postTask (userId: Number, form: TaskForm) {
+export async function postTask (userId: number, form: TaskForm) {
   await axios.post(urls.postTask, {userId: userId, providerId: -1, ...form}, {
     headers: {
       'Content-Type': 'application/json',

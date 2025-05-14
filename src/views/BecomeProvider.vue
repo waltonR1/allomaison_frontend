@@ -138,7 +138,7 @@ const { inputClass, noPlaceholderInputClass, buttonClass, fileInputClass } = use
             <option value="" disabled selected hidden>Primary Service Category</option>
             <option :value="category.category" v-for="category in categoriesStore.categories" :key="category.category">{{ category.category }}</option>
           </select>
-          <textarea v-model="form.experiences" placeholder="Briefly describe your past work experience, specialties, and notable clients..." rows="4" :class="[inputClass,'sm:col-span-2']"></textarea>
+          <textarea v-model="form.experiences" placeholder="Briefly describe your past work experience, specialties, and notable clients..." rows="4" :class="[inputClass,'col-span-2']"></textarea>
           <div class="flex flex-col gap-2 col-span-2">
           <input type="file" @change="handleCertUpload" multiple :class="fileInputClass" accept=".pdf,.jpg,.jpeg,.png"/>
           <p :class="[isDark ? 'text-gray-400' : 'text-gray-500','text-sm']"> Please upload any relevant qualification certificates, such as a babysitting license, cleaning certification, or other professional credentials. </p>
