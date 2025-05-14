@@ -13,9 +13,9 @@ export const urls = {
   login: `${BASE_URL}/user/login`,
   register:`${BASE_URL}/users`,
 
-  getUserInfo: (user_id: string) => `${BASE_URL}/userInfo?user_id=${user_id}`,
-  updateUserInfo:(user_id: string) => `${BASE_URL}/userInfo/${user_id}`,
-  uploadAvatar:(user_id: string) => `${BASE_URL}/userInfo/${user_id}`,
+  getUserInfo: (user_id: Number) => `${BASE_URL}/userInfo?user_id=${user_id}`,
+  updateUserInfo:(user_id: Number) => `${BASE_URL}/userInfo/${user_id}`,
+  uploadAvatar:(user_id: Number) => `${BASE_URL}/userInfo/${user_id}`,
   becomeProvider: `${BASE_URL}/becomeProviders`,
   getProvider: `${BASE_URL}/providers`,
 
@@ -25,7 +25,7 @@ export const urls = {
   getTask: `${BASE_URL}/tasks`,
   postTask: `${BASE_URL}/postTask`,
 
-  getOrders:(user_id: string) => `${BASE_URL}/orders?customerId=${user_id}`,
+  getOrders:(user_id: Number) => `${BASE_URL}/orders?customerId=${user_id}`,
 
   //静态选项
   getCategories: `${BASE_URL}/categories`,

@@ -2,10 +2,10 @@ import { defineStore } from 'pinia'
 import { fetchUserInfo } from '@/api/withTokenAPI.ts'
 
 export type UserInfo = {
-  user_id: string | null;   //后端生成
-  first_name: string | null;
-  last_name: string | null;
-  username: string | null;
+  userId: Number | null;   //后端生成
+  firstName: string | null;
+  lastName: string | null;
+  userName: string | null;
   gender: 'male' | 'female' | null;
   birthday: string | null; // 格式为 YYYY-MM-DD
   email: string | null;
@@ -28,10 +28,10 @@ export type UserInfoState = UserInfo & {
 
 export const useUserInfoStore = defineStore('useInfo', {
   state: (): UserInfoState => ({
-    user_id: null,
-    first_name: null,
-    last_name: null,
-    username: null,
+    userId: null,
+    firstName: null,
+    lastName: null,
+    userName: null,
     gender: null,
     birthday: null,
     email: null,
@@ -50,14 +50,14 @@ export const useUserInfoStore = defineStore('useInfo', {
 
   actions: {
     // 获取用户信息
-    async fetchUserInfo(user_id: string) {
-      if (this.user_id && this.username) return null
+    async fetchUserInfo(userId: number) {
+      if (this.userId && this.userName) return null
 
       this.loading = true
       this.error = ''
 
       try {
-        const response = await fetchUserInfo(user_id)
+        const response = await fetchUserInfo(userId)
         this.$patch(response[0])
       } catch (error: any) {
         this.error = error.message || '获取用户信息失败'

@@ -18,7 +18,7 @@ const userStore = useUserStore()
 
 // state -> ref
 const { isDark } = storeToRefs(theme)
-const { user_id, isLoggedIn } = storeToRefs(userStore)
+const { userId, isLoggedIn } = storeToRefs(userStore)
 
 // variable
 const formVisible = ref(false);
@@ -87,7 +87,7 @@ const submit = async () => {
   try {
     loading.value = true
 
-    await submitProviderApplication(user_id.value ?? '', form)
+    await submitProviderApplication(Number(userId.value) ?? -1, form)
     alert('Successfully, Please wait for approval.')
     await Router.push('/')
   } catch (error: any) {
@@ -136,7 +136,7 @@ const { inputClass, noPlaceholderInputClass, buttonClass, fileInputClass } = use
           </select>
           <select v-model="form.categories" :class="noPlaceholderInputClass(form.categories)" required>
             <option value="" disabled selected hidden>Primary Service Category</option>
-            <option :value="category.category" v-for="category in categoriesStore.categories" :key="category">{{ category.category }}</option>
+            <option :value="category.category" v-for="category in categoriesStore.categories" :key="category.category">{{ category.category }}</option>
           </select>
           <textarea v-model="form.experiences" placeholder="Briefly describe your past work experience, specialties, and notable clients..." rows="4" :class="[inputClass,'sm:col-span-2']"></textarea>
           <div class="flex flex-col gap-2 col-span-2">

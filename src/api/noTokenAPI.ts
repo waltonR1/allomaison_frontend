@@ -22,13 +22,21 @@ export async function fetchCities(): Promise<City[]> {
 // 遍历provider
 export async function fetchProviders(): Promise<ProviderCard[]> {
   const response = await axios.get<ProviderCard[]>(urls.getProvider)
-  return response.data
+  return response.data.map(p => ({
+    ...p,
+    providerId: Number(p.providerId),               // 强制转为 number
+    rating: Number(p.rating),       // 若你担心 rating 被转成 string，也清洗
+  }))
 }
 
 // 遍历task
 export async function fetchTasks(): Promise<TaskCard[]> {
   const response = await axios.get<TaskCard[]>(urls.getTask)
-  return response.data
+  return response.data.map(p => ({
+    ...p,
+    taskId: Number(p.taskId),
+    customerId: Number(p.customerId),
+  }))
 }
 
 //login

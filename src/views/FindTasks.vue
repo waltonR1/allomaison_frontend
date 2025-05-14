@@ -79,11 +79,11 @@ const { inputClass } = useFormClasses()
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="taskCard in filtered" :key="taskCard.id" :class="[isDark ? 'bg-gray-700' : 'bg-white', 'rounded-2xl shadow-md p-6 hover:shadow-xl transition group']">
-          <RouterLink :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']" :to="{ name: 'taskDetail', params: { id: taskCard.id } }">{{ taskCard.title }}</RouterLink>
+        <div v-for="taskCard in filtered" :key="taskCard.taskId" :class="[isDark ? 'bg-gray-700' : 'bg-white', 'rounded-2xl shadow-md p-6 hover:shadow-xl transition group']">
+          <RouterLink :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']" :to="{ name: 'taskDetail', params: { taskId: taskCard.taskId } }">{{ taskCard.title }}</RouterLink>
           <p :class="[isDark ? 'text-gray-400' : 'text-gray-500 ','mb-4 text-sm']">{{ taskCard.city }} • {{ taskCard.category }}</p>
           <p class="text-sm mb-4">{{ taskCard.description }}</p>
-          <p class="text-xl text-yellow-500">{{ taskCard.budget }}</p>
+          <p class="text-xl text-yellow-500">{{ taskCard.budget }}€</p>
         </div>
       </div>
     </div>

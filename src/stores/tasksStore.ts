@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 import { fetchTasks } from '@/api/noTokenAPI.ts'
 
 export type TaskCard = {
-  id: number
-  userId: string
+  taskId: number
+  customerId: number
   title: string
   category: string
   frequency: string
@@ -32,9 +32,9 @@ export const useTasksStore = defineStore('tasks', {
   }),
 
   getters: {
-    /** 根据 ID 获取单个服务者 */
-    getById: (state) => (id: number): TaskCard | undefined =>
-      state.taskCards.find((p) => p.id === id),
+    /** 根据 TaskId 获取单个服务者 */
+    getById: (state) => (taskId: number): TaskCard | undefined =>
+      state.taskCards.find((p) => p.taskId === taskId),
   },
 
   actions: {

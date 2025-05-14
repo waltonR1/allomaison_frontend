@@ -2,13 +2,21 @@ import { defineStore } from 'pinia'
 import { fetchOrders } from '@/api/withTokenAPI.ts'
 
 export type Order = {
-  orderId: string
+  orderId: number
+  providerId: number
   providerName: string
-  service: string
-  appointmentDate: string
-  status: 'pending' | 'confirmed' | 'completed' | 'cancelled'
+  customerId: number
+  category: string
+  datetime: string
   address: string
-  note?: string
+  description?: string
+  title:string
+  frequency: string
+  city: string
+  budget: string
+  contact: string
+  status: 'pending' | 'confirmed' | 'completed' | 'cancelled'
+  createdAt: string
 }
 
 type OrderState = {
@@ -25,7 +33,7 @@ export const useOrderStore = defineStore('orderStore', {
   }),
 
   actions: {
-    async fetchOrders(customerId: string , force = false) {
+    async fetchOrders(customerId: number , force = false) {
       if (this.orders.length > 0 && !force) return;
 
       try {

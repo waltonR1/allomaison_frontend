@@ -9,7 +9,7 @@ const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
 const userStore = useUserStore()
-const { role,avatarUrl,username,isLoggedIn } = storeToRefs(userStore)
+const { role,avatarUrl,userName,isLoggedIn } = storeToRefs(userStore)
 
 const showCard = ref(false)
 const showImage = ref(true)
@@ -51,7 +51,7 @@ watch(() => avatarUrl, () => {
           </div>
 
           <div v-if="showCard" :class="[isDark ? 'bg-gray-800' : 'bg-white','absolute right-0 top-full w-64 rounded-2xl shadow-2xl p-4 z-10']">
-            <div class="w-full text-center px-3 py-2 text-xl border-b mb-1 select-none ">{{ username || 'Guest'}}</div>
+            <div class="w-full text-center px-3 py-2 text-xl border-b mb-1 select-none ">{{ userName || 'Guest'}}</div>
             <router-link to="/auth/information" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Personal Information</router-link>
             <router-link to="/order" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">My Order</router-link>
 

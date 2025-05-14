@@ -14,7 +14,7 @@ const userStore = useUserStore()
 const userInfoStore = useUserInfoStore()
 
 const { isDark } = storeToRefs(themeStore)
-const {user_id, isLoggedIn} = storeToRefs(userStore)
+const {userId, isLoggedIn} = storeToRefs(userStore)
 const userInfo = storeToRefs(userInfoStore)
 
 const showImage = ref(true)
@@ -23,14 +23,14 @@ const fileInput = ref<HTMLInputElement | null>(null)
 const form = reactive<Partial<UserInfo>>({})
 
 // label 相关
-const READONLY_FIELDS: Array<keyof UserInfo> = ['first_name', 'last_name', 'gender', 'birthday']
-const isReadOnly = (key: keyof UserInfo) => READONLY_FIELDS.includes(key as any)
+const readOnlyFields: Array<keyof UserInfo> = ['firstName', 'lastName', 'gender', 'birthday']
+const isReadOnly = (key: keyof UserInfo) => readOnlyFields.includes(key as any)
 const fields: { label: string; key: keyof UserInfo; type?: string }[] = [
-  { label: 'First name', key: 'first_name' },
-  { label: 'Last name', key: 'last_name' },
+  { label: 'First name', key: 'firstName' },
+  { label: 'Last name', key: 'lastName' },
   { label: 'Gender', key: 'gender' },
   { label: 'Birthday', key: 'birthday', type: 'date' },
-  { label: 'Username', key: 'username' },
+  { label: 'UserName', key: 'userName' },
   { label: 'Email', key: 'email', type: 'email' },
   { label: 'Phone', key: 'phone', type: 'tel' },
   { label: 'Address', key: 'address' },
@@ -55,8 +55,8 @@ const handleFileChange = async (e: Event) => {
   const file = files[0]
 
   try {
-      if (user_id.value) {
-        const res = await uploadAvatar(user_id.value, file)
+      if (userId.value) {
+        const res = await uploadAvatar(userId.value, file)
 
       if (res.status === 200 && res.data.avatarUrl) {
         const newUrl = res.data.avatarUrl
@@ -85,11 +85,11 @@ const cancelEdit = () => {
 
 const saveEdit = async () => {
   try {
-    if (user_id.value) {
-      const res = await updateUserInfo(user_id.value, form)
+    if (userId.value) {
+      const res = await updateUserInfo(Number(userId.value), form)
       if (res.status === 200) {
         userInfoStore.$patch({ ...form })
-        userStore.$patch({ username: form.username })
+        userStore.$patch({ userName: form.userName })
         cancelEdit()
       } else {
         console.warn('error while saving user info')
@@ -107,8 +107,8 @@ watch(() => userInfo.avatarUrl?.value, () => {
 
 // loading
 onMounted(() => {
-  if (user_id.value) {
-    userInfoStore.fetchUserInfo(user_id.value)
+  if (userId.value) {
+    userInfoStore.fetchUserInfo(Number(userId.value))
   }
   if (!isLoggedIn) {
     router.replace('/')
@@ -133,9 +133,9 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
             <input ref="fileInput" type="file" accept="image/*" class="hidden" @change="handleFileChange" />
           </div>
 
-          <h2 class="text-3xl font-bold">{{ userInfo.username.value }}</h2>
+          <h2 class="text-3xl font-bold">{{ userInfo.userName.value }}</h2>
           <p :class="[isDark ? 'text-gray-500' : 'text-gray-400','text-sm']">
-            User ID: {{ userInfo.user_id.value }}
+            User ID: {{ userInfo.userId.value }}
           </p>
           <button type="button" v-if="!isEditing" @click="startEdit" :class="buttonClass">
             Edit profile

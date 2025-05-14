@@ -21,10 +21,10 @@ const { isLoggedIn } = storeToRefs(userStore)
 // router params
 const route = useRoute()
 const router = useRouter()
-const id = Number(route.params.id)
+const providerId = Number(route.params.providerId)
 
 // 获取当前 Provider
-const provider = computed(() => providersStore.getById(id))
+const provider = computed(() => providersStore.getById(providerId))
 
 //加载数据（若尚未加载)
 onMounted(() => providersStore.fetchProviders())
@@ -43,7 +43,7 @@ const submit = async () => {
   try {
     await axios.post(
       urls.connectProvider,
-      { providerId: id },          // 视后端而定
+      { providerId: providerId },          // 视后端而定
       { headers: { 'Content-Type': 'application/json', Accept: 'application/json' } }
     )
     alert('Successfully, Please wait for approval.')
@@ -58,7 +58,7 @@ const { buttonClass } = useFormClasses()
 
 // 监听：无此 Provider 时返回首页
 watchEffect(() => {
-  if (providersStore.fetched && !provider.value && !providersStore.loading) router.replace('/')
+  if (providersStore.fetched && !provider.value && !providersStore.loading) router.replace('/providers')
 })
 
 // 头像地址变化时重置显示开关

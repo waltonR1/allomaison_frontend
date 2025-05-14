@@ -18,7 +18,7 @@ const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
 // state -> ref
-const { user_id,isLoggedIn } = storeToRefs(userStore)
+const { userId,isLoggedIn } = storeToRefs(userStore)
 
 // variable
 const loading = ref(false)
@@ -57,7 +57,7 @@ const submit = async () => {
   try {
     loading.value = true
 
-    await postTask(user_id.value ?? '', form)
+    await postTask(Number(userId.value) ?? -1, form)
 
     alert('Successfully, Please wait for approval.')
     await Router.push('/')
@@ -86,12 +86,12 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
         <h1 class="text-center text-2xl font-bold mb-6">Post a Task</h1>
 
         <form  @submit.prevent="submit" class="space-y-6">
-          <input id="title" v-model="form.title" type="text" required :class="inputClass" placeholder="Task Title" />
-          <select id="category" v-model="form.category" :class="noPlaceholderInputClass(form.category)">
+          <input v-model="form.title" type="text" required :class="inputClass" placeholder="Task Title" />
+          <select v-model="form.category" :class="noPlaceholderInputClass(form.category)">
             <option value="" selected disabled hidden>Service Category</option>
             <option v-for="category in categoriesStore.categories" :key="category.category">{{ category.category }}</option>
           </select>
-          <select id="frequency" v-model="form.frequency" :class="noPlaceholderInputClass(form.frequency)" required>
+          <select v-model="form.frequency" :class="noPlaceholderInputClass(form.frequency)" required>
             <option value="" selected disabled hidden>Frequence</option>
             <option value="OneTime">One‑time</option>
             <option value="Weekly">Weekly</option>
@@ -105,7 +105,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
           <input type="text" v-model="form.address" placeholder="Street Address" :class="inputClass" required />
           <input type="number" v-model="form.budget" placeholder="Budget (€)" :class="inputClass" min="0" required />
           <input type="text" v-model="form.contact" placeholder="Contact Info (Phone or Email)" :class="inputClass" required />
-          <textarea id="description" v-model="form.description" rows="4" required :class="[inputClass, 'resize-none']" placeholder="Task Description"></textarea>
+          <textarea v-model="form.description" rows="4" required :class="[inputClass, 'resize-none']" placeholder="Task Description"></textarea>
           <button type="submit" :class="buttonClass" :disabled="loading">Submit Task</button>
         </form>
       </div>

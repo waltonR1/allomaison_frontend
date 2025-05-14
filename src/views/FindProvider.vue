@@ -79,8 +79,8 @@ const { inputClass } = useFormClasses()
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="providerCard in filtered" :key="providerCard.id" :class="[isDark ? 'bg-gray-700' : 'bg-white', 'rounded-2xl shadow-md p-6 hover:shadow-xl transition group']">
-          <RouterLink :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']" :to="{ name: 'providerDetail', params: { id: providerCard.id } }">{{ providerCard.provider }}</RouterLink>
+        <div v-for="providerCard in filtered" :key="providerCard.providerId" :class="[isDark ? 'bg-gray-700' : 'bg-white', 'rounded-2xl shadow-md p-6 hover:shadow-xl transition group']">
+          <RouterLink :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']" :to="{ name: 'providerDetail', params: { providerId: providerCard.providerId } }">{{ providerCard.provider }}</RouterLink>
           <p :class="[isDark ? 'text-gray-400' : 'text-gray-500 ','mb-4 text-sm']">{{ providerCard.city }} • {{ providerCard.category }}</p>
           <p class="text-sm mb-4">{{ providerCard.description }}</p>
           <p class="text-sm text-yellow-500">★ {{ providerCard.rating }}/5</p>

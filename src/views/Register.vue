@@ -15,9 +15,9 @@ const { isDark } = storeToRefs(theme)
 const loading = ref(false)
 
 export type registerForm = {
-  first_name: string,
-  last_name:string,
-  username: string,
+  firstName: string,
+  lastName:string,
+  userName: string,
   gender:string,
   birthday:string,
   email: string,
@@ -28,9 +28,9 @@ export type registerForm = {
 }
 
 const form:registerForm = reactive({
-  first_name: '',
-  last_name:'',
-  username: '',
+  firstName: '',
+  lastName:'',
+  userName: '',
   gender:'',
   birthday:'',
   email: '',
@@ -87,9 +87,9 @@ const { inputClass, noPlaceholderInputClass, buttonClass } = useFormClasses()
         <h1 class="text-center text-2xl font-bold mb-6">Create account</h1>
 
         <form @submit.prevent="submit" class="space-y-6">
-          <input v-model="form.first_name" type="text" :class="inputClass" placeholder="First Name*" required />
-          <input v-model="form.last_name" type="text" :class="inputClass" placeholder="Last Name*" required />
-          <input v-model="form.username" type="text" :class="inputClass" placeholder="Username*" required />
+          <input v-model="form.firstName" type="text" :class="inputClass" placeholder="First Name*" required />
+          <input v-model="form.lastName" type="text" :class="inputClass" placeholder="Last Name*" required />
+          <input v-model="form.userName" type="text" :class="inputClass" placeholder="Username*" required />
           <select v-model="form.gender" type="text" :class="noPlaceholderInputClass(form.gender)" required>
             <option value="" disabled selected hidden>Gender*</option>
             <option value="male">Male</option>
@@ -105,7 +105,7 @@ const { inputClass, noPlaceholderInputClass, buttonClass } = useFormClasses()
           </div>
 
           <div class="flex items-center space-x-2">
-            <input type="checkbox" v-model="form.agree" id="agree" class="form-checkbox" />
+            <input type="checkbox" v-model="form.agree" class="form-checkbox" />
             <label for="agree" class="text-sm">
               I agree to the <router-link to="/auth/terms" class="text-blue-500 underline">Terms of Service</router-link>
             </label>

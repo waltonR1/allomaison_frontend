@@ -21,10 +21,10 @@ const { isLoggedIn } = storeToRefs(userStore)
 // router params
 const route = useRoute()
 const router = useRouter()
-const id = Number(route.params.id)
+const taskId = Number(route.params.taskId)
 
 // 获取当前 Task
-const task = computed(() => tasksStore.getById(id))
+const task = computed(() => tasksStore.getById(taskId))
 
 //加载数据（若尚未加载)
 onMounted(() => tasksStore.fetchTasks())
@@ -46,7 +46,7 @@ const submit = async () => {
     return
   }
   try {
-    await axios.post(urls.connectTask, { taskId: id },          // 视后端而定
+    await axios.post(urls.connectTask, { taskId: taskId },          // 视后端而定
       { headers: { 'Content-Type': 'application/json', Accept: 'application/json' } }
     )
     alert('Successfully, Please wait for approval.')
@@ -61,7 +61,7 @@ const { buttonClass } = useFormClasses()
 
 // 监听：无此 Task 时返回首页
 watchEffect(() => {
-  if (tasksStore.fetched && !task.value && !tasksStore.loading) router.replace('/')
+  if (tasksStore.fetched && !task.value && !tasksStore.loading) router.replace('/tasks')
 })
 
 </script>
@@ -78,7 +78,7 @@ watchEffect(() => {
               <h1 class="text-3xl font-extrabold mb-1">{{ task.title }}</h1>
               <p class="text-sm opacity-80">{{ task.city }} • {{ task.category }} • {{ task.frequency }}</p>
             </div>
-            <span v-if="task.budget" class="inline-block bg-green-600 text-white text-xl sm:text-2xl px-5 py-1.5 rounded-full shadow">{{ task.budget }}</span>
+            <span v-if="task.budget" class="inline-block bg-green-600 text-white text-xl sm:text-2xl px-5 py-1.5 rounded-full shadow">{{ task.budget }}€</span>
           </div>
 
           <p class="leading-relaxed mb-8">{{ task.description }}</p>

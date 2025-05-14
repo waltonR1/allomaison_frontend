@@ -71,10 +71,10 @@ onMounted(async () => {
   <section :class="[isDark ? 'bg-gray-800' : 'bg-amber-100', 'py-16 px-6 transition-colors duration-500 select-none']">
     <h3 class="text-3xl font-semibold text-center mb-10">Latest Tasks</h3>
     <div class="grid md:grid-cols-3 gap-8">
-      <div v-for="taskCard in taskCards.slice(0, 3)" :key="taskCard.id" :class="[showPage ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',isDark ? 'bg-gray-700' : 'bg-white','relative rounded-2xl shadow-md p-6 hover:shadow-2xl transition-all duration-500']">
+      <div v-for="taskCard in taskCards.slice(0, 3)" :key="taskCard.taskId" :class="[showPage ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',isDark ? 'bg-gray-700' : 'bg-white','relative rounded-2xl shadow-md p-6 hover:shadow-2xl transition-all duration-500']">
         <div class="flex justify-between items-center mb-4">
           <div>
-            <router-link :to="{ name: 'taskDetail', params: { id: taskCard.id } }" class="font-bold hover:underline">{{ taskCard.title }}</router-link>
+            <router-link :to="{ name: 'taskDetail', params: { taskId: taskCard.taskId } }" class="font-bold hover:underline">{{ taskCard.title }}</router-link>
             <p class="text-sm text-gray-500">{{ taskCard.city }}</p>
           </div>
           <h4 :class="[isDark ? 'text-amber-400' : 'text-amber-700', 'text-lg font-extrabold']">{{ taskCard.budget }}</h4>
@@ -88,7 +88,7 @@ onMounted(async () => {
   <section :class="[isDark ? 'bg-gray-900' : 'bg-white','py-16 px-6 transition-colors duration-500']">
     <h3 class="text-3xl font-semibold text-center mb-10">Top-rated Providers</h3>
     <div class="grid md:grid-cols-3 gap-8">
-      <div v-for="providerCard in providerCards.slice(0, 3)" :key="providerCard.id" :class="[showPage ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',isDark ? 'bg-gray-800' : 'bg-white','rounded-2xl shadow-md p-6 hover:shadow-2xl transition-all duration-500']">
+      <div v-for="providerCard in providerCards.slice(0, 3)" :key="providerCard.providerId" :class="[showPage ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',isDark ? 'bg-gray-800' : 'bg-white','rounded-2xl shadow-md p-6 hover:shadow-2xl transition-all duration-500']">
         <div class="flex items-center mb-4">
           <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center border-2 border-yellow-400 shadow-md mr-3">
             <img v-if="showImage && providerCard?.avatarUrl" :src="providerCard?.avatarUrl" alt="User avatar" class="w-full h-full object-cover" @error="handleImgError" />
@@ -97,7 +97,7 @@ onMounted(async () => {
             </svg>
           </div>
           <div>
-            <router-link :to="{ name: 'providerDetail', params: { id: providerCard.id } }" class="font-bold hover:underline">{{ providerCard.provider }}</router-link>
+            <router-link :to="{ name: 'providerDetail', params: { providerId: providerCard.providerId } }" class="font-bold hover:underline">{{ providerCard.provider }}</router-link>
             <p class="text-sm text-gray-500 flex items-center"><span class="text-yellow-400 mr-1">★</span> {{ providerCard.rating }}/5</p>
           </div>
         </div>

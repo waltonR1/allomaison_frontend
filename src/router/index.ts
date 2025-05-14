@@ -35,7 +35,7 @@ const router = createRouter({
       component: FindProvider
     },
     {
-      path: '/providers/:id',
+      path: '/providers/:providerId',
       name: 'providerDetail',
       component: ProviderDetail,
       props: true
@@ -51,7 +51,7 @@ const router = createRouter({
       component: FindTasks
     },
     {
-      path: '/tasks/:id',
+      path: '/tasks/:taskId',
       name: 'taskDetail',
       component: TaskDetail,
       props: true

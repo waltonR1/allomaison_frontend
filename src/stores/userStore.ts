@@ -4,18 +4,18 @@ import { login } from '@/api/noTokenAPI.ts'
 type UserState = {
   token: string | null;
   role: 'customer' | 'provider' | 'admin' | null;
-  user_id: string | null;
+  userId: Number | null;
   avatarUrl: string | null;
-  username: string | null;
+  userName: string | null;
 }
 
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
     token: 'ww',
     role: 'customer',
-    user_id:'usr_20250510_001',
+    userId: 20250510001,
     avatarUrl:'/1',
-    username:'binbin'
+    userName:'Sylvain'
   }),
 
   getters: {
@@ -29,9 +29,9 @@ export const useUserStore = defineStore('user', {
 
         this.token = response.data.token;
         this.role = response.data.role;
-        this.user_id = response.data.id;
+        this.userId = response.data.userId;
         this.avatarUrl = response.data.avatarUrl;
-        this.username = response.data.username;
+        this.userName = response.data.userName;
       } catch (error: any) {
         throw new Error(error.response?.data?.message || error.response?.data || 'Login failed');
       }
@@ -39,9 +39,9 @@ export const useUserStore = defineStore('user', {
     logout() {
       this.token = null;
       this.role = null;
-      this.user_id = null;
+      this.userId = null;
       this.avatarUrl = null;
-      this.username = null;
+      this.userName = null;
     },
     /** 判断本地 token 是否仍然有效；无效就自动登出 */
     // async checkToken(): Promise<boolean> {

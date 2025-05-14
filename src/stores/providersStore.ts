@@ -3,7 +3,7 @@ import { providerLabel } from '@/data/providerLabel.ts'
 import { fetchProviders } from '@/api/noTokenAPI.ts'
 
 export type ProviderCard = {
-  id: number;
+  providerId: number;
   category: string;            // 服务类别，如 Cleaning / Childcare ...
   city: string;                // 所在城市
   provider: string;            // 服务者名称
@@ -37,9 +37,9 @@ export const useProvidersStore = defineStore('providers', {
   }),
 
   getters: {
-    /** 根据 ID 获取单个服务者 */
-    getById: (state) => (id: number): ProviderCard | undefined =>
-      state.providerCards.find((p) => p.id === id),
+    /** 根据 providerId 获取单个服务者 */
+    getById: (state) => (providerId: number): ProviderCard | undefined =>
+      state.providerCards.find((p) => p.providerId === providerId),
   },
 
   actions: {
