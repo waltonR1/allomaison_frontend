@@ -11,7 +11,7 @@ export type TaskCard = {
   datetime: string
   address: string
   budget: string
-  contact: string
+  customerContact: string
   description: string
   createdAt: string
 }

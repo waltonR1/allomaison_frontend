@@ -4,7 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import axios from 'axios'
 
-import { useProvidersStore } from '@/stores/providersStore.ts'
+import { useProvidersStore } from '@/stores/providerStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
@@ -134,7 +134,7 @@ watch(() => provider.value?.avatarUrl, () => (showImage.value = true))
 
       <!-- 操作按钮 -->
       <div class="flex flex-wrap gap-4 mt-6">
-        <button :class="[buttonClass, 'transition hover:scale-105']" @click="submit">Connect</button>
+        <button :class="[buttonClass, 'w-full']" @click="submit">Contact</button>
       </div>
     </div>
   </main>

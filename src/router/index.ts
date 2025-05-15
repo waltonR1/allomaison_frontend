@@ -1,16 +1,17 @@
 import { createRouter, createWebHistory, RouterView } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import FindProvider from '@/views/FindProvider.vue'
-import FindTasks from '@/views/FindTasks.vue'
-import PostTask from '@/views/PostTask.vue'
-import BecomeProvider from '@/views/BecomeProvider.vue'
+import ProviderFind from '@/views/ProviderFind.vue'
+import TaskFind from '@/views/TaskFind.vue'
+import TaskPost from '@/views/TaskPost.vue'
+import ProviderBecome from '@/views/ProviderBecome.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import ProviderDetail from '@/views/ProviderDetail.vue'
 import TaskDetail from '@/views/TaskDetail.vue'
 import Terms from '@/views/Terms.vue'
 import Information from '@/views/Information.vue'
-import Orders from '@/views/Orders.vue'
+import OrderList from '@/views/OrderList.vue'
+import OrderDetail from '@/views/OrderDetail.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,13 +27,13 @@ const router = createRouter({
     },
     {
       path: '/becomeProvider',
-      name: 'BecomeProvider',
-      component: BecomeProvider
+      name: 'ProviderBecome',
+      component: ProviderBecome
     },
     {
       path: '/providers',
       name: 'providers',
-      component: FindProvider
+      component: ProviderFind
     },
     {
       path: '/providers/:providerId',
@@ -42,13 +43,13 @@ const router = createRouter({
     },
     {
       path: '/postTask',
-      name: 'PostTask',
-      component: PostTask
+      name: 'TaskPost',
+      component: TaskPost
     },
     {
       path: '/tasks',
       name: 'tasks',
-      component: FindTasks
+      component: TaskFind
     },
     {
       path: '/tasks/:taskId',
@@ -70,7 +71,13 @@ const router = createRouter({
     {
       path: '/order',
       name: 'order',
-      component: Orders,
+      component: OrderList,
+    },
+    {
+      path: '/order/:orderId',
+      name: 'orderDetail',
+      component: OrderDetail,
+      props: true
     }
 
   ]

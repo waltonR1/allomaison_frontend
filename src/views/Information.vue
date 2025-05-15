@@ -137,7 +137,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
           <p :class="[isDark ? 'text-gray-500' : 'text-gray-400','text-sm']">
             User ID: {{ userInfo.userId.value }}
           </p>
-          <button type="button" v-if="!isEditing" @click="startEdit" :class="buttonClass">
+          <button type="button" v-if="!isEditing" @click="startEdit" :class="[buttonClass,'w-full']">
             Edit profile
           </button>
         </div>
@@ -163,10 +163,10 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
         </div>
 
         <div v-if="isEditing" class="flex justify-end space-x-4 pt-4">
-          <button type="button" @click="cancelEdit" class="px-5 py-2 rounded-xl border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700">
+          <button type="button" @click="cancelEdit" :class="[isDark ? 'hover:bg-gray-700 border-gray-600' : 'hover:bg-gray-200 border-gray-300', 'px-5 py-2 rounded-xl border']">
             Cancel
           </button>
-          <button type="button" @click="saveEdit" class="px-5 py-2 rounded-xl text-white bg-amber-500 hover:bg-amber-600 focus:ring-2 focus:ring-offset-2 focus:ring-amber-400">
+          <button type="button" @click="saveEdit" :class="[ isDark? 'bg-amber-500 hover:bg-amber-600':'bg-amber-400 hover:bg-amber-500','px-5 py-2 rounded-xl text-white focus:ring-2 focus:ring-offset-2 focus:ring-amber-400' ]">
             Save
           </button>
         </div>

@@ -15,10 +15,10 @@ export function useFormClasses () {
   /** 输入框样式 */
   const inputClass = computed(() =>
     [
-      'w-full px-4 py-3 rounded-xl border focus:ring-2 focus:outline-none transition',
+      'w-full px-4 py-3 rounded-xl border focus:ring-2 focus:outline-none transition focus:ring-amber-400',
       isDark.value
-        ? 'bg-gray-700 border-gray-700 text-gray-100 placeholder-gray-400 focus:ring-amber-400'
-        : 'bg-white   border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-amber-400'
+        ? 'bg-gray-700 border-gray-700 text-gray-100 placeholder-gray-400'
+        : 'bg-white   border-gray-300 text-gray-900 placeholder-gray-500'
     ].join(' ')
   )
 
@@ -28,20 +28,20 @@ export function useFormClasses () {
    */
   const noPlaceholderInputClass = (value: string) =>
     [
-      'w-full px-4 py-3 rounded-xl border focus:ring-2 focus:outline-none transition',
+      'w-full px-4 py-3 rounded-xl border focus:ring-2 focus:outline-none transition focus:ring-amber-400',
       isDark.value
-        ? 'bg-gray-700 border-gray-700 focus:ring-amber-400'
-        : 'bg-white border-gray-300 focus:ring-amber-400',
+        ? 'bg-gray-700 border-gray-700'
+        : 'bg-white border-gray-300',
       value === '' ? (isDark.value ? 'text-gray-400' : 'text-gray-500')  : (isDark.value ? 'text-gray-100' : 'text-gray-900')
     ].join(' ')
 
   /** 按钮样式 */
   const buttonClass = computed(() =>
     [
-      'w-full flex justify-center py-3 px-4 rounded-xl border border-transparent font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition',
+      'flex justify-center py-3 px-4 rounded-xl border border-transparent font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition text-white focus:ring-amber-400',
       isDark.value
-        ? 'bg-amber-500 hover:bg-amber-600 text-white focus:ring-amber-400'
-        : 'bg-amber-400 hover:bg-amber-500 text-white focus:ring-amber-400'
+        ? 'bg-amber-500 hover:bg-amber-600'
+        : 'bg-amber-400 hover:bg-amber-500'
     ].join(' ')
   )
 

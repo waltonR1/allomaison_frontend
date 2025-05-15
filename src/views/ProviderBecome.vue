@@ -122,7 +122,7 @@ const { inputClass, noPlaceholderInputClass, buttonClass, fileInputClass } = use
         </ul>
 
         <div class="flex justify-center">
-          <button @click="LoginClick" :class="[buttonClass]">
+          <button @click="LoginClick" :class="[buttonClass, 'w-full']">
             {{ formVisible ? 'Close Form' : 'Start Registration' }}
           </button>
         </div>

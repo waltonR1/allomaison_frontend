@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router'
 
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
-import { useProvidersStore } from '@/stores/providersStore.ts'
+import { useProvidersStore } from '@/stores/providerStore.ts'
 import { useCityStore } from '@/stores/cityStore.ts'
 import { useCategoriesStore } from '@/stores/categoriesStore.ts'
 

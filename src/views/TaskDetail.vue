@@ -4,7 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import axios from 'axios'
 
-import { useTasksStore } from '@/stores/tasksStore.ts'
+import { useTasksStore } from '@/stores/taskStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
@@ -76,7 +76,7 @@ watchEffect(() => {
           <div class="flex flex-col sm:flex-row sm:items-center gap-6 mb-8">
             <div class="flex-1">
               <h1 class="text-3xl font-extrabold mb-1">{{ task.title }}</h1>
-              <p class="text-sm opacity-80">{{ task.city }} • {{ task.category }} • {{ task.frequency }}</p>
+              <p class="text-sm opacity-80">{{ task.city }} • {{ task.category }}</p>
             </div>
             <span class="inline-block bg-amber-400 text-white text-xl sm:text-2xl px-5 py-1.5 rounded-full shadow">{{ task.budget }}€</span>
           </div>
@@ -94,7 +94,7 @@ watchEffect(() => {
             </div>
             <div>
               <p class="font-semibold mb-1">Contact</p>
-              <p>{{ task.contact }}</p>
+              <p>{{ task.customerContact }}</p>
             </div>
             <div>
               <p class="font-semibold mb-1">Frequency</p>
@@ -114,7 +114,7 @@ watchEffect(() => {
           </section>
 
           <div class="flex flex-wrap gap-4 mt-6">
-            <button :class="[buttonClass, 'transition hover:scale-105']" @click="submit">Connect</button>
+            <button :class="[buttonClass, 'w-full']" @click="submit">Contact</button>
           </div>
         </div>
   </main>

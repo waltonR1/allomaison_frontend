@@ -4,8 +4,8 @@ import { storeToRefs } from 'pinia'
 
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useCategoriesStore } from '@/stores/categoriesStore.ts'
-import { useProvidersStore } from '@/stores/providersStore.ts'
-import { useTasksStore } from '@/stores/tasksStore.ts'
+import { useProvidersStore } from '@/stores/providerStore.ts'
+import { useTasksStore } from '@/stores/taskStore.ts'
 
 /*  stores */
 const providersStore = useProvidersStore()

@@ -26,6 +26,9 @@ export const urls = {
   postTask: `${BASE_URL}/postTask`,
 
   getOrders:(userId: number) => `${BASE_URL}/orders?customerId=${userId}`,
+  concealOrder:(orderId: number) => `${BASE_URL}/orders/${orderId}`,
+  restartOrder:(orderId: number) => `${BASE_URL}/orders/${orderId}`,
+
 
   //静态选项
   getCategories: `${BASE_URL}/categories`,

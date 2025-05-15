@@ -32,7 +32,7 @@ export type TaskForm = {
   datetime: string,
   address: string,
   budget:string,
-  contact:string,
+  customerContact:string,
   description: string
 }
 
@@ -44,7 +44,7 @@ const form:TaskForm = reactive({
   datetime: '',
   address: '',
   budget:'',
-  contact:'',
+  customerContact:'',
   description: ''
 })
 
@@ -104,9 +104,9 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
           <input v-if="form.frequency !== 'OneTime'" type="datetime-local" v-model="form.datetime" :class="inputClass" required />
           <input type="text" v-model="form.address" placeholder="Street Address" :class="inputClass" required />
           <input type="number" v-model="form.budget" placeholder="Budget (€)" :class="inputClass" min="0" required />
-          <input type="text" v-model="form.contact" placeholder="Contact Info (Phone or Email)" :class="inputClass" required />
+          <input type="text" v-model="form.customerContact" placeholder="Contact Info (Phone or Email)" :class="inputClass" required />
           <textarea v-model="form.description" rows="4" required :class="[inputClass, 'resize-none']" placeholder="Task Description"></textarea>
-          <button type="submit" :class="buttonClass" :disabled="loading">Submit Task</button>
+          <button type="submit" :class="[buttonClass,'w-full']" :disabled="loading">Submit Task</button>
         </form>
       </div>
     </main>

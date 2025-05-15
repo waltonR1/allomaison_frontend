@@ -92,7 +92,12 @@
       "id": "89e9"
     }
   ],
-  "connectTask": [],
+  "connectTask": [
+    {
+      "id": "565c",
+      "taskId": 103
+    }
+  ],
   "cities": [
     {
       "zipcode": "75000",
@@ -197,25 +202,32 @@
   ],
   "categories": [
     {
-      "category": "Cleaning"
+      "category": "Cleaning",
+      "id": "d966"
     },
     {
-      "category": "Childcare"
+      "category": "Childcare",
+      "id": "3976"
     },
     {
-      "category": "Elderly Care"
+      "category": "Elderly Care",
+      "id": "0dc6"
     },
     {
-      "category": "Appliance Cleaning"
+      "category": "Appliance Cleaning",
+      "id": "5258"
     },
     {
-      "category": "Home Repairs"
+      "category": "Home Repairs",
+      "id": "2839"
     },
     {
-      "category": "Private Chef"
+      "category": "Private Chef",
+      "id": "1fd5"
     },
     {
-      "category": "Pet Sitting"
+      "category": "Pet Sitting",
+      "id": "ad3d"
     }
   ],
   "providers": [
@@ -249,7 +261,8 @@
         "Licensed Cleaner",
         "Eco Friendly"
       ],
-      "priceRange": "€25–€35/hour"
+      "priceRange": "€25–€35/hour",
+      "id": "c3e2"
     },
     {
       "providerId": 2,
@@ -281,7 +294,8 @@
         "CPR Certified",
         "Early Education Qualified"
       ],
-      "priceRange": "€20–€30/hour"
+      "priceRange": "€20–€30/hour",
+      "id": "1af1"
     },
     {
       "providerId": 3,
@@ -313,7 +327,8 @@
         "Certified Handyman",
         "Quick Estimate Provided"
       ],
-      "priceRange": "€20–€30/hour"
+      "priceRange": "€20–€30/hour",
+      "id": "eba7"
     },
     {
       "providerId": 4,
@@ -345,7 +360,8 @@
         "CPR Certified",
         "Overnight Care"
       ],
-      "priceRange": "€20–€30/hour"
+      "priceRange": "€20–€30/hour",
+      "id": "4d6f"
     },
     {
       "providerId": 5,
@@ -377,7 +393,8 @@
         "Certified Caregiver",
         "Mobility Assistance"
       ],
-      "priceRange": "€20–€30/hour"
+      "priceRange": "€20–€30/hour",
+      "id": "2c48"
     }
   ],
   "userInfo": [
@@ -400,7 +417,7 @@
       "role": "customer",
       "loading": false,
       "error": "",
-      "id": 20250510001
+      "id": "20250510001"
     }
   ],
   "tasks": [
@@ -414,9 +431,10 @@
       "datetime": "2025-05-17T10:00:00",
       "address": "12 Rue de Rivoli, 75001 Paris",
       "budget": "45",
-      "contact": "client1@example.com",
+      "customerContact": "client1@example.com",
       "description": "Looking for someone to clean my 2-bedroom apartment every Saturday morning.",
-      "createdAt": "2025-05-11T09:30:00"
+      "createdAt": "2025-05-11T09:30:00",
+      "id": "c06f"
     },
     {
       "taskId": 102,
@@ -428,9 +446,10 @@
       "datetime": "2025-05-18T19:00:00",
       "address": "45 Rue Victor Hugo, 69002 Lyon",
       "budget": "35",
-      "contact": "mom.lyon@example.com",
+      "customerContact": "mom.lyon@example.com",
       "description": "Looking for a babysitter for a 3-year-old child on Sunday evening.",
-      "createdAt": "2025-05-11T10:15:00"
+      "createdAt": "2025-05-11T10:15:00",
+      "id": "64fe"
     },
     {
       "taskId": 103,
@@ -442,9 +461,10 @@
       "datetime": "2025-05-16T08:00:00",
       "address": "88 Avenue du Prado, 13008 Marseille",
       "budget": "80",
-      "contact": "son@example.com",
+      "customerContact": "son@example.com",
       "description": "Need a kind and patient caregiver for my elderly mother each morning.",
-      "createdAt": "2025-05-11T11:00:00"
+      "createdAt": "2025-05-11T11:00:00",
+      "id": "6875"
     },
     {
       "taskId": 104,
@@ -456,9 +476,10 @@
       "datetime": "2025-05-20T14:00:00",
       "address": "3 Place Kléber, 67000 Strasbourg",
       "budget": "25",
-      "contact": "appliance.help@example.com",
+      "customerContact": "appliance.help@example.com",
       "description": "Need help deep cleaning my kitchen oven and hood.",
-      "createdAt": "2025-05-11T11:45:00"
+      "createdAt": "2025-05-11T11:45:00",
+      "id": "274f"
     },
     {
       "taskId": 105,
@@ -470,9 +491,10 @@
       "datetime": "2025-05-19T13:30:00",
       "address": "25 Rue Sainte-Catherine, 33000 Bordeaux",
       "budget": "50",
-      "contact": "tenant@example.com",
+      "customerContact": "tenant@example.com",
       "description": "Urgently need someone to repair my front door lock.",
-      "createdAt": "2025-05-11T12:10:00"
+      "createdAt": "2025-05-11T12:10:00",
+      "id": "d750"
     },
     {
       "taskId": 106,
@@ -484,15 +506,16 @@
       "datetime": "2025-05-21T19:00:00",
       "address": "10 Promenade des Anglais, 06000 Nice",
       "budget": "120",
-      "contact": "eventhost@example.com",
+      "customerContact": "eventhost@example.com",
       "description": "Hosting a dinner party for 6 guests, need a chef to prepare a 3-course meal.",
-      "createdAt": "2025-05-11T12:40:00"
+      "createdAt": "2025-05-11T12:40:00",
+      "id": "adc5"
     }
   ],
   "orders": [
     {
       "orderId": 1,
-      "providerId": 101,
+      "providerId": -1,
       "providerName": "Alice Martin",
       "customerId": 20250510001,
       "category": "House Cleaning",
@@ -503,9 +526,10 @@
       "frequency": "One-time",
       "city": "Paris",
       "budget": "50",
-      "contact": "client1@example.com",
-      "status": "pending",
-      "createdAt": "2025-05-10T08:00:00"
+      "providerContact": "client1@example.com",
+      "status": "Pending",
+      "createdAt": "2025-05-10T08:00:00",
+      "id": "1"
     },
     {
       "orderId": 2,
@@ -520,9 +544,10 @@
       "frequency": "One-time",
       "city": "Paris",
       "budget": "30",
-      "contact": "client2@example.com",
-      "status": "confirmed",
-      "createdAt": "2025-05-09T09:12:00"
+      "providerContact": "client2@example.com",
+      "status": "Confirmed",
+      "createdAt": "2025-05-09T09:12:00",
+      "id": "2"
     },
     {
       "orderId": 3,
@@ -537,13 +562,14 @@
       "frequency": "One-time",
       "city": "Marseille",
       "budget": "80",
-      "contact": "client3@example.com",
-      "status": "completed",
-      "createdAt": "2025-05-08T10:30:00"
+      "providerContact": "client3@example.com",
+      "status": "Completed",
+      "createdAt": "2025-05-08T10:30:00",
+      "id": "3"
     },
     {
       "orderId": 4,
-      "providerId": 104,
+      "providerId": -1,
       "providerName": "Luc Moreau",
       "customerId": 20250510001,
       "category": "Gardening",
@@ -554,9 +580,10 @@
       "frequency": "Monthly",
       "city": "Lyon",
       "budget": "60",
-      "contact": "client4@example.com",
-      "status": "pending",
-      "createdAt": "2025-05-11T11:00:00"
+      "providerContact": "client4@example.com",
+      "status": "Pending",
+      "createdAt": "2025-05-11T11:00:00",
+      "id": "4"
     },
     {
       "orderId": 5,
@@ -571,9 +598,10 @@
       "frequency": "Weekly",
       "city": "Bordeaux",
       "budget": "40",
-      "contact": "client5@example.com",
-      "status": "confirmed",
-      "createdAt": "2025-05-12T14:20:00"
+      "providerContact": "client5@example.com",
+      "status": "Confirmed",
+      "createdAt": "2025-05-12T14:20:00",
+      "id": "5"
     },
     {
       "orderId": 6,
@@ -588,13 +616,14 @@
       "frequency": "One-time",
       "city": "Lille",
       "budget": "70",
-      "contact": "client6@example.com",
-      "status": "confirmed",
-      "createdAt": "2025-05-13T10:00:00"
+      "providerContact": "client6@example.com",
+      "status": "Confirmed",
+      "createdAt": "2025-05-13T10:00:00",
+      "id": "6"
     },
     {
       "orderId": 7,
-      "providerId": 107,
+      "providerId": -1,
       "providerName": "Isabelle Petit",
       "customerId": 20250510001,
       "category": "Pet Sitting",
@@ -605,9 +634,10 @@
       "frequency": "One-time",
       "city": "Paris",
       "budget": "90",
-      "contact": "client7@example.com",
-      "status": "pending",
-      "createdAt": "2025-05-14T09:30:00"
+      "providerContact": "client7@example.com",
+      "status": "Pending",
+      "createdAt": "2025-05-14T09:30:00",
+      "id": "7"
     },
     {
       "orderId": 8,
@@ -622,9 +652,10 @@
       "frequency": "One-time",
       "city": "Nantes",
       "budget": "55",
-      "contact": "client8@example.com",
-      "status": "confirmed",
-      "createdAt": "2025-05-14T11:00:00"
+      "providerContact": "client8@example.com",
+      "status": "Confirmed",
+      "createdAt": "2025-05-14T11:00:00",
+      "id": "8"
     },
     {
       "orderId": 9,
@@ -639,9 +670,10 @@
       "frequency": "Weekly",
       "city": "Strasbourg",
       "budget": "65",
-      "contact": "client9@example.com",
-      "status": "confirmed",
-      "createdAt": "2025-05-14T13:15:00"
+      "providerContact": "client9@example.com",
+      "status": "Confirmed",
+      "createdAt": "2025-05-14T13:15:00",
+      "id": "9"
     },
     {
       "orderId": 10,
@@ -656,9 +688,10 @@
       "frequency": "One-time",
       "city": "Toulouse",
       "budget": "100",
-      "contact": "client10@example.com",
-      "status": "cancelled",
-      "createdAt": "2025-05-14T15:00:00"
+      "providerContact": "client10@example.com",
+      "status": "Cancelled",
+      "createdAt": "2025-05-14T15:00:00",
+      "id": "10"
     }
   ]
 }

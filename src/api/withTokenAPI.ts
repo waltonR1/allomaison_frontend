@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { urls } from '@/utils/urls.ts'
-import type { ProviderApplicationForm } from '@/views/BecomeProvider.vue'
-import type { TaskForm } from '@/views/PostTask.vue'
-import type { Order } from '@/stores/orderStore.ts'
+import type { ProviderApplicationForm } from '@/views/ProviderBecome.vue'
+import type { TaskForm } from '@/views/TaskPost.vue'
+import type { OrderCard } from '@/stores/orderStore.ts'
 import type { UserInfo } from '@/stores/userInfoStore.ts'
 
 
@@ -26,18 +26,38 @@ export async function submitProviderApplication(userId: number, form: ProviderAp
 
 // 发布Task
 export async function postTask (userId: number, form: TaskForm) {
-  await axios.post(urls.postTask, {userId: userId, providerId: -1, ...form}, {
+  return await axios.post(urls.postTask, {userId: userId, providerId: -1, ...form}, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     },
-  });
+  })
 }
 
 // 遍历order
-export async function fetchOrders(customerId:number): Promise<Order[]> {
-  const response = await axios.get<Order[]>(urls.getOrders(customerId))
+export async function fetchOrders(customerId:number): Promise<OrderCard[]> {
+  const response = await axios.get<OrderCard[]>(urls.getOrders(customerId))
   return response.data
+}
+
+// 取消order
+export async function concealOrder(orderId:number) {
+  return await axios.patch(urls.concealOrder(orderId),{ status: 'Cancelled' },{
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+  })
+}
+
+// 重启order
+export async function restartOrder(orderId:number) {
+  return await axios.patch(urls.restartOrder(orderId),{ status: 'Pending' },{
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+  })
 }
 
 //获取用户信息
