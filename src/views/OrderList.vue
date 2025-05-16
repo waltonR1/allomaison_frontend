@@ -17,6 +17,9 @@ const { isDark } = storeToRefs(theme)
 const { userId,isLoggedIn } = storeToRefs(userStore)
 
 const statusFilter = ref<'All' | string>('All')
+const showReviewModal = ref(false)
+const selectedProviderId = ref<number | null>(null)
+const reviewText = ref('')
 
 // 模拟加载
 onMounted(() => {
@@ -79,7 +82,25 @@ const restartOrder = async (orderId: number) => {
   }
 }
 
+// 开启评论框
+const reviewProvider = (providerId: number) => {
+  selectedProviderId.value = providerId
+  showReviewModal.value = true
+}
 
+//提交评论
+const submitReview = async () => {
+  if (!reviewText.value.trim()) return
+
+  console.log('提交评论：', {
+    providerId: selectedProviderId.value,
+    content: reviewText.value
+  })
+
+  // 清空 & 关闭
+  reviewText.value = ''
+  showReviewModal.value = false
+}
 
 /* css utils */
 const { buttonClass } = useFormClasses()
@@ -154,7 +175,27 @@ const { buttonClass } = useFormClasses()
     </div>
   </main>
 
-
+  <teleport to="body">
+    <div v-if="showReviewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg w-96">
+        <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Leave a Review</h2>
+        <textarea
+            v-model="reviewText"
+            rows="5"
+            placeholder="Write your review..."
+            class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white resize-none focus:outline-none focus:ring-2 focus:ring-sky-500"
+        ></textarea>
+        <div class="flex justify-end mt-4 space-x-2">
+          <button @click="showReviewModal = false" class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 text-gray-800 dark:bg-gray-600 dark:text-white">
+            Cancel
+          </button>
+          <button @click="submitReview" class="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </teleport>
 
 </template>
 
