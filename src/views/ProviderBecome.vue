@@ -50,7 +50,7 @@ const form: ProviderApplicationForm= reactive({
 })
 
 // check login
-function LoginClick() {
+const LoginClick = () => {
   if (!isLoggedIn.value) {
     Router.push('/auth/login')
     return
@@ -59,7 +59,7 @@ function LoginClick() {
 }
 
 // limit of files
-function handleCertUpload(event: Event) {
+const handleCertUpload = (event: Event) => {
   const target = event.target as HTMLInputElement | null
   if (target && target.files) {
     const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png']

@@ -24,7 +24,7 @@ const showImage = ref(true)
 
 const handleImgError = () => (showImage.value = false)
 
-function timeAgo(date:any) {
+const timeAgo = (date:any) => {
   const diff = Date.now() - new Date(date).getTime();
   return Math.floor(diff / 60000);
 }

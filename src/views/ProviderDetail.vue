@@ -3,12 +3,12 @@ import { computed, ref, watch, watchEffect, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import axios from 'axios'
+import { urls } from '@/utils/urls.ts'
 
 import { useProvidersStore } from '@/stores/providerStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
-import { urls } from '@/utils/urls.ts'
 
 // stores & helpers
 const providersStore = useProvidersStore()

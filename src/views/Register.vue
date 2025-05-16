@@ -44,7 +44,7 @@ const passwordDifferent = computed(() => {
   return form.password !== form.confirmPassword;
 });
 
-const submit = async () => {
+const submitRegister = async () => {
   if (!form.agree) {
     alert('You must agree to the terms and conditions');
     return;
@@ -86,7 +86,7 @@ const { inputClass, noPlaceholderInputClass, buttonClass } = useFormClasses()
       <div :class="[isDark ? 'bg-gray-800' :'bg-white','w-full max-w-md space-y-8 p-8 rounded-2xl shadow-2xl transition duration-500']">
         <h1 class="text-center text-2xl font-bold mb-6">Create account</h1>
 
-        <form @submit.prevent="submit" class="space-y-6">
+        <form @submit.prevent="submitRegister" class="space-y-6">
           <input v-model="form.firstName" type="text" :class="inputClass" placeholder="First Name*" required />
           <input v-model="form.lastName" type="text" :class="inputClass" placeholder="Last Name*" required />
           <input v-model="form.userName" type="text" :class="inputClass" placeholder="Username*" required />

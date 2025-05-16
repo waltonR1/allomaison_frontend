@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { concealOrder, fetchOrders, restartOrder } from '@/api/withTokenAPI.ts'
+import { concealOrder, fetchOrders, restartOrder, reviewOrder } from '@/api/withTokenAPI.ts'
 
 export type OrderCard = {
   orderId: number
@@ -41,7 +41,7 @@ export const useOrderStore = defineStore('orderStore', {
   },
 
   actions: {
-    async fetchOrders(customerId: number , force = false) {
+    async fetchOrders(customerId: number, force = false) {
       if (this.orderCards.length > 0 && !force) return;
 
       try {
@@ -65,7 +65,7 @@ export const useOrderStore = defineStore('orderStore', {
             order.status = 'Cancelled'
           }
         }
-      }catch(e:any){
+      } catch (e: any) {
         this.error = e.message || 'Conceal Failed'
       }
     },
@@ -79,9 +79,18 @@ export const useOrderStore = defineStore('orderStore', {
             order.status = 'Pending'
           }
         }
-      }catch(e:any){
+      } catch (e: any) {
         this.error = e.message || 'Conceal Failed'
       }
+    },
+
+    async review(orderId: number, reviewText: string) {
+      try {
+        await reviewOrder(orderId, reviewText)
+      }catch (e:any){
+        this.error = e.message || 'Review Failed'
+      }
     }
+
   }
 })

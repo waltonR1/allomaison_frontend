@@ -50,9 +50,19 @@ export async function concealOrder(orderId:number) {
   })
 }
 
-// 重启order
+// 重新建立order
 export async function restartOrder(orderId:number) {
   return await axios.patch(urls.restartOrder(orderId),{ status: 'Pending' },{
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+  })
+}
+
+//评论order
+export async function reviewOrder(orderId: number, reviewText:string) {
+  return await axios.post(urls.reviewOrder,{orderId, reviewText},{
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'

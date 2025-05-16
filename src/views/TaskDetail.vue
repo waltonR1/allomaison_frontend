@@ -3,12 +3,12 @@ import { computed, watchEffect, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import axios from 'axios'
+import { urls } from '@/utils/urls.ts'
 
 import { useTasksStore } from '@/stores/taskStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
-import { urls } from '@/utils/urls.ts'
 
 // stores & helpers
 const tasksStore = useTasksStore()
@@ -30,7 +30,7 @@ const task = computed(() => tasksStore.getById(taskId))
 onMounted(() => tasksStore.fetchTasks())
 
 // format helpers
-function formatDate(iso: string): string {
+const formatDate = (iso: string) => {
   if (!iso) return '-'
   const d = new Date(iso)
   return d.toLocaleString('en-GB', {

@@ -5,7 +5,7 @@ import Router from '@/router'
 
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
-import {useCategoriesStore} from '@/stores/categoriesStore.ts'
+import { useCategoriesStore } from '@/stores/categoriesStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useCityStore } from '@/stores/cityStore.ts'
 import { postTask } from '@/api/withTokenAPI.ts'
@@ -49,7 +49,7 @@ const form:TaskForm = reactive({
 })
 
 // post a task
-const submit = async () => {
+const submitTask = async () => {
   if (!isLoggedIn.value) {
     await Router.push('/auth/login')
     return
@@ -85,7 +85,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
       <div :class="[isDark ? 'bg-gray-800' : 'bg-white', 'w-full max-w-3xl space-y-8 p-8 rounded-3xl shadow-2xl transition duration-500']">
         <h1 class="text-center text-2xl font-bold mb-6">Post a Task</h1>
 
-        <form  @submit.prevent="submit" class="space-y-6">
+        <form @submit.prevent="submitTask" class="space-y-6">
           <input v-model="form.title" type="text" required :class="inputClass" placeholder="Task Title" />
           <select v-model="form.category" :class="noPlaceholderInputClass(form.category)">
             <option value="" selected disabled hidden>Service Category</option>

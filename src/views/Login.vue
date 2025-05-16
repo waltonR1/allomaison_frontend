@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import router from '@/router'
+
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
-import Router from '@/router'
-import router from '@/router'
 
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
@@ -28,7 +28,7 @@ const submit = async () => {
     loading.value = true
     await userStore.login(form)
     alert('Login successful!')
-    await Router.push('/')
+    await router.push('/')
   } catch (error: any) {
     alert(error.message || 'Login failed, please check your credentials')
   } finally {

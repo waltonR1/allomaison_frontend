@@ -18,7 +18,7 @@ const { userId,isLoggedIn } = storeToRefs(userStore)
 
 const statusFilter = ref<'All' | string>('All')
 const showReviewModal = ref(false)
-const selectedProviderId = ref<number | null>(null)
+const selectedOrderId = ref<number>(-1)
 const reviewText = ref('')
 
 // 模拟加载
@@ -45,7 +45,7 @@ const statusOptions = [
   { value: 'Cancelled', label: 'Cancelled' },
 ]
 
-function statusColor(status: string) {
+const statusColor = (status: string) => {
   switch (status) {
     case 'Pending':
       return 'text-yellow-500'
@@ -83,8 +83,8 @@ const restartOrder = async (orderId: number) => {
 }
 
 // 开启评论框
-const reviewProvider = (providerId: number) => {
-  selectedProviderId.value = providerId
+const reviewProvider = (orderId: number) => {
+  selectedOrderId.value = orderId
   showReviewModal.value = true
 }
 
@@ -92,14 +92,16 @@ const reviewProvider = (providerId: number) => {
 const submitReview = async () => {
   if (!reviewText.value.trim()) return
 
-  console.log('提交评论：', {
-    providerId: selectedProviderId.value,
-    content: reviewText.value
-  })
+  try{
+    await orderStore.review(selectedOrderId.value, reviewText.value.trim())
+  }catch (error: any) {
+    alert(error.message || 'Review failed, please check your credentials')
+  }
 
   // 清空 & 关闭
   reviewText.value = ''
   showReviewModal.value = false
+  selectedOrderId.value = -1
 }
 
 /* css utils */
@@ -161,7 +163,7 @@ const { buttonClass } = useFormClasses()
             <button v-if="order.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactProvider(order.providerId)">
               Contact
             </button>
-            <button v-if="order.status === 'Completed'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="reviewProvider(order.providerId)">
+            <button v-if="order.status === 'Completed'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="reviewProvider(order.orderId)">
               Review
             </button>
             <button v-if="order.status === 'Cancelled'" :class="[buttonClass, isDark ? 'bg-gray-500 hover:bg-gray-600' : 'bg-gray-400 hover:bg-gray-500', 'w-32']" @click="restartOrder(order.orderId)">

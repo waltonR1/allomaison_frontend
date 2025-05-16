@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, watchEffect, onMounted } from 'vue'
+import { computed, watchEffect, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
@@ -22,6 +22,11 @@ const route = useRoute()
 const router = useRouter()
 const orderId = Number(route.params.orderId)
 
+const showReviewModal = ref(false)
+const selectedOrderId = ref<number>(-1)
+const reviewText = ref('')
+
+
 // 获取当前 Order
 const order = computed(() => orderStore.getById(orderId))
 
@@ -36,7 +41,7 @@ onMounted(() => {
 })
 
 // format helpers
-function formatDate(iso: string): string {
+const formatDate = (iso: string) => {
   if (!iso) return '-'
   const d = new Date(iso)
   return d.toLocaleString('en-GB', {
@@ -65,6 +70,28 @@ const restartOrder = async (orderId: number) => {
       alert(error.message || 'Conceal failed, please check your credentials')
     }
   }
+}
+
+// 开启评论框
+const reviewProvider = (orderId: number) => {
+  selectedOrderId.value = orderId
+  showReviewModal.value = true
+}
+
+//提交评论
+const submitReview = async () => {
+  if (!reviewText.value.trim()) return
+
+  try{
+    await orderStore.review(selectedOrderId.value, reviewText.value.trim())
+  }catch (error: any) {
+    alert(error.message || 'Review failed, please check your credentials')
+  }
+
+  // 清空 & 关闭
+  reviewText.value = ''
+  showReviewModal.value = false
+  selectedOrderId.value = -1
 }
 
 // css utils
@@ -141,7 +168,7 @@ watchEffect(() => {
         <button v-if="order.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactProvider(order.providerId)">
           Contact
         </button>
-        <button v-if="order.status === 'Completed'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="reviewProvider(order.providerId)">
+        <button v-if="order.status === 'Completed'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="reviewProvider(order.orderId)">
           Review
         </button>
         <button v-if="order.status === 'Cancelled'" :class="[buttonClass, isDark ? 'bg-gray-500 hover:bg-gray-600' : 'bg-gray-400 hover:bg-gray-500', 'w-32']" @click="restartOrder(order.orderId)">
@@ -150,6 +177,29 @@ watchEffect(() => {
       </div>
     </div>
   </main>
+
+  <teleport to="body">
+    <div v-if="showReviewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg w-96">
+        <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Leave a Review</h2>
+        <textarea
+          v-model="reviewText"
+          rows="5"
+          placeholder="Write your review..."
+          class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white resize-none focus:outline-none focus:ring-2 focus:ring-sky-500"
+        ></textarea>
+        <div class="flex justify-end mt-4 space-x-2">
+          <button @click="showReviewModal = false" class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 text-gray-800 dark:bg-gray-600 dark:text-white">
+            Cancel
+          </button>
+          <button @click="submitReview" class="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </teleport>
+
 </template>
 
 

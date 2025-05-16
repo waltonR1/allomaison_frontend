@@ -29,6 +29,8 @@ export const urls = {
   concealOrder:(orderId: number) => `${BASE_URL}/orders/${orderId}`,
   restartOrder:(orderId: number) => `${BASE_URL}/orders/${orderId}`,
 
+  reviewOrder:`${BASE_URL}/review`,
+
 
   //静态选项
   getCategories: `${BASE_URL}/categories`,
