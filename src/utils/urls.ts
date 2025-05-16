@@ -6,6 +6,8 @@ export const urls = {
 
   connectProvider: `${BASE_URL}/connectProvider`,
   connectTask: `${BASE_URL}/connectTask`,
+  chatMessages:(chatId: number) => `${BASE_URL}/chatMessages?chatId=${chatId}`,
+  conversations: `${BASE_URL}/conversations`,
 
   //重置完的
 

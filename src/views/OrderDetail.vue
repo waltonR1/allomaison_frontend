@@ -95,13 +95,12 @@ const submitReview = async () => {
 }
 
 // css utils
-const { buttonClass } = useFormClasses()
+const { inputClass, buttonClass } = useFormClasses()
 
 // 监听：无此 Order 时返回首页
 watchEffect(() => {
   if (orderStore.fetched && !order.value && !orderStore.loading) router.replace('/order')
 })
-
 </script>
 
 <template>
@@ -180,16 +179,11 @@ watchEffect(() => {
 
   <teleport to="body">
     <div v-if="showReviewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50">
-      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg w-96">
-        <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Leave a Review</h2>
-        <textarea
-          v-model="reviewText"
-          rows="5"
-          placeholder="Write your review..."
-          class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white resize-none focus:outline-none focus:ring-2 focus:ring-sky-500"
-        ></textarea>
+      <div :class="[isDark ? 'bg-gray-900 border border-amber-50' : 'bg-white','p-6 rounded-2xl shadow-lg w-96']">
+        <h2 :class="[isDark ? 'text-white' : 'text-gray-800', 'text-xl font-bold mb-4']">Leave a Review</h2>
+        <textarea v-model="reviewText" rows="5" placeholder="Write your review..." :class="[inputClass]"/>
         <div class="flex justify-end mt-4 space-x-2">
-          <button @click="showReviewModal = false" class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 text-gray-800 dark:bg-gray-600 dark:text-white">
+          <button @click="showReviewModal = false" class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 text-gray-800">
             Cancel
           </button>
           <button @click="submitReview" class="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white">

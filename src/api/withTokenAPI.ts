@@ -99,6 +99,24 @@ export async function updateUserInfo(userId: number, form: Partial<UserInfo>) {
 }
 
 
+// ========== Conversations ========== //
+export async function fetchConversations() {
+  return await axios.get(urls.conversations) // GET /conversations
+}
+
+// ========== Messages ========== //
+export async function fetchMessages(chatId: number) {
+  return await axios.get(urls.chatMessages(chatId))
+}
+
+export async function postMessage(chatId: number, content: string) {
+  return await axios.post(
+      urls.chatMessages(chatId),
+      { content }
+  )
+}
+
+
 
 
 

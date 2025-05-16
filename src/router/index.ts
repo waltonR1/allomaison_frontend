@@ -12,6 +12,7 @@ import Terms from '@/views/Terms.vue'
 import Information from '@/views/Information.vue'
 import OrderList from '@/views/OrderList.vue'
 import OrderDetail from '@/views/OrderDetail.vue'
+import ChatView from '@/views/ChatView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -78,6 +79,11 @@ const router = createRouter({
       name: 'orderDetail',
       component: OrderDetail,
       props: true
+    },
+    {
+      path:'/chat',
+      name:'chat',
+      component: ChatView
     }
 
   ]

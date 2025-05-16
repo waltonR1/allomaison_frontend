@@ -705,5 +705,54 @@
       "orderId": 3,
       "reviewText": "test"
     }
+  ],
+  "conversations": [
+    {
+      "id": 1,
+      "title": "Alice",
+      "lastMessage": "See you tomorrow!",
+      "updatedAt": "2025-05-15T18:25:43.511Z"
+    },
+    {
+      "id": 2,
+      "title": "Project Group",
+      "lastMessage": "Please review the PR.",
+      "updatedAt": "2025-05-16T07:10:11.100Z"
+    }
+  ],
+  "chatMessages": [
+    {
+      "id": 1,
+      "chatId": 1,
+      "senderId": 1,
+      "content": "Hello!",
+      "createdAt": "2025-05-15T17:20:00Z"
+    },
+    {
+      "id": 2,
+      "chatId": 1,
+      "senderId": 2,
+      "content": "Hi! How are you?",
+      "createdAt": "2025-05-15T17:21:00Z"
+    },
+    {
+      "id": 3,
+      "chatId": 1,
+      "senderId": 1,
+      "content": "Good, thanks.",
+      "createdAt": "2025-05-15T17:22:00Z"
+    },
+    {
+      "id": "cd6d",
+      "chatId": 2,
+      "senderId": 1,
+      "content": "11"
+    },
+    {
+      "id": "0981",
+      "chatId": 2,
+      "senderId": 1,
+      "content": "12"
+    }
   ]
 }
