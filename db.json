@@ -1,103 +1,4 @@
 {
-  "users": [
-    {
-      "id": "3223",
-      "firstName": "haihang",
-      "lastName": "wang",
-      "gender": "male",
-      "birthday": "2025-05-01",
-      "email": "wanghaihang233@gmail.com",
-      "phone": "0750797040",
-      "password": "123456",
-      "confirmPassword": "123456",
-      "agree": true
-    },
-    {
-      "id": "a51d",
-      "firstName": "啊实打实的",
-      "lastName": "321",
-      "userName": "321",
-      "gender": "male",
-      "birthday": "2025-05-10",
-      "email": "312@1",
-      "phone": "0100000000",
-      "password": "123456",
-      "confirmPassword": "123456",
-      "agree": true
-    }
-  ],
-  "postTask": [
-    {
-      "id": "5a45",
-      "userId": "usr_20250510_001",
-      "providerId": -1,
-      "title": "的",
-      "category": "Cleaning",
-      "frequency": "OneTime",
-      "city": "Nîmes",
-      "datetime": "",
-      "address": "21",
-      "budget": 12,
-      "contact": "21",
-      "description": "21"
-    },
-    {
-      "id": "0864",
-      "userId": "usr_20250510_001",
-      "title": "1",
-      "category": "Cleaning",
-      "frequency": "Weekly",
-      "city": "Dijon",
-      "datetime": "2025-05-12T04:01",
-      "address": "1",
-      "budget": 1,
-      "contact": "1",
-      "description": "1"
-    },
-    {
-      "id": "fb0b",
-      "userId": "usr_20250510_001",
-      "title": "21",
-      "category": "Cleaning",
-      "frequency": "OneTime",
-      "city": "Aix-en-Provence",
-      "datetime": "",
-      "address": "12",
-      "budget": 21,
-      "contact": "21",
-      "description": "21"
-    },
-    {
-      "id": "b4e2",
-      "userId": "usr_20250510_001",
-      "title": "5.14",
-      "category": "Cleaning",
-      "frequency": "OneTime",
-      "city": "Aix-en-Provence",
-      "datetime": "",
-      "address": "1",
-      "budget": 1,
-      "contact": "1",
-      "description": "1"
-    }
-  ],
-  "connectService": [
-    {
-      "id": "536e"
-    },
-    {
-      "id": "e9ea"
-    },
-    {
-      "id": "89e9"
-    }
-  ],
-  "connectTask": [
-    {
-      "id": "565c",
-      "taskId": 103
-    }
-  ],
   "cities": [
     {
       "zipcode": "75000",
@@ -228,6 +129,134 @@
     {
       "category": "Pet Sitting",
       "id": "ad3d"
+    }
+  ],
+  "login": [
+    {
+      "token": "ww",
+      "role": "customer",
+      "userId": 20250510001,
+      "avatarUrl": "/1",
+      "userName": "Sylvain",
+      "email": "wanghaihang233@gmail.com",
+      "password": "123456",
+      "id": "6978"
+    },
+    {
+      "id": "1",
+      "email": "alice@example.com",
+      "password": "123456",
+      "role": "user",
+      "token": "token_alice_abc",
+      "userId": "usr_001",
+      "avatarUrl": "/images/avatars/alice.png",
+      "userName": "Alice"
+    },
+    {
+      "id": "2",
+      "email": "bob@example.com",
+      "password": "abcdef",
+      "role": "provider",
+      "token": "token_bob_xyz",
+      "userId": "usr_002",
+      "avatarUrl": "/images/avatars/bob.png",
+      "userName": "Bob"
+    }
+  ],
+  "register": [
+    {
+      "id": "fc1c",
+      "firstName": "haihang",
+      "lastName": "wang",
+      "userName": "123",
+      "gender": "male",
+      "birthday": "2025-05-18",
+      "email": "wanghaihang233@gmail.com",
+      "phone": "0750797040",
+      "password": "123456",
+      "confirmPassword": "123456",
+      "agree": true
+    },
+    {
+      "id": "fc1c",
+      "firstName": "haihang",
+      "lastName": "wang",
+      "userName": "123",
+      "gender": "male",
+      "birthday": "2025-05-18",
+      "email": "wanghaihang233@gmail.com",
+      "phone": "0750797040",
+      "password": "123456",
+      "confirmPassword": "123456",
+      "agree": true
+    }
+  ],
+  "postTask": [
+    {
+      "id": "5a45",
+      "userId": "usr_20250510_001",
+      "providerId": -1,
+      "title": "的",
+      "category": "Cleaning",
+      "frequency": "OneTime",
+      "city": "Nîmes",
+      "datetime": "",
+      "address": "21",
+      "budget": 12,
+      "contact": "21",
+      "description": "21"
+    },
+    {
+      "id": "0864",
+      "userId": "usr_20250510_001",
+      "title": "1",
+      "category": "Cleaning",
+      "frequency": "Weekly",
+      "city": "Dijon",
+      "datetime": "2025-05-12T04:01",
+      "address": "1",
+      "budget": 1,
+      "contact": "1",
+      "description": "1"
+    },
+    {
+      "id": "fb0b",
+      "userId": "usr_20250510_001",
+      "title": "21",
+      "category": "Cleaning",
+      "frequency": "OneTime",
+      "city": "Aix-en-Provence",
+      "datetime": "",
+      "address": "12",
+      "budget": 21,
+      "contact": "21",
+      "description": "21"
+    },
+    {
+      "id": "b4e2",
+      "userId": "usr_20250510_001",
+      "title": "5.14",
+      "category": "Cleaning",
+      "frequency": "OneTime",
+      "city": "Aix-en-Provence",
+      "datetime": "",
+      "address": "1",
+      "budget": 1,
+      "contact": "1",
+      "description": "1"
+    },
+    {
+      "id": "b4e2",
+      "userId": "usr_20250510_001",
+      "title": "5.14",
+      "category": "Cleaning",
+      "frequency": "OneTime",
+      "city": "Aix-en-Provence",
+      "datetime": "",
+      "address": "1",
+      "budget": 1,
+      "contact": "1",
+      "description": "1"
     }
   ],
   "providers": [
@@ -527,7 +556,7 @@
       "city": "Paris",
       "budget": "50",
       "providerContact": "client1@example.com",
-      "status": "Pending",
+      "status": "Cancelled",
       "createdAt": "2025-05-10T08:00:00",
       "id": "1"
     },
@@ -704,39 +733,58 @@
       "id": "8bd8",
       "orderId": 3,
       "reviewText": "test"
+    },
+    {
+      "id": "8bd3",
+      "orderId": 3,
+      "reviewText": "test"
+    },
+    {
+      "id": "8bd3",
+      "orderId": 3,
+      "reviewText": "test"
     }
   ],
   "conversations": [
     {
-      "id": 1,
-      "title": "Alice",
+      "chatId": 1,
+      "ContactName": "Alice",
       "lastMessage": "See you tomorrow!",
-      "updatedAt": "2025-05-15T18:25:43.511Z"
+      "updatedAt": "2025-05-15T18:25:43.511Z",
+      "userId": 20250510001
     },
     {
-      "id": 2,
-      "title": "Project Group",
+      "chatId": 2,
+      "ContactName": "Project Group",
       "lastMessage": "Please review the PR.",
-      "updatedAt": "2025-05-16T07:10:11.100Z"
+      "updatedAt": "2025-05-16T07:10:11.100Z",
+      "userId": 20250510001
+    },
+    {
+      "chatId": 3,
+      "ContactName": "Project Group",
+      "lastMessage": "Please review the PR.",
+      "updatedAt": "2025-05-16T07:10:11.100Z",
+      "userId": 20250510001
     }
   ],
   "chatMessages": [
     {
-      "id": 1,
+      "id": "1",
       "chatId": 1,
       "senderId": 1,
       "content": "Hello!",
       "createdAt": "2025-05-15T17:20:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "chatId": 1,
       "senderId": 2,
       "content": "Hi! How are you?",
       "createdAt": "2025-05-15T17:21:00Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "chatId": 1,
       "senderId": 1,
       "content": "Good, thanks.",
@@ -753,6 +801,119 @@
       "chatId": 2,
       "senderId": 1,
       "content": "12"
+    },
+    {
+      "id": "e940",
+      "chatId": "1",
+      "content": "21"
+    },
+    {
+      "id": "b55b",
+      "chatId": "2",
+      "content": "231h"
+    },
+    {
+      "id": "44bb",
+      "chatId": "2",
+      "senderId": 20250510001,
+      "content": "df"
+    },
+    {
+      "id": "3cd5",
+      "chatId": "1",
+      "senderId": 20250510001,
+      "content": "额外",
+      "createdAt": "2025-05-16T22:26:06.501Z"
+    },
+    {
+      "id": "57ef",
+      "chatId": "2",
+      "senderId": 20250510001,
+      "content": "132",
+      "createdAt": "2025-05-16T23:05:47.504Z"
+    },
+    {
+      "id": "7684",
+      "chatId": 2,
+      "senderId": 20250510001,
+      "content": "打赏",
+      "createdAt": "2025-05-17T00:21:46.520Z"
+    },
+    {
+      "id": "aaec",
+      "chatId": 1,
+      "senderId": 20250510001,
+      "content": "擦拭",
+      "createdAt": "2025-05-17T00:21:52.769Z"
+    },
+    {
+      "id": "0e18",
+      "chatId": 1,
+      "senderId": 20250510001,
+      "content": "不能",
+      "createdAt": "2025-05-17T00:22:16.568Z"
+    },
+    {
+      "id": "eef7",
+      "chatId": 1,
+      "senderId": 20250510001,
+      "content": "和法国",
+      "createdAt": "2025-05-17T00:22:31.213Z"
+    },
+    {
+      "id": "ae0a",
+      "chatId": 1,
+      "senderId": 20250510001,
+      "content": "驱蚊器",
+      "createdAt": "2025-05-17T00:38:09.406Z"
+    }
+  ],
+  "connectService": [
+    {
+      "id": "536e"
+    },
+    {
+      "id": "e9ea"
+    },
+    {
+      "id": "89e9"
+    }
+  ],
+  "acceptTask": [
+    {
+      "id": "96d1",
+      "taskId": 102,
+      "providerId": 20250510001
+    },
+    {
+      "id": "258e",
+      "taskId": 102,
+      "providerId": 20250510001
+    },
+    {
+      "id": "e0e7",
+      "taskId": 101,
+      "providerId": 20250510001
+    },
+    {
+      "id": "cd29",
+      "taskId": 101,
+      "providerId": 20250510001
+    },
+    {
+      "id": "4d02",
+      "taskId": 101,
+      "providerId": 20250510001
+    },
+    {
+      "id": "415e",
+      "taskId": 101,
+      "providerId": 20250510001
+    },
+    {
+      "id": "76a0",
+      "taskId": 101,
+      "providerId": 20250510001
     }
   ]
 }

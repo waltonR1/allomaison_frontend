@@ -2,13 +2,12 @@
 import { computed, ref, watch, watchEffect, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import axios from 'axios'
-import { urls } from '@/utils/urls.ts'
 
 import { useProvidersStore } from '@/stores/providerStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
+import { createConversation } from '@/api/withTokenAPI.ts'
 
 // stores & helpers
 const providersStore = useProvidersStore()
@@ -16,7 +15,7 @@ const userStore = useUserStore()
 const themeStore = useThemeStore()
 
 const { isDark } = storeToRefs(themeStore)
-const { isLoggedIn } = storeToRefs(userStore)
+const { userId ,isLoggedIn } = storeToRefs(userStore)
 
 // router params
 const route = useRoute()
@@ -41,13 +40,11 @@ const submit = async () => {
     return
   }
   try {
-    await axios.post(
-      urls.connectProvider,
-      { providerId: providerId },          // 视后端而定
-      { headers: { 'Content-Type': 'application/json', Accept: 'application/json' } }
-    )
-    alert('Successfully, Please wait for approval.')
-    await router.push('/')
+    const { data } = await createConversation(userId.value!, provider.value!.providerId)
+    await router.push({
+      name: 'chat',
+      query: { chatId: data.conversationId },
+    })
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed')
   }

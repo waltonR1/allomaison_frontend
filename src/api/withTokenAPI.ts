@@ -10,8 +10,8 @@ import type { UserInfo } from '@/stores/userInfoStore.ts'
 export async function submitProviderApplication(userId: number, form: ProviderApplicationForm) {
   const formData = new FormData()
   formData.append('customerId', userId.toString())
-  formData.append('idNumber', form.idNumber)
-  formData.append('yearsOfService', form.yearsOfService)
+  formData.append('idNumber', form.idNumber.toString())
+  formData.append('yearsOfService', form.yearsOfService.toString())
   formData.append('city', form.city)
   formData.append('categories', form.categories)
   formData.append('experiences', form.experiences)
@@ -40,19 +40,9 @@ export async function fetchOrders(customerId:number): Promise<OrderCard[]> {
   return response.data
 }
 
-// 取消order
-export async function concealOrder(orderId:number) {
-  return await axios.patch(urls.concealOrder(orderId),{ status: 'Cancelled' },{
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-  })
-}
-
-// 重新建立order
-export async function restartOrder(orderId:number) {
-  return await axios.patch(urls.restartOrder(orderId),{ status: 'Pending' },{
+// 改变order状态
+export async function changeOrderStatus(orderId:number,status:string) {
+  return await axios.patch(urls.changeOrderStatus(orderId),{ status: status },{
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -90,7 +80,7 @@ export async function uploadAvatar(userId:number ,file:File){
 
 //更新个人信息
 export async function updateUserInfo(userId: number, form: Partial<UserInfo>) {
-  return await axios.put(urls.updateUserInfo(userId), form, {
+  return await axios.patch(urls.updateUserInfo(userId), form, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -100,8 +90,8 @@ export async function updateUserInfo(userId: number, form: Partial<UserInfo>) {
 
 
 // ========== Conversations ========== //
-export async function fetchConversations() {
-  return await axios.get(urls.conversations) // GET /conversations
+export async function fetchConversations(userId:number) {
+  return await axios.get(urls.getConversations(userId)) // GET /conversations
 }
 
 // ========== Messages ========== //
@@ -109,10 +99,17 @@ export async function fetchMessages(chatId: number) {
   return await axios.get(urls.chatMessages(chatId))
 }
 
-export async function postMessage(chatId: number, content: string) {
-  return await axios.post(
-      urls.chatMessages(chatId),
-      { content }
+export async function postMessage(chatId: number, senderId: number, content: string, createdAt: Date) {
+  return await axios.post(urls.chatMessages(chatId), {chatId, senderId, content, createdAt },)
+}
+
+export async function createConversation(userId: number, contactId: number) {
+  return await axios.post(urls.createConversation, {userId, contactId },)
+}
+
+export async function acceptTask(taskId: number, providerId: number) {
+  return await axios.post(urls.acceptTask, { taskId: taskId, providerId: providerId },
+    { headers: { 'Content-Type': 'application/json', Accept: 'application/json' } }
   )
 }
 

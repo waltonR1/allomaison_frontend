@@ -19,6 +19,39 @@ export async function fetchCities(): Promise<City[]> {
   return response.data
 }
 
+//login
+// export async function login( loginForm: loginForm ) {
+//   return await axios.post(urls.login,
+//     { ...loginForm }, {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json'
+//       },
+//     })
+// }
+export async function login(loginForm: loginForm) {
+  const response =  await axios.get(urls.login, {
+    params: loginForm,
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  })
+  return response.data
+}
+
+
+
+//register
+export async function register(registerForm: registerForm) {
+  await axios.post(urls.register,{...registerForm},{
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+  })
+}
+
 // 遍历provider
 export async function fetchProviders(): Promise<ProviderCard[]> {
   const response = await axios.get<ProviderCard[]>(urls.getProvider)
@@ -37,25 +70,4 @@ export async function fetchTasks(): Promise<TaskCard[]> {
     taskId: Number(p.taskId),
     customerId: Number(p.customerId),
   }))
-}
-
-//login
-export async function login( loginForm: loginForm ) {
-  return await axios.post(urls.login,
-    { ...loginForm }, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-    })
-}
-
-//register
-export async function register(registerForm: registerForm) {
-  await axios.post(urls.register,{...registerForm},{
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-  })
 }

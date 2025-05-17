@@ -110,7 +110,7 @@ onMounted(() => {
   if (userId.value) {
     userInfoStore.fetchUserInfo(Number(userId.value))
   }
-  if (!isLoggedIn) {
+  if (!isLoggedIn.value) {
     router.replace('/')
   }
 })

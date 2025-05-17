@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
+import Router from '@/router'
+
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
-import Router from '@/router'
 
 const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
@@ -54,8 +55,8 @@ watch(() => avatarUrl, () => {
             <div class="w-full text-center px-3 py-2 text-xl border-b mb-1 select-none ">{{ userName || 'Guest'}}</div>
             <router-link to="/auth/information" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Personal Information</router-link>
             <router-link to="/order" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">My Order</router-link>
+            <router-link to="/chat" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Chat</router-link>
 
-            <button :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Chat</button>
             <button @click="handleLogout"  :class="[isDark ? 'border border-amber-400 text-amber-400 hover:bg-amber-500 hover:text-white' : 'border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white', 'w-full text-center px-4 py-2 mt-4 rounded-lg font-semibold transition-colors select-none']">Logout</button>
           </div>
         </div>

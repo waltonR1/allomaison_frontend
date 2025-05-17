@@ -38,7 +38,7 @@ const submit = async () => {
 
 const { isLoggedIn } = storeToRefs(userStore)
 onMounted(() => {
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
     router.replace('/')
   }
 })
@@ -55,7 +55,7 @@ const { inputClass, buttonClass } = useFormClasses()
         <form @submit.prevent="submit" class="space-y-6">
           <input v-model="form.email" type="email"  :class="inputClass" placeholder="Email" required />
           <input v-model="form.password" type="password" :class="inputClass" placeholder="Password" required minlength="6" />
-          <button type="submit" :class="buttonClass" :disabled="loading" >Login</button>
+          <button type="submit" :class="[buttonClass,'w-full']" :disabled="loading" >Login</button>
         </form>
 
         <router-link to="/auth/register" class="block text-sm text-center mt-4 hover:underline">

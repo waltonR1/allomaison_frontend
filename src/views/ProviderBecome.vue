@@ -32,8 +32,8 @@ const benefits = [
 
 // form
 export type ProviderApplicationForm = {
-  idNumber: string
-  yearsOfService: string
+  idNumber: number
+  yearsOfService: number
   city: string
   categories: string
   experiences: string
@@ -41,8 +41,8 @@ export type ProviderApplicationForm = {
 }
 
 const form: ProviderApplicationForm= reactive({
-      idNumber: '',
-      yearsOfService: '',
+      idNumber: -1,
+      yearsOfService: -1,
       city: '',
       categories: '',
       experiences: '',

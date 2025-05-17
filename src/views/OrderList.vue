@@ -26,7 +26,7 @@ onMounted(() => {
   if (userId.value) {
     orderStore.fetchOrders(userId.value)
   }
-  if (!isLoggedIn) {
+  if (!isLoggedIn.value) {
     router.replace('/')
   }
 })

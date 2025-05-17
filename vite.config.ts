@@ -17,4 +17,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+
+  server: {
+    watch: {
+      // 用 ** 通配，避免 Windows / macOS 路径分隔符差异
+      ignored: ['**/db.json']
+    }
+  }
+
+
 })

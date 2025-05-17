@@ -2,13 +2,12 @@
 import { computed, watchEffect, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import axios from 'axios'
-import { urls } from '@/utils/urls.ts'
 
 import { useTasksStore } from '@/stores/taskStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
+import { acceptTask, createConversation } from '@/api/withTokenAPI.ts'
 
 // stores & helpers
 const tasksStore = useTasksStore()
@@ -16,7 +15,7 @@ const userStore = useUserStore()
 const themeStore = useThemeStore()
 
 const { isDark } = storeToRefs(themeStore)
-const { isLoggedIn } = storeToRefs(userStore)
+const { userId, isLoggedIn } = storeToRefs(userStore)
 
 // router params
 const route = useRoute()
@@ -25,6 +24,8 @@ const taskId = Number(route.params.taskId)
 
 // 获取当前 Task
 const task = computed(() => tasksStore.getById(taskId))
+
+
 
 //加载数据（若尚未加载)
 onMounted(() => tasksStore.fetchTasks())
@@ -39,18 +40,20 @@ const formatDate = (iso: string) => {
   })
 }
 
-// Connect 按钮逻辑
-const submit = async () => {
+// Accept 按钮逻辑
+const accept = async () => {
   if (!isLoggedIn.value) {
     await router.push('/auth/login')
     return
   }
   try {
-    await axios.post(urls.connectTask, { taskId: taskId },          // 视后端而定
-      { headers: { 'Content-Type': 'application/json', Accept: 'application/json' } }
-    )
+    await acceptTask(taskId, userId.value!)
+    const { data } = await createConversation(userId.value!, task.value!.customerId)
     alert('Successfully, Please wait for approval.')
-    await router.push('/')
+    await router.push({
+      name: 'chat',
+      query: { chatId: data.conversationId },
+    })
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed')
   }
@@ -114,7 +117,7 @@ watchEffect(() => {
           </section>
 
           <div class="flex flex-wrap gap-4 mt-6">
-            <button :class="[buttonClass, 'w-full']" @click="submit">Contact</button>
+            <button :class="[buttonClass, 'w-full']" @click="accept">Accept</button>
           </div>
         </div>
   </main>
