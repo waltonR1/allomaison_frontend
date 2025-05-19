@@ -20,7 +20,7 @@ const { isDark } = storeToRefs(theme)
 
 // state -------------------------------------------------
 export interface Message {
-  id: number
+  msgId: number
   senderId: number
   content: string
   createdAt: string
@@ -63,9 +63,9 @@ watch(() => props.activeChatId, loadMessages)
   <section class="flex flex-col h-full px-4 py-6 mr-10 border-r-auto border border-amber-400">
     <!-- 消息列表 -->
     <div class="flex-1 overflow-y-auto space-y-4 pr-1">
-      <div v-for="msg in messages" :key="msg.id" class="flex w-full" :class="msg.senderId === userId ? 'justify-end' : 'justify-start'">
+      <div v-for="msg in messages" :key="msg.msgId" class="flex w-full" :class="msg.senderId === userId ? 'justify-end' : 'justify-start'">
       <div class="max-w-[70%] p-3 rounded-2xl shadow transition-colors duration-300" :class="[msg.senderId === userId? (isDark ? 'bg-amber-600 text-white' : 'bg-amber-500 text-white'): (isDark ? 'bg-gray-700 text-gray-100' : 'bg-gray-200 text-gray-800')]">
-        <p class="whitespace-pre-wrap break-words text-sm leading-relaxed">
+        <p class="whitespace-pre-wrap break-words text-xl leading-relaxed">
           {{ msg.content }}
         </p>
         <span class="block text-xs text-right opacity-60 mt-1">

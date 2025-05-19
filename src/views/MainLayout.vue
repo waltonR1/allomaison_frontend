@@ -14,7 +14,7 @@ const { isDark } = storeToRefs(theme)
   <main :class="[isDark ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-800', 'min-h-screen flex flex-col transition-colors duration-500']">
     <HeaderBar />
     <router-view />
-<!--    <FloatingButton />-->
+    <FloatingButton />
     <FooterBar />
   </main>
 </template>
