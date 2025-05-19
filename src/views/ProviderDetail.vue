@@ -77,7 +77,7 @@ watch(() => provider.value?.avatarUrl, () => (showImage.value = true))
           </svg>
         </div>
         <div>
-          <h1 :class="[isDark ? 'text-white' : 'text-gray-900', 'text-3xl font-bold mb-1']">{{ provider?.provider }}</h1>
+          <h1 :class="[isDark ? 'text-white' : 'text-gray-900', 'text-3xl font-bold mb-1']">{{ provider?.providerName }}</h1>
           <p :class="[isDark ? 'text-gray-400' : 'text-gray-500', 'text-sm']">{{ provider?.city }} • {{ provider?.category }}</p>
           <p class="text-yellow-500 font-semibold">★ {{ provider?.rating }}/5</p>
         </div>

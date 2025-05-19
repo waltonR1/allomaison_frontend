@@ -10,10 +10,6 @@ export type UserInfo = {
   birthday: string | null; // 格式为 YYYY-MM-DD
   email: string | null;
   avatarUrl: string | null; // 用户头像链接
-  address: string | null;
-  city: string | null;
-  country: string | null;
-  zipCode: string | null;
   createdAt: string | null; // 注册时间   后端生成
   lastLogin: string | null; // 最近登录时间  后端生成
   role: 'customer' | 'provider' | 'admin' | null;
@@ -35,10 +31,6 @@ export const useUserInfoStore = defineStore('useInfo', {
     birthday: null,
     email: null,
     avatarUrl: null,
-    address: null,
-    city: null,
-    country: null,
-    zipCode: null,
     createdAt: null,
     lastLogin: null,
     role: null,

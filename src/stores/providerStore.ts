@@ -5,7 +5,7 @@ export type ProviderCard = {
   providerId: number
   category: string            // 服务类别，如 Cleaning / Childcare ...
   city: string                // 所在城市
-  provider: string            // 服务者名称
+  providerName: string            // 服务者名称
   description: string         // 个人/团队简介
   rating: number              // 平均评分 0‑5
   avatarUrl: string           // 头像
@@ -17,7 +17,7 @@ export type ProviderCard = {
     content: string
   }[]
   providerLabels: [] // 资质 / 标签
-  priceRange: string          // 价格区间，如 “€20‑€35 / h”
+  priceRange: string          // 价格区间，如 “€20‑€35”
 }
 
 type ProvidersState = {

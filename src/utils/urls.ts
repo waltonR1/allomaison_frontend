@@ -14,6 +14,9 @@ export const urls = {
   getMyTasks:(userId: number) => `${BASE_URL}/myTasks?providerId=${userId}`,
   changeMyTaskStatus:(taskId: number) => `${BASE_URL}/myTasks/${taskId}`,
 
+  getProviderInfo: (userId: number) => `${BASE_URL}/providerInfo?userId=${userId}`,
+  updateProviderInfo:(providerId: number) => `${BASE_URL}/providerInfo/${providerId}`,
+
 
   //重置完的
 

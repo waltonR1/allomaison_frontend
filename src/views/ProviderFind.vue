@@ -32,7 +32,7 @@ const filtered = computed(() => {
   const text = search.value.trim().toLowerCase()
 
   return providerCards.value.filter((p) => {
-    const matchText = !text || p.description.toLowerCase().includes(text) || p.provider.toLowerCase().includes(text)
+    const matchText = !text || p.description.toLowerCase().includes(text) || p.providerName.toLowerCase().includes(text)
     const matchCat = category.value === 'All' || p.category === category.value
     const matchCity = city.value === 'All' || p.city === city.value
 
@@ -68,8 +68,7 @@ const { inputClass } = useFormClasses()
         <select v-model="category" :class="inputClass">
           <option disabled hidden value="All">Primary Service Category</option>
           <option value="All">All</option>
-          <option v-for="category in categoriesStore.categories" :key="category.category">{{ category.category }}
-          </option>
+          <option v-for="category in categoriesStore.categories" :key="category.category">{{ category.category }}</option>
         </select>
         <select v-model="city" :class="inputClass">
           <option disabled hidden value="All">City</option>
@@ -80,7 +79,7 @@ const { inputClass } = useFormClasses()
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div v-for="providerCard in filtered" :key="providerCard.providerId" :class="[isDark ? 'bg-gray-700' : 'bg-white', 'rounded-2xl shadow-md p-6 hover:shadow-xl transition group']">
-          <RouterLink :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']" :to="{ name: 'providerDetail', params: { providerId: providerCard.providerId } }">{{ providerCard.provider }}</RouterLink>
+          <RouterLink :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']" :to="{ name: 'providerDetail', params: { providerId: providerCard.providerId } }">{{ providerCard.providerName }}</RouterLink>
           <p :class="[isDark ? 'text-gray-400' : 'text-gray-500 ','mb-4 text-sm']">{{ providerCard.city }} • {{ providerCard.category }}</p>
           <p class="text-sm mb-4">{{ providerCard.description }}</p>
           <p class="text-sm text-yellow-500">★ {{ providerCard.rating }}/5</p>

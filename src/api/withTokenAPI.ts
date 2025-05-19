@@ -5,6 +5,7 @@ import type { TaskForm } from '@/views/TaskPost.vue'
 import type { MyOrderCard } from '@/stores/myOrderStore.ts'
 import type { UserInfo } from '@/stores/userInfoStore.ts'
 import type { MyTaskCard } from '@/stores/myTaskStore.ts'
+import type { ProviderInfo } from '@/stores/providerInfoStore.ts'
 
 
 // 提交成为provider的申请
@@ -124,6 +125,23 @@ export async function fetchTasks(providerId:number): Promise<MyTaskCard[]> {
 // 改变order状态
 export async function changeTaskStatus(taskId:number,status:string) {
   return await axios.patch(urls.changeMyTaskStatus(taskId),{ status: status },{
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+  })
+}
+
+
+//获取provider个人信息
+export async function fetchProviderInfo(userId:number): Promise<ProviderInfo[]> {
+  const response = await axios.get<ProviderInfo[]>(urls.getProviderInfo(userId))
+  return response.data
+}
+
+//更新provider信息
+export async function updateProviderInfo(providerId: number, form: Partial<ProviderInfo>) {
+  return await axios.patch(urls.updateProviderInfo(providerId), form, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'

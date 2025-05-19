@@ -15,6 +15,7 @@ import OrderDetail from '@/views/OrderDetail.vue'
 import ChatView from '@/views/ChatView.vue'
 import TaskList from '@/views/TaskList.vue'
 import TaskInfo from '@/views/TaskInfo.vue'
+import ProviderInfo from '@/views/InfoProvider.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -67,7 +68,8 @@ const router = createRouter({
         { path: 'login', name: 'Login', component: Login },
         { path: 'register', name: 'Register', component: Register },
         { path: 'terms', name: 'Terms', component: Terms },
-        { path: 'information', name: 'Information', component: Information }
+        { path: 'information', name: 'Information', component: Information },
+        { path: 'providerInfo',name: 'providerInfo', component: ProviderInfo}
       ],
       redirect: '/auth/login'
     },

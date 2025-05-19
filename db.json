@@ -288,7 +288,7 @@
       "providerId": 1,
       "category": "Cleaning",
       "city": "Paris",
-      "provider": "Julie C.",
+      "providerName": "Julie C.",
       "description": "Sparkling kitchens and spotless bathrooms — your home will shine like new.",
       "rating": 4.9,
       "avatarUrl": "/images/avatars/julie.png",
@@ -321,7 +321,7 @@
       "providerId": 2,
       "category": "Childcare",
       "city": "Lyon",
-      "provider": "Amélie B.",
+      "providerName": "Amélie B.",
       "description": "CPR-certified babysitter with 5 years of experience. Safe and caring environment guaranteed.",
       "rating": 4.8,
       "avatarUrl": "/images/avatars/amelie.png",
@@ -354,7 +354,7 @@
       "providerId": 3,
       "category": "Home Repairs",
       "city": "Marseille",
-      "provider": "Marc V.",
+      "providerName": "Marc V.",
       "description": "Fixing appliances, plumbing issues, and home hardware with professionalism.",
       "rating": 4.7,
       "avatarUrl": "/images/avatars/marc.png",
@@ -387,7 +387,7 @@
       "providerId": 4,
       "category": "Pet Sitting",
       "city": "Toulouse",
-      "provider": "Camille R.",
+      "providerName": "Camille R.",
       "description": "Loving care for your furry friends when you’re away.",
       "rating": 5,
       "avatarUrl": "/images/avatars/camille.png",
@@ -420,7 +420,7 @@
       "providerId": 5,
       "category": "Elderly Care",
       "city": "Nice",
-      "provider": "Youssef A.",
+      "providerName": "Youssef A.",
       "description": "Compassionate support for seniors, including companionship and daily tasks.",
       "rating": 4.6,
       "avatarUrl": "/images/avatars/youssef.png",
@@ -1082,6 +1082,31 @@
       "status": "Cancelled",
       "createdAt": "2025-05-14T15:00:00",
       "id": "10"
+    }
+  ],
+  "providerInfo": [
+    {
+      "userId": 20250510001,
+      "providerId": 5,
+      "category": "Elderly Care",
+      "city": "Aix-en-Provence",
+      "providerName": "Youssef A.",
+      "description": "Compassionate support for seniors, including companionship and daily tasks.",
+      "servicesOffered": [
+        "Grocery shopping",
+        "Meal preparation"
+      ],
+      "serviceArea": "Nice + 10km",
+      "availabilityTime": "Mon–Fri: 08:00–19:00",
+      "providerLabels": [
+        "Certified Caregiver",
+        "Mobility Assistance",
+        "Nice"
+      ],
+      "priceRange": "€30–€40/hour",
+      "id": "5",
+      "loading": false,
+      "error": ""
     }
   ]
 }
