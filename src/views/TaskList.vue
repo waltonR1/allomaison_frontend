@@ -123,7 +123,9 @@ const { buttonClass } = useFormClasses()
             <h3 class="text-xl font-semibold col-span-2">{{ task.title }}</h3>
             <p><span class="font-semibold">Provider:</span> {{ task.customerName }}</p>
             <p><span class="font-semibold">Category:</span> {{ task.category }}</p>
-            <p><span class="font-semibold">Time:</span> {{ new Date(task.datetime).toLocaleString() }}</p>
+            <p v-if="task.frequency === 'OneTime'"><span class="font-semibold">Date:</span> {{ new Date(task.startTime).toLocaleDateString() }} </p>
+            <p v-if="task.frequency !== 'OneTime'"><span class="font-semibold">Start Date:</span> {{ new Date(task.startTime).toLocaleDateString() }} </p>
+            <p v-if="task.frequency !== 'OneTime'"><span class="font-semibold">End Date:</span> {{ new Date(task.endTime).toLocaleDateString() }} </p>
             <p><span class="font-semibold">Address:</span> {{ task.address }}</p>
             <p><span class="font-semibold">Status:</span> <span :class="statusColor(task.status)">{{ task.status }}</span></p>
           </div>

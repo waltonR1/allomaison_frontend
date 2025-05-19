@@ -7,7 +7,8 @@ export type MyOrderCard = {
   providerName: string
   customerId: number
   category: string
-  datetime: string
+  startTime: string
+  endTime: string
   address: string
   description: string
   title:string

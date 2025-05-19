@@ -161,7 +161,9 @@ const { inputClass, buttonClass } = useFormClasses()
             <h3 class="text-xl font-semibold col-span-2">{{ order.title }}</h3>
             <p><span class="font-semibold">Provider:</span> {{ order.providerName }}</p>
             <p><span class="font-semibold">Category:</span> {{ order.category }}</p>
-            <p><span class="font-semibold">Time:</span> {{ new Date(order.datetime).toLocaleString() }}</p>
+            <p v-if="order.frequency === 'OneTime'"><span class="font-semibold">Date:</span> {{ new Date(order.startTime).toLocaleDateString() }} </p>
+            <p v-if="order.frequency !== 'OneTime'"><span class="font-semibold">Start Date:</span> {{ new Date(order.startTime).toLocaleDateString() }} </p>
+            <p v-if="order.frequency !== 'OneTime'"><span class="font-semibold">End Date:</span> {{ new Date(order.endTime).toLocaleDateString() }} </p>
             <p><span class="font-semibold">Address:</span> {{ order.address }}</p>
             <p><span class="font-semibold">Status:</span> <span :class="statusColor(order.status)">{{ order.status }}</span></p>
           </div>

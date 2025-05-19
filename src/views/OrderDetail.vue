@@ -7,6 +7,7 @@ import { useMyOrderStore } from '@/stores/myOrderStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
+import { getConversation } from '@/api/withTokenAPI.ts'
 
 // stores & helpers
 const orderStore = useMyOrderStore()
@@ -39,16 +40,6 @@ onMounted(() => {
     router.replace('/')
   }
 })
-
-// format helpers
-const formatDate = (iso: string) => {
-  if (!iso) return '-'
-  const d = new Date(iso)
-  return d.toLocaleString('en-GB', {
-    dateStyle: 'medium',
-    timeStyle: 'short'
-  })
-}
 
 // Conceal Order
 const concealOrder = async (orderId: number) => {
@@ -94,6 +85,19 @@ const submitReview = async () => {
   selectedOrderId.value = -1
 }
 
+const contactProvider = async (providerId: number) => {
+  try {
+    const { data } = await getConversation(userId.value!, providerId)
+    await router.push({
+      name: 'chat',
+      query: { chatId: data.conversationId },
+    })
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed')
+  }
+}
+
+
 // css utils
 const { inputClass, buttonClass } = useFormClasses()
 
@@ -121,9 +125,17 @@ watchEffect(() => {
       <p class="leading-relaxed mb-8">{{ order.description }}</p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-        <div>
-          <p class="font-semibold mb-1">Date & Time</p>
-          <p>{{ formatDate(order.datetime) }}</p>
+        <div v-if="order.frequency === 'OneTime'">
+          <p class="font-semibold mb-1">Date</p>
+          <p>{{ new Date(order.startTime).toLocaleDateString() }}</p>
+        </div>
+        <div v-if="order.frequency !== 'OneTime'">
+          <p class="font-semibold mb-1">Start Date</p>
+          <p>{{ new Date(order.startTime).toLocaleDateString() }}</p>
+        </div>
+        <div v-if="order.frequency !== 'OneTime'">
+          <p class="font-semibold mb-1">End Date</p>
+          <p>{{ new Date(order.endTime).toLocaleDateString() }}</p>
         </div>
         <div>
           <p class="font-semibold mb-1">Address</p>

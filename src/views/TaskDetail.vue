@@ -30,16 +30,6 @@ const task = computed(() => tasksStore.getById(taskId))
 //加载数据（若尚未加载)
 onMounted(() => tasksStore.fetchTasks())
 
-// format helpers
-const formatDate = (iso: string) => {
-  if (!iso) return '-'
-  const d = new Date(iso)
-  return d.toLocaleString('en-GB', {
-    dateStyle: 'medium',
-    timeStyle: 'short'
-  })
-}
-
 // Accept 按钮逻辑
 const accept = async () => {
   if (!isLoggedIn.value) {
@@ -87,9 +77,17 @@ watchEffect(() => {
           <p class="leading-relaxed mb-8">{{ task.description }}</p>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-            <div>
-              <p class="font-semibold mb-1">Date & Time</p>
-              <p>{{ formatDate(task.datetime) }}</p>
+            <div v-if="task.frequency === 'OneTime'">
+              <p class="font-semibold mb-1">Date</p>
+              <p>{{ new Date(task.startTime).toLocaleDateString() }}</p>
+            </div>
+            <div v-if="task.frequency !== 'OneTime'">
+              <p class="font-semibold mb-1">Start Date</p>
+              <p>{{ new Date(task.startTime).toLocaleDateString() }}</p>
+            </div>
+            <div v-if="task.frequency !== 'OneTime'">
+              <p class="font-semibold mb-1">End Date</p>
+              <p>{{ new Date(task.endTime).toLocaleDateString() }}</p>
             </div>
             <div>
               <p class="font-semibold mb-1">Address</p>

@@ -8,7 +8,8 @@ export type TaskCard = {
   category: string
   frequency: string
   city: string
-  datetime: string
+  startTime: string
+  endTime: string
   address: string
   budget: string
   customerContact: string
