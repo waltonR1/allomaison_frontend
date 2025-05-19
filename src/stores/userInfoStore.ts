@@ -9,7 +9,6 @@ export type UserInfo = {
   gender: 'male' | 'female' | null;
   birthday: string | null; // 格式为 YYYY-MM-DD
   email: string | null;
-  phone: string | null;
   avatarUrl: string | null; // 用户头像链接
   address: string | null;
   city: string | null;
@@ -35,7 +34,6 @@ export const useUserInfoStore = defineStore('useInfo', {
     gender: null,
     birthday: null,
     email: null,
-    phone: null,
     avatarUrl: null,
     address: null,
     city: null,

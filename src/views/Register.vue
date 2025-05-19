@@ -21,7 +21,6 @@ export type registerForm = {
   gender:string,
   birthday:string,
   email: string,
-  phone:string,
   password: string,
   confirmPassword: string,
   agree: boolean,
@@ -34,7 +33,6 @@ const form:registerForm = reactive({
   gender:'',
   birthday:'',
   email: '',
-  phone:'',
   password: '',
   confirmPassword: '',
   agree: false
@@ -97,7 +95,6 @@ const { inputClass, noPlaceholderInputClass, buttonClass } = useFormClasses()
           </select>
           <input v-model="form.birthday" type="date" :class="noPlaceholderInputClass(form.birthday)" required />
           <input v-model="form.email" type="email" :class="inputClass" placeholder="Email*" required />
-          <input v-model="form.phone" type="text" :class="inputClass" placeholder="Phone*" required pattern="^0[1-9](\d{8})$" title="Please enter a valid phone number"/>
           <input v-model="form.password" type="password" :class="inputClass" placeholder="Password*" required minlength="6"/>
           <input v-model="form.confirmPassword" type="password" :class="inputClass" placeholder="Confirm Password*" required minlength="6"/>
           <div v-if="passwordDifferent" class="text-red-500 text-sm">

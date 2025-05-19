@@ -5,11 +5,11 @@ import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useCategoriesStore } from '@/stores/categoriesStore.ts'
 import { useProvidersStore } from '@/stores/providerStore.ts'
-import { useTasksStore } from '@/stores/taskStore.ts'
+import { useTaskStore } from '@/stores/taskStore.ts'
 
 /*  stores */
 const providersStore = useProvidersStore()
-const tasksStore = useTasksStore()
+const tasksStore = useTaskStore()
 const theme = useThemeStore()
 const categoriesStore = useCategoriesStore()
 

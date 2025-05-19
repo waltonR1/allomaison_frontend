@@ -3,14 +3,14 @@ import { computed, watchEffect, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
-import { useTasksStore } from '@/stores/taskStore.ts'
+import { useTaskStore } from '@/stores/taskStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
-import { acceptTask, createConversation } from '@/api/withTokenAPI.ts'
+import { acceptTask, getConversation } from '@/api/withTokenAPI.ts'
 
 // stores & helpers
-const tasksStore = useTasksStore()
+const tasksStore = useTaskStore()
 const userStore = useUserStore()
 const themeStore = useThemeStore()
 
@@ -48,7 +48,7 @@ const accept = async () => {
   }
   try {
     await acceptTask(taskId, userId.value!)
-    const { data } = await createConversation(userId.value!, task.value!.customerId)
+    const { data } = await getConversation(userId.value!, task.value!.customerId)
     alert('Successfully, Please wait for approval.')
     await router.push({
       name: 'chat',

@@ -13,6 +13,8 @@ import Information from '@/views/Information.vue'
 import OrderList from '@/views/OrderList.vue'
 import OrderDetail from '@/views/OrderDetail.vue'
 import ChatView from '@/views/ChatView.vue'
+import TaskList from '@/views/TaskList.vue'
+import TaskInfo from '@/views/TaskInfo.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -78,6 +80,17 @@ const router = createRouter({
       path: '/order/:orderId',
       name: 'orderDetail',
       component: OrderDetail,
+      props: true
+    },
+    {
+      path: '/myTask',
+      name: 'myTask',
+      component: TaskList,
+    },
+    {
+      path: '/myTask/:taskId',
+      name: 'taskInfo',
+      component: TaskInfo,
       props: true
     },
     {

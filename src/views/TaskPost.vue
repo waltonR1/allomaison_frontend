@@ -92,7 +92,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
             <option v-for="category in categoriesStore.categories" :key="category.category">{{ category.category }}</option>
           </select>
           <select v-model="form.frequency" :class="noPlaceholderInputClass(form.frequency)" required>
-            <option value="" selected disabled hidden>Frequence</option>
+            <option value="" selected disabled hidden>Frequency</option>
             <option value="OneTime">One‑time</option>
             <option value="Weekly">Weekly</option>
             <option value="Monthly">Monthly</option>
@@ -101,7 +101,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
             <option value="" disabled selected hidden>City</option>
             <option v-for="city in cityStore.cities" :key="city.zipcode">{{ city.city }}</option>
           </select>
-          <input v-if="form.frequency !== 'OneTime'" type="datetime-local" v-model="form.datetime" :class="inputClass" required />
+          <input type="datetime-local" v-model="form.datetime" :class="inputClass" required />
           <input type="text" v-model="form.address" placeholder="Street Address" :class="inputClass" required />
           <input type="number" v-model="form.budget" placeholder="Budget (€)" :class="inputClass" min="0" required />
           <input type="text" v-model="form.customerContact" placeholder="Contact Info (Phone or Email)" :class="inputClass" required />

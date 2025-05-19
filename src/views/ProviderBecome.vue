@@ -32,8 +32,6 @@ const benefits = [
 
 // form
 export type ProviderApplicationForm = {
-  idNumber: number | ''
-  yearsOfService: number | ''
   city: string
   categories: string
   experiences: string
@@ -41,8 +39,6 @@ export type ProviderApplicationForm = {
 }
 
 const form: ProviderApplicationForm= reactive({
-      idNumber:'',
-      yearsOfService:'',
       city: '',
       categories: '',
       experiences: '',
@@ -128,8 +124,6 @@ const { inputClass, noPlaceholderInputClass, buttonClass, fileInputClass } = use
         </div>
 
         <form v-if="formVisible" class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8" @submit.prevent="submit">
-          <input v-model="form.idNumber" placeholder="ID Number" type="text" :class="inputClass" required />
-          <input v-model="form.yearsOfService" placeholder="Years of service" type="number" :class="inputClass" required />
           <select  v-model="form.city" :class="noPlaceholderInputClass(form.city)">
             <option value="" disabled selected hidden>City</option>
             <option v-for="city in cityStore.cities" :key="city.zipcode" :value="city">{{ city.city }}</option>

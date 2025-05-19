@@ -7,7 +7,7 @@ import { useProvidersStore } from '@/stores/providerStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
-import { createConversation } from '@/api/withTokenAPI.ts'
+import { getConversation } from '@/api/withTokenAPI.ts'
 
 // stores & helpers
 const providersStore = useProvidersStore()
@@ -40,7 +40,7 @@ const submit = async () => {
     return
   }
   try {
-    const { data } = await createConversation(userId.value!, provider.value!.providerId)
+    const { data } = await getConversation(userId.value!, provider.value!.providerId)
     await router.push({
       name: 'chat',
       query: { chatId: data.conversationId },

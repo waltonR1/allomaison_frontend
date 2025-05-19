@@ -37,7 +37,7 @@ watch(() => avatarUrl, () => {
     </h1>
 
     <nav class="flex items-center space-x-4">
-      <router-link class="hover:text-amber-500 transition select-none" to="/tasks">Find Tasks</router-link>
+      <router-link v-if="role !== 'customer'" class="hover:text-amber-500 transition select-none" to="/tasks">Find Tasks</router-link>
       <router-link class="hover:text-amber-500 transition select-none" to="/providers">Find Providers</router-link>
       <router-link class="hover:text-amber-500 transition select-none" to="/postTask">Post a Task</router-link>
       <router-link v-if="role !== 'provider'" class="hover:text-amber-500 transition select-none" to="/becomeProvider">Become a Provider</router-link>
@@ -55,6 +55,7 @@ watch(() => avatarUrl, () => {
             <div class="w-full text-center px-3 py-2 text-xl border-b mb-1 select-none ">{{ userName || 'Guest'}}</div>
             <router-link to="/auth/information" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Personal Information</router-link>
             <router-link to="/order" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">My Order</router-link>
+            <router-link v-if="role === 'provider'" to="/myTask" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">My Task</router-link>
             <router-link to="/chat" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Chat</router-link>
 
             <button @click="handleLogout"  :class="[isDark ? 'border border-amber-400 text-amber-400 hover:bg-amber-500 hover:text-white' : 'border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white', 'w-full text-center px-4 py-2 mt-4 rounded-lg font-semibold transition-colors select-none']">Logout</button>

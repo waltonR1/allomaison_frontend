@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { changeOrderStatus, fetchOrders, reviewOrder } from '@/api/withTokenAPI.ts'
 
-export type OrderCard = {
+export type MyOrderCard = {
   orderId: number
   providerId: number
   providerName: string
@@ -19,15 +19,15 @@ export type OrderCard = {
   createdAt: string
 }
 
-type OrderState = {
-  orderCards: OrderCard[]
+type MyOrderState = {
+  orderCards: MyOrderCard[]
   loading: boolean
   error: string | null
   fetched: boolean
 }
 
-export const useOrderStore = defineStore('orderStore', {
-  state: (): OrderState => ({
+export const useMyOrderStore = defineStore('myOrderStore', {
+  state: (): MyOrderState => ({
     orderCards: [],
     loading: false,
     error: '',
@@ -36,7 +36,7 @@ export const useOrderStore = defineStore('orderStore', {
 
   getters: {
     /** 根据 OrderId 获取单个order */
-    getById: (state) => (orderId: number): OrderCard | undefined =>
+    getById: (state) => (orderId: number): MyOrderCard | undefined =>
       state.orderCards.find((p) => p.orderId === orderId),
   },
 

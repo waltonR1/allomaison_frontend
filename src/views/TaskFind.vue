@@ -5,12 +5,12 @@ import { useRoute } from 'vue-router'
 
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
-import { useTasksStore } from '@/stores/taskStore.ts'
+import { useTaskStore } from '@/stores/taskStore.ts'
 import { useCityStore } from '@/stores/cityStore.ts'
 import { useCategoriesStore } from '@/stores/categoriesStore.ts'
 
 // stores
-const tasksStore = useTasksStore()
+const tasksStore = useTaskStore()
 const cityStore = useCityStore()
 const categoriesStore = useCategoriesStore()
 const theme = useThemeStore()

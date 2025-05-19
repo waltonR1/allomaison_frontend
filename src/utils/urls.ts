@@ -8,7 +8,12 @@ export const urls = {
   acceptTask: `${BASE_URL}/acceptTask`,
   chatMessages:(chatId: number) => `${BASE_URL}/chatMessages?chatId=${chatId}`,
   getConversations:(userId: number) => `${BASE_URL}/conversations?userId=${userId}`,
-  "createConversation": `${BASE_URL}/createConversation`,
+  getConversation: `${BASE_URL}/createConversation`,
+
+
+  getMyTasks:(userId: number) => `${BASE_URL}/myTasks?providerId=${userId}`,
+  changeMyTaskStatus:(taskId: number) => `${BASE_URL}/myTasks/${taskId}`,
+
 
   //重置完的
 
@@ -28,10 +33,10 @@ export const urls = {
   getTask: `${BASE_URL}/tasks`,
   postTask: `${BASE_URL}/postTask`,
 
-  getOrders:(userId: number) => `${BASE_URL}/orders?customerId=${userId}`,
-  changeOrderStatus:(orderId: number) => `${BASE_URL}/orders/${orderId}`,
+  getMyOrders:(userId: number) => `${BASE_URL}/orders?customerId=${userId}`,
+  changeMyOrderStatus:(orderId: number) => `${BASE_URL}/orders/${orderId}`,
 
-  reviewOrder:`${BASE_URL}/review`,
+  reviewMyOrder:`${BASE_URL}/review`,
 
 
   //静态选项

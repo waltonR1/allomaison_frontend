@@ -3,13 +3,13 @@ import { computed, watchEffect, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
-import { useOrderStore } from '@/stores/orderStore.ts'
+import { useMyOrderStore } from '@/stores/myOrderStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 
 // stores & helpers
-const orderStore = useOrderStore()
+const orderStore = useMyOrderStore()
 const userStore = useUserStore()
 const themeStore = useThemeStore()
 

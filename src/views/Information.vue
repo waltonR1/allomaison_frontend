@@ -23,20 +23,15 @@ const fileInput = ref<HTMLInputElement | null>(null)
 const form = reactive<Partial<UserInfo>>({})
 
 // label 相关
-const readOnlyFields: Array<keyof UserInfo> = ['firstName', 'lastName', 'gender', 'birthday']
+const readOnlyFields: Array<keyof UserInfo> = ['firstName', 'lastName', 'gender', 'birthday','email']
 const isReadOnly = (key: keyof UserInfo) => readOnlyFields.includes(key as any)
 const fields: { label: string; key: keyof UserInfo; type?: string }[] = [
   { label: 'First name', key: 'firstName' },
   { label: 'Last name', key: 'lastName' },
   { label: 'Gender', key: 'gender' },
   { label: 'Birthday', key: 'birthday', type: 'date' },
-  { label: 'UserName', key: 'userName' },
   { label: 'Email', key: 'email', type: 'email' },
-  { label: 'Phone', key: 'phone', type: 'tel' },
-  { label: 'Address', key: 'address' },
-  { label: 'City', key: 'city' },
-  { label: 'Country', key: 'country' },
-  { label: 'Zip code', key: 'zipCode' },
+  { label: 'UserName', key: 'userName' },
 ]
 
 // 头像显示/默认

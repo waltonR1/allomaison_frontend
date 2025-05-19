@@ -16,15 +16,15 @@ export type TaskCard = {
   createdAt: string
 }
 
-type TasksState = {
+type TaskState = {
   taskCards: TaskCard[];
   loading: boolean;
   error: string | null;
   fetched: boolean;
 }
 
-export const useTasksStore = defineStore('tasks', {
-  state: ():TasksState => ({
+export const useTaskStore = defineStore('tasks', {
+  state: ():TaskState => ({
     taskCards: [],
     loading: false,
     error: null,

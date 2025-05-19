@@ -4,11 +4,12 @@ import { storeToRefs } from 'pinia'
 import router from '@/router'
 
 import { useThemeStore } from '@/stores/themeStore.ts'
-import { useOrderStore } from '@/stores/orderStore.ts'
+import { useMyOrderStore } from '@/stores/myOrderStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
+import { getConversation } from '@/api/withTokenAPI.ts'
 
-const orderStore = useOrderStore()
+const orderStore = useMyOrderStore()
 const theme = useThemeStore()
 const userStore = useUserStore()
 
@@ -103,6 +104,19 @@ const submitReview = async () => {
   showReviewModal.value = false
   selectedOrderId.value = -1
 }
+
+const contactProvider = async (providerId: number) => {
+  try {
+    const { data } = await getConversation(userId.value!, providerId)
+    await router.push({
+      name: 'chat',
+      query: { chatId: data.conversationId },
+    })
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed')
+  }
+}
+
 
 /* css utils */
 const { inputClass, buttonClass } = useFormClasses()
