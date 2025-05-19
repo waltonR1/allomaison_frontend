@@ -72,7 +72,7 @@ const submitRegister = async () => {
 const userStore = useUserStore()
 const { isLoggedIn } = storeToRefs(userStore)
 onMounted(() => {
-  if (!isLoggedIn.value) {
+  if (isLoggedIn.value) {
     router.replace('/')
   }
 })
@@ -111,7 +111,7 @@ const { inputClass, noPlaceholderInputClass, buttonClass } = useFormClasses()
             </label>
           </div>
 
-          <button type="submit" :class="buttonClass" :disabled="loading">Create account</button>
+          <button type="submit" :class="[buttonClass,'w-full']" :disabled="loading">Create account</button>
         </form>
 
         <router-link to="/auth/login" class="block text-sm text-center mt-4 hover:underline">

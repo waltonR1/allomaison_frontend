@@ -431,7 +431,7 @@
       "userId": 20250510001,
       "firstName": "Julie",
       "lastName": "Chen",
-      "userName": "Sylvain",
+      "userName": "Eric",
       "gender": "female",
       "birthday": "1995-08-20",
       "email": "julie.chen@example.com",
@@ -751,21 +751,24 @@
       "ContactName": "Alice",
       "lastMessage": "See you tomorrow!",
       "updatedAt": "2025-05-15T18:25:43.511Z",
-      "userId": 20250510001
+      "userId": 20250510001,
+      "id": "f34d"
     },
     {
       "chatId": 2,
       "ContactName": "Project Group",
       "lastMessage": "Please review the PR.",
       "updatedAt": "2025-05-16T07:10:11.100Z",
-      "userId": 20250510001
+      "userId": 20250510001,
+      "id": "6b25"
     },
     {
       "chatId": 3,
       "ContactName": "Project Group",
       "lastMessage": "Please review the PR.",
       "updatedAt": "2025-05-16T07:10:11.100Z",
-      "userId": 20250510001
+      "userId": 20250510001,
+      "id": "545e"
     }
   ],
   "chatMessages": [

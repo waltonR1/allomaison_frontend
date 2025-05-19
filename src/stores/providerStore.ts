@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { providerLabel } from '@/data/providerLabel.ts'
 import { fetchProviders } from '@/api/noTokenAPI.ts'
 
 export type ProviderCard = {
@@ -17,7 +16,7 @@ export type ProviderCard = {
     author: string
     content: string
   }[]
-  providerLabels: providerLabel[] // 资质 / 标签
+  providerLabels: [] // 资质 / 标签
   priceRange: string          // 价格区间，如 “€20‑€35 / h”
 }
 
