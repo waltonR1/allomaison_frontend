@@ -142,6 +142,9 @@ onMounted(() => {
       </div>
     </div>
 
+    <div style="display: none">
+      <span class="fade-slide-enter-active fade-slide-leave-active fade-slide-enter-from fade-slide-enter-to fade-slide-leave-from fade-slide-leave-to"></span>
+    </div>
   </Transition>
 </template>
 
