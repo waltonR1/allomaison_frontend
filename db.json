@@ -1199,5 +1199,47 @@
       "loading": false,
       "error": ""
     }
+  ],
+  "infoMessages": [
+    {
+      "announceId": 1,
+      "userId": 20250510001,
+      "title": "System Maintenance Notice",
+      "content": "The system will be under maintenance tonight from 23:00 to 24:00. Please save your data in advance.",
+      "type": "SYSTEM",
+      "sentTime": "2024-06-01T18:00:00Z",
+      "read": true,
+      "id": "1"
+    },
+    {
+      "announceId": 2,
+      "userId": 20250510001,
+      "title": "New Order Reminder",
+      "content": "You have a new order pending. Please check it in time.",
+      "type": "NOTICE",
+      "sentTime": "2024-06-02T09:30:00Z",
+      "read": true,
+      "id": "2"
+    },
+    {
+      "announceId": 3,
+      "userId": 20250510001,
+      "title": "Audit Result Notification",
+      "content": "Your provider certification has been approved. Welcome to use more features.",
+      "type": "AUDIT",
+      "sentTime": "2024-06-03T14:20:00Z",
+      "read": true,
+      "id": "3"
+    },
+    {
+      "announceId": 4,
+      "userId": 20250510001,
+      "title": "Security Reminder",
+      "content": "Do not disclose personal information and beware of fraud.",
+      "type": "ALERT",
+      "sentTime": "2024-06-04T08:00:00Z",
+      "read": false,
+      "id": "4"
+    }
   ]
 }

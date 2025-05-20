@@ -1,4 +1,13 @@
 // 所有全局类型定义集中于此文件，便于统一管理和复用
+export type InfoMessage = {
+  announceId: number
+  userId: number
+  title?: string
+  content: string
+  type: string
+  sentTime: string
+  read: boolean
+}
 
 export type loginForm ={
   email: string,

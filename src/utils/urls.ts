@@ -45,6 +45,7 @@ export const urls = {
   //静态选项
   getCategories: `${BASE_URL}/categories`,
   getCities: `${BASE_URL}/cities`,
-
-
+  
+  getInfoMessages: (userId: number) => `${BASE_URL}/infoMessages?userId=${userId}`,
+  readInfoMessages:(announceId: number) => `${BASE_URL}/infoMessages/${announceId}`,
 }

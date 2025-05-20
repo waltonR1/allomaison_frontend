@@ -30,7 +30,13 @@ export async function login(loginForm: loginForm) {
       'Accept': 'application/json'
     }
   })
-  return response.data
+  const data = response.data
+
+  if (!Array.isArray(data) || data.length === 0) {
+    throw new Error('Invalid email or password')
+  }
+
+  return data
 }
 
 

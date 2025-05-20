@@ -10,6 +10,7 @@ import type {
   Message,
   Conversation
 } from '@/types/types'
+import type { InfoMessage } from '@/types/types'
 
 
 // 提交成为provider的申请
@@ -143,6 +144,28 @@ export async function fetchProviderInfo(userId:number): Promise<ProviderInfo[]> 
 //更新provider信息
 export async function updateProviderInfo(providerId: number, form: Partial<ProviderInfo>) {
   return await axios.patch(urls.updateProviderInfo(providerId), form, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+  })
+}
+
+
+
+
+
+
+// 获取通知列表
+export async function fetchInfoMessages(userId: number): Promise<InfoMessage[]> {
+  return (await axios.get<InfoMessage[]>(urls.getInfoMessages(userId))).data
+}
+
+
+
+// 更新通知已读状态
+export async function markInfoMessageAsRead(announceId: number) {
+  return await axios.patch(urls.readInfoMessages(announceId), { read: true }, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
