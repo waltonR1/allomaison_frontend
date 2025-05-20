@@ -1,17 +1,5 @@
 // 所有全局类型定义集中于此文件，便于统一管理和复用
 
-export type UserState = {
-  token: string | null;
-  role: 'customer' | 'provider' | 'admin' | null;
-  userId: number | null;
-  avatarUrl: string | null;
-  userName: string | null;
-}
-
-export type ThemeState = {
-  isDark: boolean,
-}
-
 export type loginForm ={
   email: string,
   password: string,
@@ -33,13 +21,6 @@ export type TaskCard = {
   createdAt: string
 }
 
-export type TaskState = {
-  taskCards: TaskCard[];
-  loading: boolean;
-  error: string | null;
-  fetched: boolean;
-}
-
 export type ProviderCard = {
   providerId: number
   category: string
@@ -57,13 +38,6 @@ export type ProviderCard = {
   }[]
   providerLabels: []
   priceRange: string
-}
-
-export type ProvidersState = {
-  providerCards: ProviderCard[]
-  loading: boolean
-  error: string | null
-  fetched: boolean
 }
 
 export type MyOrderCard = {
@@ -85,22 +59,9 @@ export type MyOrderCard = {
   createdAt: string
 }
 
-export type MyOrderState = {
-  orderCards: MyOrderCard[]
-  loading: boolean
-  error: string | null
-  fetched: boolean
-}
-
 export type City = {
   city: string
   zipcode: string
-}
-
-export type CityState = {
-  cities: City[],
-  loading: boolean,
-  error: string
 }
 
 export type ProviderApplicationForm = {
@@ -129,13 +90,6 @@ export type MyTaskCard = {
   createdAt: string
 }
 
-export type MyTaskState = {
-  taskCards: MyTaskCard[]
-  loading: boolean
-  error: string | null
-  fetched: boolean
-}
-
 export type UserInfo = {
   userId: number | null;
   firstName: string | null;
@@ -149,11 +103,6 @@ export type UserInfo = {
   lastLogin: string | null;
   role: 'customer' | 'provider' | 'admin' | null;
 }
-
-export type UserInfoState = UserInfo & {
-  loading: boolean;
-  error: string;
-};
 
 export type ProviderInfo = {
   userId: number | null
@@ -169,19 +118,8 @@ export type ProviderInfo = {
   priceRange: string
 }
 
-export type ProviderInfoState = ProviderInfo & {
-  loading: boolean;
-  error: string;
-};
-
 export type Category = {
   category: string
-}
-
-export type CategoriesState = {
-  categories: Category[]
-  loading: boolean
-  error: string
 }
 
 export type TaskForm = {
@@ -207,4 +145,18 @@ export type registerForm = {
   password: string,
   confirmPassword: string,
   agree: boolean,
+}
+
+export type Conversation  = {
+  chatId: number
+  ContactName: string
+  lastMessage: string
+  updatedAt: string
+}
+
+export type Message  = {
+  msgId: number
+  senderId: number
+  content: string
+  createdAt: string
 }

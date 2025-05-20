@@ -1,6 +1,11 @@
 import { defineStore } from 'pinia'
 import { fetchUserInfo } from '@/api/withTokenAPI.ts'
-import type { UserInfoState } from '@/types/types'
+import type {UserInfo} from '@/types/types'
+
+type UserInfoState = UserInfo & {
+  loading: boolean;
+  error: string;
+};
 
 export const useUserInfoStore = defineStore('useInfo', {
   state: (): UserInfoState => ({

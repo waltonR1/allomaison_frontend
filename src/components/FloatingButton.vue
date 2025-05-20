@@ -28,39 +28,15 @@ const transformStyle = computed(() => {
 
 <template>
   <!-- 悬浮添加按钮 -->
-  <button
-    @click="togglePanel"
-    @mouseenter="isHovered = true"
-    @mouseleave="isHovered = false"
-    :class="[
-      isDark ? 'bg-amber-500 hover:bg-amber-600' : 'bg-amber-400 hover:bg-amber-500',
-      'fixed bottom-8 right-8 text-white rounded-full w-14 h-14 text-3xl flex items-center justify-center shadow-lg transition-all duration-200 z-50'
-    ]"
-    :style="{ transform: transformStyle }"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      stroke-width="2"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
-      />
+  <button @click="togglePanel" @mouseenter="isHovered = true" @mouseleave="isHovered = false" :class="[isDark ? 'bg-amber-500 hover:bg-amber-600' : 'bg-amber-400 hover:bg-amber-500','fixed bottom-8 right-8 text-white rounded-full w-14 h-14 text-3xl flex items-center justify-center shadow-lg transition-all duration-200 z-50']" :style="{ transform: transformStyle }">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
     </svg>
   </button>
 
   <!-- 展开的浮动面板 -->
   <Transition name="fade-slide">
-    <div
-      v-if="showPanel"
-      class="fixed bottom-28 right-8 w-80 bg-white shadow-xl rounded-xl p-4 border border-gray-200 z-40"
-      :class="{ 'dark:bg-gray-800 dark:text-white': isDark }"
-    >
+    <div v-if="showPanel" class="fixed bottom-28 right-8 w-80 bg-white shadow-xl rounded-xl p-4 border border-gray-200 z-40" :class="{ 'dark:bg-gray-800 dark:text-white': isDark }">
       <h3 class="text-lg font-semibold mb-2">新订单</h3>
       <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">这里可以放表单、按钮或链接。</p>
     </div>

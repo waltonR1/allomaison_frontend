@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useRoute } from 'vue-router'
+import {onMounted, ref} from 'vue'
+import {storeToRefs} from 'pinia'
+import {useRoute} from 'vue-router'
 import router from '@/router'
 
 import ChatMessages from '@/components/ChatMessages.vue'
 
-import { useUserStore }  from '@/stores/userStore.ts'
-import { useThemeStore } from '@/stores/themeStore.ts'
-import { fetchConversations } from '@/api/withTokenAPI.ts'
+import {useUserStore} from '@/stores/userStore.ts'
+import {useThemeStore} from '@/stores/themeStore.ts'
+import {fetchConversations} from '@/api/withTokenAPI.ts'
+import type {Conversation} from "@/types/types.ts";
 
-export interface Conversation {
-  chatId: number
-  ContactName: string
-  lastMessage: string
-  updatedAt: string
-}
 
 // stores ------------------------------------------------
 const userStore = useUserStore()
@@ -33,8 +28,7 @@ const activeChatId   = ref<number | null>(null)
 // methods ----------------------------------------------
 const loadConversations = async () => {
   try {
-    const resp = await fetchConversations(userId.value!)
-    conversations.value = resp.data
+    conversations.value = await fetchConversations(userId.value!)
 
     const target = Number(route.query.chatId)
     if (target) activeChatId.value = target

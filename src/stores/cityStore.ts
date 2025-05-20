@@ -1,6 +1,12 @@
 import { defineStore } from 'pinia'
 import { fetchCities } from '@/api/noTokenAPI.ts'
-import type { CityState } from '@/types/types'
+import type { City } from '@/types/types'
+
+type CityState = {
+  cities: City[],
+  loading: boolean,
+  error: string
+}
 
 export const useCityStore = defineStore('cityStore', {
   state: (): CityState => ({

@@ -1,6 +1,11 @@
 import { defineStore } from 'pinia'
 import { fetchProviderInfo } from '@/api/withTokenAPI.ts'
-import type { ProviderInfoState } from '@/types/types'
+import type { ProviderInfo } from '@/types/types'
+
+type ProviderInfoState = ProviderInfo & {
+  loading: boolean;
+  error: string;
+};
 
 export const useProviderInfoStore = defineStore('providerInfo', {
   state: (): ProviderInfoState => ({

@@ -4,14 +4,12 @@ import type { Category, City, TaskCard, ProviderCard, loginForm, registerForm } 
 
 //获取categories
 export async function fetchCategories(): Promise<Category[]> {
-  const response = await axios.get<Category[]>(urls.getCategories)
-  return response.data
+  return (await axios.get<Category[]>(urls.getCategories)).data
 }
 
 //获取city
 export async function fetchCities(): Promise<City[]> {
-  const response = await axios.get<City[]>(urls.getCities)
-  return response.data
+  return (await axios.get<City[]>(urls.getCities)).data
 }
 
 //login

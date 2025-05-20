@@ -1,6 +1,13 @@
 import { defineStore } from 'pinia'
 import { fetchTasks } from '@/api/noTokenAPI.ts'
-import type { TaskCard, TaskState } from '@/types/types'
+import type { TaskCard } from '@/types/types'
+
+type TaskState = {
+  taskCards: TaskCard[];
+  loading: boolean;
+  error: string | null;
+  fetched: boolean;
+}
 
 export const useTaskStore = defineStore('tasks', {
   state: ():TaskState => ({

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
-import { storeToRefs } from 'pinia'
+import {onMounted, ref, watch} from 'vue'
+import {storeToRefs} from 'pinia'
 
-import { useUserStore }  from '@/stores/userStore.ts'
-import { useThemeStore } from '@/stores/themeStore.ts'
-import { fetchMessages, postMessage } from '@/api/withTokenAPI.ts'
+import {useUserStore} from '@/stores/userStore.ts'
+import {useThemeStore} from '@/stores/themeStore.ts'
+import {fetchMessages, postMessage} from '@/api/withTokenAPI.ts'
+import type {Message} from "@/types/types.ts";
 
 interface Props {
   activeChatId: number
@@ -18,22 +19,13 @@ const { userId } = storeToRefs(userStore)
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
-// state -------------------------------------------------
-export interface Message {
-  msgId: number
-  senderId: number
-  content: string
-  createdAt: string
-}
-
-const messages   = ref<Message[]>([])
+const messages = ref<Message[]>([])
 const newMessage = ref('')
 
 // methods ----------------------------------------------
 const loadMessages = async () => {
   try {
-    const resp = await fetchMessages(props.activeChatId)
-    messages.value = resp.data
+    messages.value = await fetchMessages(props.activeChatId)
   } catch (err) {
     console.error('加载消息失败', err)
   }

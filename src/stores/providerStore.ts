@@ -1,6 +1,13 @@
 import { defineStore } from 'pinia'
 import { fetchProviders } from '@/api/noTokenAPI.ts'
-import type { ProviderCard, ProvidersState } from '@/types/types'
+import type { ProviderCard } from '@/types/types'
+
+type ProvidersState = {
+  providerCards: ProviderCard[]
+  loading: boolean
+  error: string | null
+  fetched: boolean
+}
 
 export const useProvidersStore = defineStore('providers', {
   state: (): ProvidersState => ({

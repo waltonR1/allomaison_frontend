@@ -1,6 +1,15 @@
 import axios from 'axios'
 import { urls } from '@/utils/urls.ts'
-import type { ProviderApplicationForm, TaskForm, MyOrderCard, UserInfo, MyTaskCard, ProviderInfo } from '@/types/types'
+import type {
+  ProviderApplicationForm,
+  TaskForm,
+  MyOrderCard,
+  UserInfo,
+  MyTaskCard,
+  ProviderInfo,
+  Message,
+  Conversation
+} from '@/types/types'
 
 
 // 提交成为provider的申请
@@ -31,8 +40,7 @@ export async function postTask (userId: number, form: TaskForm) {
 
 // 遍历order
 export async function fetchOrders(customerId:number): Promise<MyOrderCard[]> {
-  const response = await axios.get<MyOrderCard[]>(urls.getMyOrders(customerId))
-  return response.data
+  return (await axios.get<MyOrderCard[]>(urls.getMyOrders(customerId))).data
 }
 
 // 改变order状态
@@ -47,7 +55,7 @@ export async function changeOrderStatus(orderId:number,status:string) {
 
 //评论order
 export async function reviewOrder(orderId: number, reviewText:string) {
-  return await axios.post(urls.reviewMyOrder,{orderId, reviewText},{
+  return await axios.post(urls.reviewMyOrder,{orderId: orderId, reviewText: reviewText},{
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -57,8 +65,7 @@ export async function reviewOrder(orderId: number, reviewText:string) {
 
 //获取用户信息
 export async function fetchUserInfo(userId:number): Promise<UserInfo[]> {
-  const response = await axios.get<UserInfo[]>(urls.getUserInfo(userId))
-  return response.data
+  return (await axios.get<UserInfo[]>(urls.getUserInfo(userId))).data
 }
 
 //更新头像
@@ -85,22 +92,23 @@ export async function updateUserInfo(userId: number, form: Partial<UserInfo>) {
 
 
 // ========== Conversations ========== //
-export async function fetchConversations(userId:number) {
-  return await axios.get(urls.getConversations(userId))
+export async function fetchConversations(userId:number): Promise<Conversation[]> {
+  return (await axios.get<Conversation[]>(urls.getConversations(userId))).data
 }
 
 // ========== Messages ========== //
-export async function fetchMessages(chatId: number) {
-  return await axios.get(urls.chatMessages(chatId))
+export async function fetchMessages(chatId: number): Promise<Message[]> {
+  return (await axios.get<Message[]>(urls.chatMessages(chatId))).data
 }
 
 export async function postMessage(chatId: number, senderId: number, content: string, createdAt: Date) {
-  return await axios.post(urls.chatMessages(chatId), {chatId, senderId, content, createdAt },)
+  return await axios.post(urls.chatMessages(chatId), {chatId: chatId, senderId: senderId, content: content, createdAt: createdAt },)
 }
 
 export async function getConversation(userId: number, contactId: number) {
-  return await axios.post(urls.getConversation, {userId, contactId },)
+  return await axios.post(urls.getConversation, {userId: userId, contactId: contactId },)
 }
+
 
 export async function acceptTask(taskId: number, providerId: number) {
   return await axios.post(urls.acceptTask, { taskId: taskId, providerId: providerId },
@@ -113,8 +121,7 @@ export async function acceptTask(taskId: number, providerId: number) {
 
 // 遍历task
 export async function fetchTasks(providerId:number): Promise<MyTaskCard[]> {
-  const response = await axios.get<MyTaskCard[]>(urls.getMyTasks(providerId))
-  return response.data
+  return (await axios.get<MyTaskCard[]>(urls.getMyTasks(providerId))).data
 }
 
 // 改变order状态
@@ -130,8 +137,7 @@ export async function changeTaskStatus(taskId:number,status:string) {
 
 //获取provider个人信息
 export async function fetchProviderInfo(userId:number): Promise<ProviderInfo[]> {
-  const response = await axios.get<ProviderInfo[]>(urls.getProviderInfo(userId))
-  return response.data
+  return (await axios.get<ProviderInfo[]>(urls.getProviderInfo(userId))).data
 }
 
 //更新provider信息

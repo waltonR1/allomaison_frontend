@@ -1,6 +1,12 @@
 import { defineStore } from 'pinia'
 import { fetchCategories } from '@/api/noTokenAPI.ts'
-import type { CategoriesState } from '@/types/types'
+import type { Category } from '@/types/types'
+
+type CategoriesState = {
+  categories: Category[]
+  loading: boolean
+  error: string
+}
 
 export const useCategoriesStore = defineStore('categoriesStore', {
   state: (): CategoriesState => ({
