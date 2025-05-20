@@ -3,13 +3,14 @@ import { reactive, ref, toRaw, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import router from '@/router'
 
-import { type ProviderInfo, useProviderInfoStore } from '@/stores/providerInfoStore.ts'
+import { useProviderInfoStore } from '@/stores/providerInfoStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import { updateProviderInfo } from '@/api/withTokenAPI.ts'
 import { useCityStore } from '@/stores/cityStore.ts'
 import { useCategoriesStore } from '@/stores/categoriesStore.ts'
+import type { ProviderInfo } from '@/types/types'
 
 
 const themeStore = useThemeStore()

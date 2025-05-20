@@ -1,11 +1,6 @@
 import axios from 'axios'
 import { urls } from '@/utils/urls.ts'
-import type { Category } from '@/stores/categoriesStore.ts'
-import type { City } from '@/stores/cityStore.ts'
-import type { TaskCard } from '@/stores/taskStore.ts'
-import type { ProviderCard } from '@/stores/providerStore.ts'
-import type { loginForm } from '@/views/Login.vue'
-import type { registerForm } from '@/views/Register.vue'
+import type { Category, City, TaskCard, ProviderCard, loginForm, registerForm } from '@/types/types'
 
 //获取categories
 export async function fetchCategories(): Promise<Category[]> {

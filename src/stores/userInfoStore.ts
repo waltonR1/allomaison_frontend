@@ -1,25 +1,6 @@
 import { defineStore } from 'pinia'
 import { fetchUserInfo } from '@/api/withTokenAPI.ts'
-
-export type UserInfo = {
-  userId: number | null;   //后端生成
-  firstName: string | null;
-  lastName: string | null;
-  userName: string | null;
-  gender: 'male' | 'female' | null;
-  birthday: string | null; // 格式为 YYYY-MM-DD
-  email: string | null;
-  avatarUrl: string | null; // 用户头像链接
-  createdAt: string | null; // 注册时间   后端生成
-  lastLogin: string | null; // 最近登录时间  后端生成
-  role: 'customer' | 'provider' | 'admin' | null;
-}
-
-export type UserInfoState = UserInfo & {
-  loading: boolean;
-  error: string;
-};
-
+import type { UserInfoState } from '@/types/types'
 
 export const useUserInfoStore = defineStore('useInfo', {
   state: (): UserInfoState => ({

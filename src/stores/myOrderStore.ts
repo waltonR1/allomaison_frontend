@@ -1,31 +1,6 @@
 import { defineStore } from 'pinia'
 import { changeOrderStatus, fetchOrders, reviewOrder } from '@/api/withTokenAPI.ts'
-
-export type MyOrderCard = {
-  orderId: number
-  providerId: number
-  providerName: string
-  customerId: number
-  category: string
-  startTime: string
-  endTime: string
-  address: string
-  description: string
-  title:string
-  frequency: string
-  city: string
-  budget: string
-  providerContact: string
-  status: 'Pending' | 'Confirmed' | 'Completed' | 'Cancelled'
-  createdAt: string
-}
-
-type MyOrderState = {
-  orderCards: MyOrderCard[]
-  loading: boolean
-  error: string | null
-  fetched: boolean
-}
+import type { MyOrderCard, MyOrderState } from '@/types/types'
 
 export const useMyOrderStore = defineStore('myOrderStore', {
   state: (): MyOrderState => ({

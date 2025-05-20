@@ -1,31 +1,6 @@
 import { defineStore } from 'pinia'
 import { changeTaskStatus, fetchTasks } from '@/api/withTokenAPI.ts'
-
-export type MyTaskCard = {
-  taskId: number
-  providerId: number
-  customerName: string
-  customerId: number
-  category: string
-  startTime: string
-  endTime: string
-  address: string
-  description: string
-  title:string
-  frequency: string
-  city: string
-  budget: string
-  customerContact: string
-  status: 'Confirmed' | 'Completed' | 'Cancelled'
-  createdAt: string
-}
-
-type MyTaskState = {
-  taskCards: MyTaskCard[]
-  loading: boolean
-  error: string | null
-  fetched: boolean
-}
+import type { MyTaskCard, MyTaskState } from '@/types/types'
 
 export const useMyTaskStore = defineStore('myTaskStore', {
   state: (): MyTaskState => ({

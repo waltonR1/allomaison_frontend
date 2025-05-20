@@ -1,11 +1,6 @@
 import axios from 'axios'
 import { urls } from '@/utils/urls.ts'
-import type { ProviderApplicationForm } from '@/views/ProviderBecome.vue'
-import type { TaskForm } from '@/views/TaskPost.vue'
-import type { MyOrderCard } from '@/stores/myOrderStore.ts'
-import type { UserInfo } from '@/stores/userInfoStore.ts'
-import type { MyTaskCard } from '@/stores/myTaskStore.ts'
-import type { ProviderInfo } from '@/stores/providerInfoStore.ts'
+import type { ProviderApplicationForm, TaskForm, MyOrderCard, UserInfo, MyTaskCard, ProviderInfo } from '@/types/types'
 
 
 // 提交成为provider的申请

@@ -1,8 +1,5 @@
 import { defineStore } from 'pinia'
-
-type ThemeState = {
-  isDark: boolean,
-}
+import type { ThemeState } from '@/types/types'
 
 export const useThemeStore = defineStore('theme', {
   state: (): ThemeState => ({

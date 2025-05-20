@@ -6,17 +6,13 @@ import router from '@/router'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
+import type { loginForm } from '@/types/types'
 
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 const userStore = useUserStore()
 
 const loading = ref(false)
-
-export type loginForm ={
-  email: string,
-  password: string,
-}
 
 const form: loginForm = reactive({
   email: '',

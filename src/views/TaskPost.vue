@@ -9,6 +9,7 @@ import { useCategoriesStore } from '@/stores/categoriesStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useCityStore } from '@/stores/cityStore.ts'
 import { postTask } from '@/api/withTokenAPI.ts'
+import type { TaskForm } from '@/types/types'
 
 // stores
 const categoriesStore = useCategoriesStore()
@@ -26,19 +27,6 @@ const formStartTime = ref('')
 const formEndTime = ref('')
 
 // form
-export type TaskForm = {
-  title: string,
-  category: string,
-  frequency: string,
-  city: string,
-  startTime: string,
-  endTime: string,
-  address: string,
-  budget:string,
-  customerContact:string,
-  description: string
-}
-
 const form:TaskForm = reactive({
   title: '',
   category: '',

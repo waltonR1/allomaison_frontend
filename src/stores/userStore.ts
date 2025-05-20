@@ -1,13 +1,6 @@
 import { defineStore } from 'pinia';
 import { login } from '@/api/noTokenAPI.ts'
-
-type UserState = {
-  token: string | null;
-  role: 'customer' | 'provider' | 'admin' | null;
-  userId: number | null;
-  avatarUrl: string | null;
-  userName: string | null;
-}
+import type { UserState } from '@/types/types'
 
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({

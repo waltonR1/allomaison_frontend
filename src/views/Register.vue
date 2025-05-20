@@ -8,23 +8,12 @@ import Router from '@/router'
 import { register } from '@/api/noTokenAPI.ts'
 import router from '@/router'
 import { useUserStore } from '@/stores/userStore.ts'
+import type { registerForm } from '@/types/types'
 
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
 const loading = ref(false)
-
-export type registerForm = {
-  firstName: string,
-  lastName:string,
-  userName: string,
-  gender:string,
-  birthday:string,
-  email: string,
-  password: string,
-  confirmPassword: string,
-  agree: boolean,
-}
 
 const form:registerForm = reactive({
   firstName: '',

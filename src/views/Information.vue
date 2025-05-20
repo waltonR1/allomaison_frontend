@@ -3,11 +3,12 @@ import { storeToRefs } from 'pinia'
 import router from '@/router'
 import { reactive, ref, watch, toRaw, onMounted } from 'vue'
 
-import { type UserInfo, useUserInfoStore } from '@/stores/userInfoStore.ts'
+import { useUserInfoStore } from '@/stores/userInfoStore.ts'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import { uploadAvatar, updateUserInfo } from '@/api/withTokenAPI.ts'
+import type { UserInfo } from '@/types/types'
 
 const themeStore = useThemeStore()
 const userStore = useUserStore()

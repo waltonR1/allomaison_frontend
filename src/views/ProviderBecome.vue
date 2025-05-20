@@ -9,6 +9,7 @@ import { useUserStore } from '@/stores/userStore.ts'
 import {useCategoriesStore} from '@/stores/categoriesStore.ts'
 import { useCityStore } from '@/stores/cityStore.ts'
 import { submitProviderApplication } from '@/api/withTokenAPI.ts'
+import type { ProviderApplicationForm } from '@/types/types'
 
 // stores
 const categoriesStore = useCategoriesStore()
@@ -31,13 +32,6 @@ const benefits = [
 ];
 
 // form
-export type ProviderApplicationForm = {
-  city: string
-  categories: string
-  experiences: string
-  certifications: File[]
-}
-
 const form: ProviderApplicationForm= reactive({
       city: '',
       categories: '',
