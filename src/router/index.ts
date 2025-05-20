@@ -82,7 +82,6 @@ const router = createRouter({
       path: '/order/:orderId',
       name: 'orderDetail',
       component: OrderDetail,
-      props: true
     },
     {
       path: '/myTask',

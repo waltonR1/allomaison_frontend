@@ -67,9 +67,9 @@ export const useMyOrderStore = defineStore('myOrderStore', {
       }
     },
 
-    async review(orderId: number, reviewText: string) {
+    async review(orderId: number, reviewText: string, rating: number) {
       try {
-        await reviewOrder(orderId, reviewText)
+        await reviewOrder(orderId, reviewText,rating)
       }catch (e:any){
         this.error = e.message || 'Review Failed'
       }

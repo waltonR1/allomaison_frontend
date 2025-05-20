@@ -53,5 +53,19 @@ export const useMyTaskStore = defineStore('myTaskStore', {
       }
     },
 
+    async complete(taskId: number) {
+      try {
+        const response = await changeTaskStatus(taskId,'Completed')
+        if (response.status === 200) {
+          const task = this.taskCards.find((o) => o.taskId === taskId)
+          if (task) {
+            task.status = 'Completed'
+          }
+        }
+      } catch (e: any) {
+        this.error = e.message || 'Complete Failed'
+      }
+    },
+
   }
 })

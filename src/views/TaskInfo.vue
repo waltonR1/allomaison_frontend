@@ -125,6 +125,7 @@ watchEffect(() => {
         </div>
         <p class="mb-0.5"><strong>Cancellation:</strong> Free up to 24h before appointment</p>
         <p><strong>Guarantee:</strong> 100% satisfaction or free re‑cleaning within 48h</p>
+        <p><strong>Task Id:</strong> {{taskId}}</p>
       </section>
 
       <div class="flex justify-end items-center gap-3 mt-4">

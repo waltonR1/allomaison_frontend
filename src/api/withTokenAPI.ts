@@ -54,8 +54,8 @@ export async function changeOrderStatus(orderId:number,status:string) {
 }
 
 //评论order
-export async function reviewOrder(orderId: number, reviewText:string) {
-  return await axios.post(urls.reviewMyOrder,{orderId: orderId, reviewText: reviewText},{
+export async function reviewOrder(orderId: number, reviewText:string, rating: number) {
+  return await axios.post(urls.reviewMyOrder,{orderId: orderId, reviewText: reviewText, rating: rating},{
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'

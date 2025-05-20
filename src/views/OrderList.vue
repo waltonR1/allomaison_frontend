@@ -9,6 +9,8 @@ import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import { getConversation } from '@/api/withTokenAPI.ts'
 
+import ReviewModal from '@/components/ReviewModal.vue'
+
 const orderStore = useMyOrderStore()
 const theme = useThemeStore()
 const userStore = useUserStore()
@@ -20,7 +22,6 @@ const { userId,isLoggedIn } = storeToRefs(userStore)
 const statusFilter = ref<'All' | string>('All')
 const showReviewModal = ref(false)
 const selectedOrderId = ref<number>(-1)
-const reviewText = ref('')
 
 // 模拟加载
 onMounted(() => {
@@ -90,19 +91,14 @@ const reviewProvider = (orderId: number) => {
 }
 
 //提交评论
-const submitReview = async () => {
-  if (!reviewText.value.trim()) return
-
-  try{
-    await orderStore.review(selectedOrderId.value, reviewText.value.trim())
-  }catch (error: any) {
+const submitReview = async ({ orderId, text, rating }: { orderId: number, text: string, rating: number }) => {
+  try {
+    await orderStore.review(orderId, text, rating)
+    showReviewModal.value = false
+    selectedOrderId.value = -1
+  } catch (error: any) {
     alert(error.message || 'Review failed, please check your credentials')
   }
-
-  // 清空 & 关闭
-  reviewText.value = ''
-  showReviewModal.value = false
-  selectedOrderId.value = -1
 }
 
 const contactProvider = async (providerId: number) => {
@@ -119,7 +115,7 @@ const contactProvider = async (providerId: number) => {
 
 
 /* css utils */
-const { inputClass, buttonClass } = useFormClasses()
+const { buttonClass } = useFormClasses()
 </script>
 
 <template>
@@ -193,22 +189,12 @@ const { inputClass, buttonClass } = useFormClasses()
     </div>
   </main>
 
-  <teleport to="body">
-    <div v-if="showReviewModal" class="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50">
-      <div :class="[isDark ? 'bg-gray-900 border border-amber-50' : 'bg-white','p-6 rounded-2xl shadow-lg w-96']">
-        <h2 :class="[isDark ? 'text-white' : 'text-gray-800', 'text-xl font-bold mb-4']">Leave a Review</h2>
-        <textarea v-model="reviewText" rows="5" placeholder="Write your review..." :class="[inputClass]"/>
-        <div class="flex justify-end mt-4 space-x-2">
-          <button @click="showReviewModal = false" class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 text-gray-800">
-            Cancel
-          </button>
-          <button @click="submitReview" class="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white">
-            Submit
-          </button>
-        </div>
-      </div>
-    </div>
-  </teleport>
+  <ReviewModal
+      :showReviewModal="showReviewModal"
+      :selectedOrderId="selectedOrderId"
+      @close="showReviewModal = false"
+      @submitReview="submitReview"
+  />
 
 </template>
 

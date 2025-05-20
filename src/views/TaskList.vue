@@ -66,6 +66,17 @@ const concealTask = async (taskId: number) => {
   }
 }
 
+//complete task
+const completeTask = async (taskId: number) => {
+  if (confirm('Are you sure?')) {
+    try {
+      await myTaskStore.complete(taskId)
+    } catch (error: any) {
+      alert(error.message || 'Complete failed, please check your credentials')
+    }
+  }
+}
+
 //contact with customer
 const contactCustomer = async (customerId: number) => {
   try {
@@ -137,6 +148,9 @@ const { buttonClass } = useFormClasses()
             </button>
             <button v-if="task.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactCustomer(task.customerId)">
               Contact
+            </button>
+            <button v-if="task.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="completeTask(task.taskId)">
+              Completed
             </button>
             <button v-if="task.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-rose-500 hover:bg-rose-600' : 'bg-rose-400 hover:bg-rose-500', 'w-32']" @click="concealTask(task.taskId)">
               Cancel
