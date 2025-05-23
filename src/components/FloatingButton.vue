@@ -107,13 +107,7 @@ onMounted(() => {
 
   <!-- 展开的浮动面板 -->
   <Transition name="fade-slide">
-    <div v-if="showPanel" class="fixed bottom-28 right-8 w-80 p-4 rounded-xl z-40 transition-all duration-300"
-      :class="[
-        isDark
-          ? 'bg-gray-800 text-white border border-gray-700 shadow-2xl shadow-gray-900/60'
-          : 'bg-white text-gray-900 border border-gray-200 shadow-xl shadow-gray-300/40',
-      ]"
-    >
+    <div v-if="showPanel" class="fixed bottom-28 right-8 w-80 p-4 rounded-xl z-40 transition-all duration-300" :class="[isDark? 'bg-gray-800 text-white border border-gray-700 shadow-2xl shadow-gray-900/60': 'bg-white text-gray-900 border border-gray-200 shadow-xl shadow-gray-300/40',]">
       <h3 class="text-lg font-semibold mb-2">Notification</h3>
       <div v-if="loading" class="text-gray-400 text-center py-4">Loading...</div>
       <div v-else-if="infoMessages.length === 0" class="text-gray-400 text-center py-4">No notifications</div>
@@ -142,9 +136,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <div style="display: none">
-      <span class="fade-slide-enter-active fade-slide-leave-active fade-slide-enter-from fade-slide-enter-to fade-slide-leave-from fade-slide-leave-to"></span>
-    </div>
+
   </Transition>
 </template>
 
