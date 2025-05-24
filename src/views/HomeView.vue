@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import router from '@/router'
 
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useCategoriesStore } from '@/stores/categoriesStore.ts'
@@ -35,10 +34,6 @@ const timeAgo = (date:any) => {
 
 /* loading */
 onMounted(async () => {
-  if (role.value) {
-    router.replace('/admin')
-  }
-
   await Promise.all([
   categoriesStore.fetchCategories(),
   providersStore.fetchProviders(),
