@@ -40,6 +40,34 @@ export async function login(loginForm: loginForm) {
 }
 
 
+//admin login
+// export async function adminLogin( loginForm: loginForm ) {
+//   return await axios.post(urls.adminLogin,
+//     { ...loginForm }, {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json'
+//       },
+//     })
+// }
+export async function adminLogin(loginForm: loginForm) {
+  const response =  await axios.get(urls.adminLogin, {
+    params: loginForm,
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  })
+  const data = response.data
+
+  if (!Array.isArray(data) || data.length === 0) {
+    throw new Error('Invalid email or password')
+  }
+
+  return data
+}
+
+
 
 //register
 export async function register(registerForm: registerForm) {

@@ -133,6 +133,16 @@
   ],
   "login": [
     {
+      "token": "admin_token_001",
+      "role": "admin",
+      "userId": 9001,
+      "avatarUrl": "/images/avatars/admin.png",
+      "userName": "SuperAdmin",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "id": "admin_001"
+    },
+    {
       "token": "ww",
       "role": "customer",
       "userId": 20250510001,
@@ -171,6 +181,114 @@
       "userId": "usr_002",
       "avatarUrl": "/images/avatars/bob.png",
       "userName": "Bob"
+    }
+  ],
+  "providerApplications": [
+    {
+      "id": "1",
+      "customerId": 20250510001,
+      "city": "Paris",
+      "categories": "Cleaning",
+      "experiences": "5 years cleaning experience",
+      "certifications": [
+        "/public/favicon.ico"
+      ],
+      "status": "pending",
+      "applicationId": "1"
+    },
+    {
+      "id": "2",
+      "customerId": 20250510002,
+      "city": "Lyon",
+      "categories": "Childcare",
+      "experiences": "3 years babysitting",
+      "certifications": [
+        "cert2.pdf"
+      ],
+      "status": "approved",
+      "applicationId": "2"
+    },
+    {
+      "id": "4",
+      "customerId": 20250510001,
+      "city": "Paris",
+      "categories": "Cleaning",
+      "experiences": "5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience5 years cleaning experience",
+      "certifications": [
+        "cert1.pdf"
+      ],
+      "status": "pending",
+      "applicationId": "4"
+    },
+    {
+      "id": "3",
+      "customerId": 20250510003,
+      "city": "Marseille",
+      "categories": "Home Repairs",
+      "experiences": "10 years handyman",
+      "certifications": [
+        "cert3.pdf"
+      ],
+      "status": "rejected",
+      "applicationId": "3"
+    }
+  ],
+  "notices": [
+    {
+      "id": "1",
+      "title": "全体通知",
+      "content": "本周六平台将进行系统维护，请大家提前保存数据。",
+      "type": "ALL",
+      "sentTime": "2024-06-10T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "title": "Provider专属公告",
+      "content": "请所有Provider于本月20日前完成资质年审。",
+      "type": "PROVIDER",
+      "sentTime": "2024-06-11T09:00:00Z"
+    },
+    {
+      "id": "4ae9",
+      "title": "32",
+      "content": "2",
+      "type": "NOTICE",
+      "sentTime": "2025-05-24T16:40:42.938Z"
+    },
+    {
+      "id": "cc96",
+      "type": "provider",
+      "title": "sdf",
+      "content": "fds",
+      "sentTime": "2025-05-24T16:40:42.938Z"
+    },
+    {
+      "id": "927a",
+      "type": "all",
+      "title": "231",
+      "content": "wae",
+      "sentTime": "2025-05-24T16:40:42.938Z"
+    },
+    {
+      "id": "1397",
+      "type": "all",
+      "title": "3",
+      "content": "速度发hi哦撒旦回复i哦萨的合法岁哦的话发挥哦谁都怕发货i收到回复i哦的撒回复就覅偶的撒谎覅欧派十大回复i哦撒等会哦 ",
+      "sentTime": "2025-05-24T16:40:42.938Z"
+    },
+    {
+      "id": "7a9c",
+      "type": "all",
+      "title": " 我",
+      "content": "我",
+      "sentTime": "2025-05-24T16:40:42.938Z"
+    },
+    {
+      "id": "3626",
+      "type": "all",
+      "title": "1221",
+      "content": "1221",
+      "sentTime": "2025-05-24T16:40:42.938Z"
     }
   ],
   "register": [
@@ -938,7 +1056,7 @@
       "chatId": "1",
       "senderId": 20250510001,
       "content": "额外",
-      "createdAt": "2025-05-16T22:26:06.501Z"
+      "`crea`tedAt": "2025-05-16T22:26:06.501Z"
     },
     {
       "id": "57ef",

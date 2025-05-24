@@ -24,6 +24,9 @@ export const urls = {
   login: `${BASE_URL}/login`,
   register:`${BASE_URL}/register`,
 
+  adminLogin: `${BASE_URL}/login`,
+
+
   getUserInfo: (userId: number) => `${BASE_URL}/userInfo?userId=${userId}`,
   updateUserInfo:(userId: number) => `${BASE_URL}/userInfo/${userId}`,
   uploadAvatar:(userId: number) => `${BASE_URL}/userInfo/${userId}`,
@@ -45,7 +48,11 @@ export const urls = {
   //静态选项
   getCategories: `${BASE_URL}/categories`,
   getCities: `${BASE_URL}/cities`,
-  
+
+  providerApplications: `${BASE_URL}/providerApplications`,
+  operateProviderApplications:(applicationId : number) => `${BASE_URL}/providerApplications/${applicationId}`,
+  notices: `${BASE_URL}/notices`,
+
   getInfoMessages: (userId: number) => `${BASE_URL}/infoMessages?userId=${userId}`,
   readInfoMessages:(announceId: number) => `${BASE_URL}/infoMessages/${announceId}`,
 }

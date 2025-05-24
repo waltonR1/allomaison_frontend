@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/themeStore.ts'
+import { useUserStore } from '@/stores/userStore.ts'
 
 const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
+
+const userStore = useUserStore()
+const { role } = storeToRefs(userStore)
 
 /** 动态年份，用于版权行 */
 const year = new Date().getFullYear()
@@ -23,6 +27,7 @@ const year = new Date().getFullYear()
         </p>
       </div>
 
+      <template v-if="role !== 'admin'">
       <!-- 快速链接 -->
       <div>
         <h4 :class="[isDark ? 'text-amber-600' : 'text-amber-400','text-lg font-semibold mb-3']">
@@ -47,6 +52,8 @@ const year = new Date().getFullYear()
           <RouterLink to="#" class="hover:underline">Instagram</RouterLink>
         </div>
       </div>
+      </template>
+
     </div>
 
     <!-- 版权行 -->

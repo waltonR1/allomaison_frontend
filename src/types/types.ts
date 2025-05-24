@@ -1,4 +1,3 @@
-// 所有全局类型定义集中于此文件，便于统一管理和复用
 export type InfoMessage = {
   announceId: number
   userId: number
@@ -168,4 +167,28 @@ export type Message  = {
   senderId: number
   content: string
   createdAt: string
+}
+
+export type AdminProviderApplication = {
+  applicationId: number
+  customerId: number
+  city: string
+  categories: string
+  experiences: string
+  certifications: any
+  status: string
+}
+
+export type Notice = {
+  NoticeId: number
+  title: string
+  content: string
+  type: string
+  sentTime: string
+}
+
+export type AdminAccountForm = {
+  userName: string
+  email: string
+  password: string
 }

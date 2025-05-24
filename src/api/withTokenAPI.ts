@@ -8,9 +8,12 @@ import type {
   MyTaskCard,
   ProviderInfo,
   Message,
-  Conversation
+  Conversation,
+  Notice,
+  AdminProviderApplication,
+  InfoMessage,
+  AdminAccountForm
 } from '@/types/types'
-import type { InfoMessage } from '@/types/types'
 
 
 // 提交成为provider的申请
@@ -166,6 +169,46 @@ export async function fetchInfoMessages(userId: number): Promise<InfoMessage[]> 
 // 更新通知已读状态
 export async function markInfoMessageAsRead(announceId: number) {
   return await axios.patch(urls.readInfoMessages(announceId), { read: true }, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+  })
+}
+
+
+
+// 获取所有provider申请
+export async function fetchProviderApplications(): Promise<AdminProviderApplication[]> {
+  return (await axios.get<AdminProviderApplication[]>(urls.providerApplications)).data
+}
+
+export async function reviewProviderApplication(applicationId: number, status: string): Promise<any> {
+  return await axios.patch(urls.operateProviderApplications(applicationId), { status }, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+  })
+}
+
+//获取通知
+export async function fetchNotices(): Promise<Notice[]> {
+  return (await axios.get<Notice[]>(urls.notices)).data
+}
+
+//发送通知
+export async function createNotice(notice: Omit<Notice, 'NoticeId' | 'sentTime'>, createdAt: Date): Promise<any> {
+  return await axios.post(urls.notices, {...notice, sentTime: createdAt }, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+  })
+}
+
+export async function createAdminAccount(adminInfo:AdminAccountForm): Promise<any> {
+  return await axios.post(urls.adminLogin, adminInfo, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'

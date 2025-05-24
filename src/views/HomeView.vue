@@ -1,22 +1,26 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
+import router from '@/router'
 
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useCategoriesStore } from '@/stores/categoriesStore.ts'
 import { useProvidersStore } from '@/stores/providerStore.ts'
 import { useTaskStore } from '@/stores/taskStore.ts'
+import {useUserStore} from '@/stores/userStore.ts'
 
 /*  stores */
 const providersStore = useProvidersStore()
 const tasksStore = useTaskStore()
 const theme = useThemeStore()
 const categoriesStore = useCategoriesStore()
+const userStore = useUserStore()
 
 /* state -> ref */
 const { providerCards } = storeToRefs(providersStore)
 const { taskCards } = storeToRefs(tasksStore)
 const { isDark } = storeToRefs(theme)
+const { role } = storeToRefs(userStore)
 
 /* variable */
 const showPage = ref(false)
@@ -31,6 +35,10 @@ const timeAgo = (date:any) => {
 
 /* loading */
 onMounted(async () => {
+  if (role.value) {
+    router.replace('/admin')
+  }
+
   await Promise.all([
   categoriesStore.fetchCategories(),
   providersStore.fetchProviders(),

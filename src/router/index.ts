@@ -16,6 +16,11 @@ import ChatView from '@/views/ChatView.vue'
 import TaskList from '@/views/TaskList.vue'
 import TaskInfo from '@/views/TaskInfo.vue'
 import ProviderInfo from '@/views/InfoProvider.vue'
+import AdminLogin from '@/views/AdminLogin.vue'
+import AdminProvider from '@/views/AdminProvider.vue'
+import AdminNotice from '@/views/AdminNotice.vue'
+import AdminAccount from '@/views/AdminAccount.vue'
+import AdminHomeView from '@/views/AdminHomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -98,8 +103,32 @@ const router = createRouter({
       path:'/chat',
       name:'chat',
       component: ChatView
-    }
-
+    },
+    {
+      path: '/admin',
+      name: 'AdminHomeView',
+      component: AdminHomeView
+    },
+    {
+      path: '/adminLogin',
+      name: 'AdminLogin',
+      component: AdminLogin
+    },
+    {
+      path: '/admin/provider',
+      name: 'AdminProvider',
+      component: AdminProvider
+    },
+    {
+      path: '/admin/notice',
+      name: 'AdminNotice',
+      component: AdminNotice
+    },
+    {
+      path: '/admin/account',
+      name: 'AdminAccount',
+      component: AdminAccount
+    },
   ]
 })
 

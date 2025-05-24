@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { login } from '@/api/noTokenAPI.ts'
+import { adminLogin as adminLoginAPI, login as loginAPI } from '@/api/noTokenAPI.ts'
 
 type UserState = {
   token: string | null;
@@ -25,12 +25,25 @@ export const useUserStore = defineStore('user', {
   actions: {
     async login(values: { email: string; password: string }) {
       try {
-        const response = await login(values);
+        const response = await loginAPI(values);
         this.$patch(response[0])
       } catch (error: any) {
         throw new Error(error.message || 'Login failed')
       }
     },
+
+    async adminLogin(values: { email: string; password: string }) {
+      try {
+        const data = await adminLoginAPI(values);
+        if (!Array.isArray(data) || data.length === 0 || data[0].role !== 'admin') {
+          throw new Error('Only admin is allowed')
+        }
+        this.$patch(data[0])
+      } catch (error: any) {
+        throw new Error(error.message || 'Login failed')
+      }
+    },
+
     logout() {
       this.$reset()
 
