@@ -85,9 +85,6 @@ const saveEdit = async () => {
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/*  LIFECYCLE                                                                 */
-/* -------------------------------------------------------------------------- */
 onMounted(async () => {
   await Promise.all([
     categoriesStore.fetchCategories(),

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '@/utils/axios'
 import { urls } from '@/utils/urls.ts'
 import type {
   ProviderApplicationForm,
@@ -102,11 +102,11 @@ export async function fetchConversations(userId:number): Promise<Conversation[]>
 
 // ========== Messages ========== //
 export async function fetchMessages(chatId: number): Promise<Message[]> {
-  return (await axios.get<Message[]>(urls.chatMessages(chatId))).data
+  return (await axios.get<Message[]>(urls.getChatMessages(chatId))).data
 }
 
 export async function postMessage(chatId: number, senderId: number, content: string, createdAt: Date) {
-  return await axios.post(urls.chatMessages(chatId), {chatId: chatId, senderId: senderId, content: content, createdAt: createdAt },)
+  return await axios.post(urls.postChatMessages(chatId), {chatId: chatId, senderId: senderId, content: content, createdAt: createdAt },)
 }
 
 export async function getConversation(userId: number, contactId: number) {
@@ -194,12 +194,12 @@ export async function reviewProviderApplication(applicationId: number, status: s
 
 //获取通知
 export async function fetchNotices(): Promise<Notice[]> {
-  return (await axios.get<Notice[]>(urls.notices)).data
+  return (await axios.get<Notice[]>(urls.getNotices)).data
 }
 
 //发送通知
 export async function createNotice(notice: Omit<Notice, 'NoticeId' | 'sentTime'>, createdAt: Date): Promise<any> {
-  return await axios.post(urls.notices, {...notice, sentTime: createdAt }, {
+  return await axios.post(urls.sendNotices, {...notice, sentTime: createdAt }, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'

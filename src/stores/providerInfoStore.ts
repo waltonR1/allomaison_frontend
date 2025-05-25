@@ -36,8 +36,8 @@ export const useProviderInfoStore = defineStore('providerInfo', {
         const response = await fetchProviderInfo(userId)
         this.$patch(response[0])
       } catch (error: any) {
-        this.error = error.message || '获取用户信息失败'
-        console.error('获取用户信息失败:', this.error)
+        this.error = error.message || 'Loading provider info Failed'
+        console.error('Loading provider info Failed:', this.error)
       } finally {
         this.loading = false
       }

@@ -36,8 +36,8 @@ export const useUserInfoStore = defineStore('useInfo', {
         const response = await fetchUserInfo(userId)
         this.$patch(response[0])
       } catch (error: any) {
-        this.error = error.message || '获取用户信息失败'
-        console.error('获取用户信息失败:', this.error)
+        this.error = error.message || 'Loading user info Failed'
+        console.error('Loading user info Failed:', this.error)
       } finally {
         this.loading = false
       }

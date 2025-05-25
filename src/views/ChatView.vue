@@ -34,7 +34,7 @@ const loadConversations = async () => {
     if (target) activeChatId.value = target
 
   } catch (e) {
-    console.error('加载会话列表失败', e)
+    console.error('Loading Chat Failed', e)
   }
 }
 

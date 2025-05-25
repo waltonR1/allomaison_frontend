@@ -5,7 +5,8 @@ export const urls = {
 
 
   acceptTask: `${BASE_URL}/acceptTask`,
-  chatMessages:(chatId: number) => `${BASE_URL}/chatMessages?chatId=${chatId}`,
+  getChatMessages:(chatId: number) => `${BASE_URL}/chatMessages?chatId=${chatId}`,
+  postChatMessages:(chatId: number) => `${BASE_URL}/chatMessages?chatId=${chatId}`,
   getConversations:(userId: number) => `${BASE_URL}/conversations?userId=${userId}`,
   getConversation: `${BASE_URL}/createConversation`,
 
@@ -51,7 +52,8 @@ export const urls = {
 
   providerApplications: `${BASE_URL}/providerApplications`,
   operateProviderApplications:(applicationId : number) => `${BASE_URL}/providerApplications/${applicationId}`,
-  notices: `${BASE_URL}/notices`,
+  getNotices: `${BASE_URL}/notices`,
+  sendNotices: `${BASE_URL}/notices`,
 
   getInfoMessages: (userId: number) => `${BASE_URL}/infoMessages?userId=${userId}`,
   readInfoMessages:(announceId: number) => `${BASE_URL}/infoMessages/${announceId}`,

@@ -27,7 +27,7 @@ const loadMessages = async () => {
   try {
     messages.value = await fetchMessages(props.activeChatId)
   } catch (err) {
-    console.error('加载消息失败', err)
+    console.error('Loading Message Failed', err)
   }
 }
 
@@ -40,7 +40,7 @@ const sendMessage = async () => {
     messages.value.push(resp.data)
     newMessage.value = ''
   } catch (err) {
-    console.error('发送消息失败', err)
+    console.error('Sending Message Failed', err)
   }
 }
 
