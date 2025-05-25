@@ -62,24 +62,26 @@ const statusColor = (status: string) => {
   }
 }
 
+import { useModal } from '@/utils/useModal'
+const { alert, confirm } = useModal()
 //conceal order
 const concealOrder = async (orderId: number) => {
-  if (confirm('Are you sure?')) {
+  if (await confirm('Are you sure?')) {
     try {
       await orderStore.conceal(orderId)
     } catch (error: any) {
-      alert(error.message || 'Conceal failed, please check your credentials')
+      await alert(error.message || 'Conceal failed, please check your credentials')
     }
   }
 }
 
 //restart order
 const restartOrder = async (orderId: number) => {
-  if (confirm('Are you sure?')) {
+  if (await confirm('Are you sure?')) {
     try {
       await orderStore.restart(orderId)
     } catch (error: any) {
-      alert(error.message || 'Conceal failed, please check your credentials')
+      await alert(error.message || 'Conceal failed, please check your credentials')
     }
   }
 }
@@ -97,7 +99,7 @@ const submitReview = async ({ orderId, text, rating }: { orderId: number, text: 
     showReviewModal.value = false
     selectedOrderId.value = -1
   } catch (error: any) {
-    alert(error.message || 'Review failed, please check your credentials')
+    await alert(error.message || 'Review failed, please check your credentials')
   }
 }
 

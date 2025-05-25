@@ -3,6 +3,7 @@ import { ref, reactive, onMounted } from 'vue'
 import router from '@/router'
 import { storeToRefs } from 'pinia'
 
+import { useModal } from '@/utils/useModal'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import { useUserStore } from '@/stores/userStore.ts'
@@ -12,6 +13,7 @@ const theme = useThemeStore()
 const userStore = useUserStore()
 const { isDark } = storeToRefs(theme)
 const { isLoggedIn } = storeToRefs(userStore)
+const { alert } = useModal()
 
 const loading = ref(false)
 const errorMsg = ref('')
@@ -26,7 +28,7 @@ const submit = async () => {
   try {
     loading.value = true
     await userStore.adminLogin(form)
-    alert('Admin Login successful!')
+    await alert('Admin Login successful!')
     await router.push('/admin')
   } catch (error: any) {
     errorMsg.value = error.message || 'Login failed, please check your credentials'

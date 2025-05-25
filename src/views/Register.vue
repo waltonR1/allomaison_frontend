@@ -31,14 +31,16 @@ const passwordDifferent = computed(() => {
   return form.password !== form.confirmPassword;
 });
 
+import { useModal } from '@/utils/useModal'
+const { alert } = useModal()
 const submitRegister = async () => {
   if (!form.agree) {
-    alert('You must agree to the terms and conditions');
+    await alert('You must agree to the terms and conditions');
     return;
   }
 
   if (passwordDifferent.value) {
-    alert('The two passwords do not match')
+    await alert('The two passwords do not match')
     return;
   }
   try {
@@ -46,7 +48,7 @@ const submitRegister = async () => {
     await register(form)
 
     // 或者提示邮箱验证？后端去发送？
-    alert('Successfully registered')
+    await alert('Successfully registered')
     await Router.push('/auth/login')
 
   } catch (error: any) {

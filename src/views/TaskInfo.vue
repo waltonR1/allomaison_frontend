@@ -37,13 +37,15 @@ onMounted(() => {
   }
 })
 
+import { useModal } from '@/utils/useModal'
+const { alert, confirm } = useModal()
 //conceal task
 const concealTask = async (taskId: number) => {
-  if (confirm('Are you sure?')) {
+  if (await confirm('Are you sure?')) {
     try {
       await myTaskStore.conceal(taskId)
     } catch (error: any) {
-      alert(error.message || 'Conceal failed, please check your credentials')
+      await alert(error.message || 'Conceal failed, please check your credentials')
     }
   }
 }

@@ -8,6 +8,7 @@ import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 import { acceptTask, getConversation } from '@/api/withTokenAPI.ts'
+import { useModal } from '@/utils/useModal'
 
 // stores & helpers
 const tasksStore = useTaskStore()
@@ -16,6 +17,7 @@ const themeStore = useThemeStore()
 
 const { isDark } = storeToRefs(themeStore)
 const { userId, isLoggedIn } = storeToRefs(userStore)
+const { alert } = useModal()
 
 // router params
 const route = useRoute()
@@ -39,7 +41,7 @@ const accept = async () => {
   try {
     await acceptTask(taskId, userId.value!)
     const { data } = await getConversation(userId.value!, task.value!.customerId)
-    alert('Successfully, Please wait for approval.')
+    await alert('Successfully, Please wait for approval.')
     await router.push({
       name: 'chat',
       query: { chatId: data.conversationId },

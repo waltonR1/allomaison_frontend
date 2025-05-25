@@ -19,14 +19,16 @@ const form: loginForm = reactive({
   password: ''
 })
 
+import { useModal } from '@/utils/useModal'
+const { alert } = useModal()
 const submit = async () => {
   try {
     loading.value = true
     await userStore.login(form)
-    alert('Login successful!')
+    await alert('Login successful!')
     await router.push('/')
   } catch (error: any) {
-    alert(error.message || 'Login failed, please check your credentials')
+    await alert(error.message || 'Login failed, please check your credentials')
   } finally {
     loading.value = false
   }

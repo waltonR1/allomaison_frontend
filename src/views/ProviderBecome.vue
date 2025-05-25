@@ -49,7 +49,9 @@ const LoginClick = () => {
 }
 
 // limit of files
-const handleCertUpload = (event: Event) => {
+import { useModal } from '@/utils/useModal'
+const { alert } = useModal()
+const handleCertUpload = async (event: Event) => {
   const target = event.target as HTMLInputElement | null
   if (target && target.files) {
     const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png']
@@ -58,11 +60,11 @@ const handleCertUpload = (event: Event) => {
 
     for (const file of Array.from(target.files)) {
       if (!allowedTypes.includes(file.type)) {
-        alert(`Invalid file type: ${file.name}. Only PDF, JPG, and PNG are allowed.`)
+        await alert('Only PDF, JPG, and PNG files are allowed.')
         continue
       }
       if (file.size > maxFileSize) {
-        alert(`File too large: ${file.name}. Max size is 5MB.`)
+        await alert('File size must be less than 25MB.')
         continue
       }
       validFiles.push(file)
@@ -78,7 +80,7 @@ const submit = async () => {
     loading.value = true
 
     await submitProviderApplication(Number(userId.value) ?? -1, form)
-    alert('Successfully, Please wait for approval.')
+    await alert('Successfully, Please wait for approval.')
     await Router.push('/')
   } catch (error: any) {
     throw new Error(error.response?.data?.message || error.response?.data || 'Failed');

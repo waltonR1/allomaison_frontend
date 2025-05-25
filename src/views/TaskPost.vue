@@ -10,6 +10,7 @@ import { useUserStore } from '@/stores/userStore.ts'
 import { useCityStore } from '@/stores/cityStore.ts'
 import { postTask } from '@/api/withTokenAPI.ts'
 import type { TaskForm } from '@/types/types'
+import { useModal } from '@/utils/useModal'
 
 // stores
 const categoriesStore = useCategoriesStore()
@@ -17,6 +18,7 @@ const cityStore = useCityStore()
 const userStore = useUserStore()
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
+const { alert } = useModal()
 
 // state -> ref
 const { userId,isLoggedIn } = storeToRefs(userStore)
@@ -51,7 +53,7 @@ const submitTask = async () => {
 
     await postTask(Number(userId.value) ?? -1, form)
 
-    alert('Successfully, Please wait for approval.')
+    await alert('Successfully, Please wait for approval.')
     await Router.push('/')
   } catch (error: any) {
     throw new Error(error.response?.data?.message || error.response?.data || 'Failed');

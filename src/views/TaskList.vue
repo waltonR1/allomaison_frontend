@@ -55,24 +55,26 @@ const statusColor = (status: string) => {
   }
 }
 
+import { useModal } from '@/utils/useModal'
+const { alert, confirm } = useModal()
 //conceal task
 const concealTask = async (taskId: number) => {
-  if (confirm('Are you sure?')) {
+  if (await confirm('Are you sure?')) {
     try {
       await myTaskStore.conceal(taskId)
     } catch (error: any) {
-      alert(error.message || 'Conceal failed, please check your credentials')
+      await alert(error.message || 'Conceal failed, please check your credentials')
     }
   }
 }
 
 //complete task
 const completeTask = async (taskId: number) => {
-  if (confirm('Are you sure?')) {
+  if (await confirm('Are you sure?')) {
     try {
       await myTaskStore.complete(taskId)
     } catch (error: any) {
-      alert(error.message || 'Complete failed, please check your credentials')
+      await alert(error.message || 'Complete failed, please check your credentials')
     }
   }
 }
