@@ -4,7 +4,6 @@ export const urls = {
   // login:'http://localhost:8080/api/auth/login',
 
 
-  connectProvider: `${BASE_URL}/connectProvider`,
   acceptTask: `${BASE_URL}/acceptTask`,
   chatMessages:(chatId: number) => `${BASE_URL}/chatMessages?chatId=${chatId}`,
   getConversations:(userId: number) => `${BASE_URL}/conversations?userId=${userId}`,
@@ -25,6 +24,7 @@ export const urls = {
   register:`${BASE_URL}/register`,
 
   adminLogin: `${BASE_URL}/login`,
+  adminRegister: `${BASE_URL}/login`,
 
 
   getUserInfo: (userId: number) => `${BASE_URL}/userInfo?userId=${userId}`,

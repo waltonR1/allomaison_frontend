@@ -208,7 +208,7 @@ export async function createNotice(notice: Omit<Notice, 'NoticeId' | 'sentTime'>
 }
 
 export async function createAdminAccount(adminInfo:AdminAccountForm): Promise<any> {
-  return await axios.post(urls.adminLogin, adminInfo, {
+  return await axios.post(urls.adminRegister, adminInfo, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
