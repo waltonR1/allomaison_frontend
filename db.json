@@ -139,7 +139,7 @@
       "avatarUrl": "/images/avatars/admin.png",
       "userName": "SuperAdmin",
       "email": "admin@example.com",
-      "password": "admin123",
+      "password": "123456",
       "id": "admin_001"
     },
     {
@@ -148,7 +148,7 @@
       "userId": 20250510001,
       "avatarUrl": "/1",
       "userName": "Sylvain",
-      "email": "wanghaihang233@gmail.com",
+      "email": "customer@example.com",
       "password": "123456",
       "id": "6978"
     },
@@ -157,30 +157,10 @@
       "role": "provider",
       "userId": 20250510001,
       "avatarUrl": "/1",
-      "userName": "Sylvain",
-      "email": "wanghaihang@gmail.com",
+      "userName": "Eric",
+      "email": "provider@example.com",
       "password": "123456",
       "id": "6977"
-    },
-    {
-      "id": "1",
-      "email": "alice@example.com",
-      "password": "123456",
-      "role": "user",
-      "token": "token_alice_abc",
-      "userId": "usr_001",
-      "avatarUrl": "/images/avatars/alice.png",
-      "userName": "Alice"
-    },
-    {
-      "id": "2",
-      "email": "bob@example.com",
-      "password": "abcdef",
-      "role": "provider",
-      "token": "token_bob_xyz",
-      "userId": "usr_002",
-      "avatarUrl": "/images/avatars/bob.png",
-      "userName": "Bob"
     }
   ],
   "providerApplications": [
