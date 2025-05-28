@@ -23,9 +23,8 @@ const loading = ref(false)
 
 enum InfoMessageType {
   NOTICE = 'NOTICE',
-  ALERT = 'ALERT',
+  WARNING = 'WARNING',
   SYSTEM = 'SYSTEM',
-  AUDIT = 'AUDIT'
 }
 
 const loadMessages = async () => {
@@ -62,9 +61,8 @@ const transformStyle = computed(() => {
 const getTypeColor = (type: InfoMessageType) => {
   switch(type) {
     case 'NOTICE': return 'bg-blue-100 text-blue-700 border-blue-300'
-    case 'ALERT': return 'bg-red-100 text-red-700 border-red-300'
+    case 'WARNING': return 'bg-red-100 text-red-700 border-red-300'
     case 'SYSTEM': return 'bg-gray-100 text-gray-700 border-gray-300'
-    case 'AUDIT': return 'bg-green-100 text-green-700 border-green-300'
     default: return 'bg-gray-100 text-gray-700 border-gray-300'
   }
 }
@@ -72,9 +70,9 @@ const getTypeColor = (type: InfoMessageType) => {
 const selectedMessage = ref<InfoMessage|null>(null)
 
 const openDetail = (msg: InfoMessage) => {
-  if (!msg.read) {
-    msg.read = true;
-    markInfoMessageAsRead(msg.announceId).catch(() => { msg.read = false })
+  if (!msg.isNew) {
+    msg.isNew = true;
+    markInfoMessageAsRead(msg.announceId).catch(() => { msg.isNew = false })
   }
   selectedMessage.value = msg;
 }
@@ -103,7 +101,8 @@ onMounted(() => {
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
     </svg>
-    <span v-if="infoMessages.filter(m=>!m.read).length" class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full px-1.5 py-0.5">{{ infoMessages.filter(m=>!m.read).length }}</span>
+    <span v-if="infoMessages.filter(m=>!m.isNew).length" class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full px-1.5 py-0.5">{{ infoMessages.filter(m => !m.isNew).length
+      }}</span>
   </button>
 
   <!-- 展开的浮动面板 -->
@@ -117,7 +116,8 @@ onMounted(() => {
           <div @click="openDetail(msg)" class="cursor-pointer border rounded-lg px-3 py-2 flex flex-col gap-1 hover:bg-gray-50 transition-all duration-150" :class="getTypeColor(msg.type as InfoMessageType)">
             <div class="flex items-center justify-between">
               <span class="font-medium">{{ msg.title || 'No Title' }}</span>
-              <span class="text-xs" :class="msg.read ? 'opacity-60' : 'font-bold text-red-500'">{{ msg.read ? 'Read' : 'Unread' }}</span>
+              <span class="text-xs" :class="msg.isNew ? 'opacity-60' : 'font-bold text-red-500'">{{ msg.isNew ? '' : 'New'
+                }}</span>
             </div>
             <div class="text-xs text-gray-500">{{ msg.sentTime.slice(0, 16).replace('T', ' ') }}</div>
             <div class="truncate text-sm">{{ msg.content }}</div>

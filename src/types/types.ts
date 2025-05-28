@@ -5,11 +5,16 @@ export type InfoMessage = {
   content: string
   type: string
   sentTime: string
-  read: boolean
+  isNew: boolean
 }
 
 export type loginForm ={
   email: string,
+  password: string,
+}
+
+export type AdminAccountForm ={
+  username: string,
   password: string,
 }
 
@@ -73,6 +78,8 @@ export type City = {
 }
 
 export type ProviderApplicationForm = {
+  customerId: number
+  zipcode: string
   city: string
   categories: string
   experiences: string
@@ -108,7 +115,6 @@ export type UserInfo = {
   email: string | null;
   avatarUrl: string | null;
   createdAt: string | null;
-  lastLogin: string | null;
   role: 'customer' | 'provider' | 'admin' | null;
 }
 
@@ -134,6 +140,7 @@ export type TaskForm = {
   title: string,
   category: string,
   frequency: string,
+  zipcode: string,
   city: string,
   startTime: string,
   endTime: string,
@@ -185,10 +192,4 @@ export type Notice = {
   content: string
   type: string
   sentTime: string
-}
-
-export type AdminAccountForm = {
-  userName: string
-  email: string
-  password: string
 }

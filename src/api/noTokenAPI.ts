@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { urls } from '@/utils/urls.ts'
-import type { Category, City, TaskCard, ProviderCard, loginForm, registerForm } from '@/types/types'
+import type { Category, City, TaskCard, ProviderCard, loginForm, registerForm, AdminAccountForm } from '@/types/types'
 
 //获取categories
 export async function fetchCategories(): Promise<Category[]> {
@@ -50,9 +50,9 @@ export async function login(loginForm: loginForm) {
 //       },
 //     })
 // }
-export async function adminLogin(loginForm: loginForm) {
+export async function adminLogin(adminLoginForm: AdminAccountForm) {
   const response =  await axios.get(urls.adminLogin, {
-    params: loginForm,
+    params: adminLoginForm,
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'

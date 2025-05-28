@@ -33,6 +33,7 @@ const form:TaskForm = reactive({
   title: '',
   category: '',
   frequency: '',
+  zipcode:'',
   city: '',
   startTime: '',
   endTime: '',
@@ -40,6 +41,20 @@ const form:TaskForm = reactive({
   budget:'',
   customerContact:'',
   description: ''
+})
+
+const onZipCodeInput = () => {
+  const match = cityStore.cities.find(c => c.zipcode === form.zipcode)
+  if (match) {
+    form.city = match.city
+  }
+}
+
+watch(() => form.city, (newCity) => {
+  const match = cityStore.cities.find(c => c.city === newCity)
+  if (match) {
+    form.zipcode = match.zipcode
+  }
 })
 
 // post a task
@@ -100,10 +115,15 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
             <span :class="[isDark ? 'text-gray-100' : 'text-gray-900','text-sm']">Frequency*</span>
             <select v-model="form.frequency" :class="noPlaceholderInputClass(form.frequency)" required>
               <option value="" selected disabled hidden>Frequency*</option>
-              <option value="OneTime">One‑time</option>
+              <option value="Once">Once</option>
+              <option value="Daily">Daily</option>
               <option value="Weekly">Weekly</option>
               <option value="Monthly">Monthly</option>
             </select>
+          </label>
+          <label class="block">
+            <span :class="[isDark ? 'text-gray-100' : 'text-gray-900','text-sm']">ZipCode*</span>
+            <input v-model="form.zipcode" type="text" placeholder="Zipcode*" @input="onZipCodeInput" :class="inputClass" />
           </label>
           <label class="block">
             <span :class="[isDark ? 'text-gray-100' : 'text-gray-900','text-sm']">City*</span>
@@ -116,7 +136,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
             <span :class="[isDark ? 'text-gray-100' : 'text-gray-900','text-sm']">Start Date</span>
             <input type="date" v-model="formStartTime" :class="inputClass" required />
           </label>
-          <label class="block" v-if="!(form.frequency === '' || form.frequency === 'OneTime')">
+          <label class="block" v-if="!(form.frequency === '' || form.frequency === 'Once')">
             <span :class="[isDark ? 'text-gray-100' : 'text-gray-900','text-sm']">End Date</span>
             <input type="date" v-model="formEndTime" :class="inputClass" required />
           </label>

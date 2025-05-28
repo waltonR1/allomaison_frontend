@@ -17,7 +17,7 @@ import type {
 
 
 // 提交成为provider的申请
-export async function submitProviderApplication(userId: number, form: ProviderApplicationForm) {
+export async function submitProviderApplication(userId: number, form: Omit<ProviderApplicationForm,'customerId'>) {
   const formData = new FormData()
   formData.append('customerId', userId.toString())
   formData.append('city', form.city)

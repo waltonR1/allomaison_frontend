@@ -121,15 +121,15 @@ watchEffect(() => {
       <p class="leading-relaxed mb-8">{{ order.description }}</p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-        <div v-if="order.frequency === 'OneTime'">
+        <div v-if="order.frequency === 'Once'">
           <p class="font-semibold mb-1">Date</p>
           <p>{{ new Date(order.startTime).toLocaleDateString() }}</p>
         </div>
-        <div v-if="order.frequency !== 'OneTime'">
+        <div v-if="order.frequency !== 'Once'">
           <p class="font-semibold mb-1">Start Date</p>
           <p>{{ new Date(order.startTime).toLocaleDateString() }}</p>
         </div>
-        <div v-if="order.frequency !== 'OneTime'">
+        <div v-if="order.frequency !== 'Once'">
           <p class="font-semibold mb-1">End Date</p>
           <p>{{ new Date(order.endTime).toLocaleDateString() }}</p>
         </div>

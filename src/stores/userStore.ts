@@ -32,7 +32,7 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    async adminLogin(values: { email: string; password: string }) {
+    async adminLogin(values: { username: string; password: string }) {
       try {
         const data = await adminLoginAPI(values);
         if (!Array.isArray(data) || data.length === 0 || data[0].role !== 'admin') {

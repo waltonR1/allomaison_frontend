@@ -18,7 +18,6 @@ export const useUserInfoStore = defineStore('useInfo', {
     email: null,
     avatarUrl: null,
     createdAt: null,
-    lastLogin: null,
     role: null,
     loading: false,
     error: ''

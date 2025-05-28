@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import Router from '@/router'
 
@@ -32,8 +32,9 @@ const benefits = [
 ];
 
 // form
-const form: ProviderApplicationForm= reactive({
-      city: '',
+const form: Omit<ProviderApplicationForm,'customerId'>= reactive({
+      zipcode: '',
+      city:'',
       categories: '',
       experiences: '',
       certifications: []
@@ -89,6 +90,20 @@ const submit = async () => {
   }
 }
 
+const onZipCodeInput = () => {
+  const match = cityStore.cities.find(c => c.zipcode === form.zipcode)
+  if (match) {
+    form.city = match.city
+  }
+}
+
+watch(() => form.city, (newCity) => {
+  const match = cityStore.cities.find(c => c.city === newCity)
+  if (match) {
+    form.zipcode = match.zipcode
+  }
+})
+
 /* loading */
 onMounted(() => {
   cityStore.fetchCities()
@@ -120,9 +135,10 @@ const { inputClass, noPlaceholderInputClass, buttonClass, fileInputClass } = use
         </div>
 
         <form v-if="formVisible" class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8" @submit.prevent="submit">
+          <input v-model="form.zipcode" type="text" placeholder="Zipcode" @input="onZipCodeInput" :class="inputClass" />
           <select  v-model="form.city" :class="noPlaceholderInputClass(form.city)">
             <option value="" disabled selected hidden>City</option>
-            <option v-for="city in cityStore.cities" :key="city.zipcode" :value="city">{{ city.city }}</option>
+            <option v-for="city in cityStore.cities" :key="city.zipcode">{{ city.city }}</option>
           </select>
           <select v-model="form.categories" :class="noPlaceholderInputClass(form.categories)" required>
             <option value="" disabled selected hidden>Primary Service Category</option>
