@@ -21,7 +21,7 @@ const { isDark } = storeToRefs(theme)
 const { alert } = useModal()
 
 // state -> ref
-const { userId,isLoggedIn } = storeToRefs(userStore)
+const { isLoggedIn } = storeToRefs(userStore)
 
 // variable
 const loading = ref(false)
@@ -65,8 +65,8 @@ const submitTask = async () => {
   }
   try {
     loading.value = true
-
-    await postTask(Number(userId.value) ?? -1, form)
+    form.city = form.zipcode
+    await postTask(form)
 
     await alert('Successfully, Please wait for approval.')
     await Router.push('/')
@@ -79,8 +79,16 @@ const submitTask = async () => {
 
 watch([formStartTime, formEndTime], ([startVal, endVal]) => {
   form.startTime = startVal ? `${startVal}T08:00` : ''
-  form.endTime = endVal ? `${endVal}T08:00` : ''
+  form.endTime = endVal ? `${endVal}T16:00` : ''
 })
+
+// 当「频率」或「开始日期」变化时，自动同步 endTime = startTime（仅限 Once）
+watch([() => form.frequency, formStartTime], ([freq, start]) => {
+  if (freq === 'Once') {
+    formEndTime.value = start || ''     // start 为空时保持空字符串
+  }
+})
+
 
 // loading
 onMounted(async () => {

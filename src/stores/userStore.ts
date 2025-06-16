@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
-import { adminLogin as adminLoginAPI, login as loginAPI } from '@/api/noTokenAPI.ts'
+import { login as loginAPI } from '@/api/noTokenAPI.ts'
 
 type UserState = {
   token: string | null;
-  role: 'customer' | 'provider' | 'admin' | null;
+  role: 'customer' | 'provider' | null;
   userId: number | null;
   avatarUrl: string | null;
   userName: string | null;
+  expiresAt: number | null;
 }
 
 export const useUserStore = defineStore('user', {
@@ -15,7 +16,8 @@ export const useUserStore = defineStore('user', {
     role:  null,
     userId:  null,
     avatarUrl: null,
-    userName: null
+    userName: null,
+    expiresAt: null
   }),
 
   getters: {
@@ -26,27 +28,28 @@ export const useUserStore = defineStore('user', {
     async login(values: { email: string; password: string }) {
       try {
         const response = await loginAPI(values);
-        this.$patch(response[0])
+        const oneHour = 60 * 60 * 1000;
+
+        const avatarUrl = response.avatarUrl
+          ? `http://localhost:8080/${response.avatarUrl.replace(/^\/+/, '')}`
+          : null;
+
+        this.$patch({
+          ...response,
+          avatarUrl,
+          expiresAt: Date.now() + oneHour
+        })
       } catch (error: any) {
         throw new Error(error.message || 'Login failed')
       }
     },
-
-    async adminLogin(values: { username: string; password: string }) {
-      try {
-        const data = await adminLoginAPI(values);
-        if (!Array.isArray(data) || data.length === 0 || data[0].role !== 'admin') {
-          throw new Error('Only admin is allowed')
-        }
-        this.$patch(data[0])
-      } catch (error: any) {
-        throw new Error(error.message || 'Login failed')
-      }
-    },
-
     logout() {
       this.$reset()
-
+    },
+    checkExpired() {
+      if (this.expiresAt && Date.now() > this.expiresAt) {
+        this.logout();
+      }
     }
   },
   persist: true

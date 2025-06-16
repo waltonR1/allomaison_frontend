@@ -82,7 +82,7 @@ const { inputClass } = useFormClasses()
           <RouterLink :class="[isDark ? 'text-amber-400' : '','text-xl font-bold mb-2 group-hover:text-amber-500']" :to="{ name: 'providerDetail', params: { providerId: providerCard.providerId } }">{{ providerCard.providerName }}</RouterLink>
           <p :class="[isDark ? 'text-gray-400' : 'text-gray-500 ','mb-4 text-sm']">{{ providerCard.city }} • {{ providerCard.category }}</p>
           <p class="text-sm mb-4">{{ providerCard.description }}</p>
-          <p class="text-sm text-yellow-500">★ {{ providerCard.rating }}/5</p>
+          <p class="text-sm text-yellow-500">{{ providerCard.priceRange }}</p>
         </div>
       </div>
     </div>

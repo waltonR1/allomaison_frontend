@@ -33,7 +33,15 @@ export const useUserInfoStore = defineStore('useInfo', {
 
       try {
         const response = await fetchUserInfo(userId)
-        this.$patch(response[0])
+        const avatarUrl = response.avatarUrl
+          ? `http://localhost:8080/${response.avatarUrl.replace(/^\/+/, '')}`
+          : null;
+
+        this.$patch({
+          ...response,
+          avatarUrl
+        }
+        )
       } catch (error: any) {
         this.error = error.message || 'Loading user info Failed'
         console.error('Loading user info Failed:', this.error)

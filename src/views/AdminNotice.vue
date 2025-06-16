@@ -5,14 +5,14 @@ import { storeToRefs } from 'pinia'
 import { fetchNotices, createNotice } from '@/api/withTokenAPI'
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
-import { useUserStore } from '@/stores/userStore.ts'
+import { useAdminStore } from '@/stores/adminStore.ts'
 import type { Notice } from '@/types/types.ts'
 import router from '@/router'
 
 const theme = useThemeStore()
-const userStore = useUserStore()
+const adminStore = useAdminStore()
 const { isDark } = storeToRefs(theme)
-const {role, isLoggedIn} = storeToRefs(userStore)
+const {isLoggedIn} = storeToRefs(adminStore)
 
 const noticeForm = ref<Omit<Notice, 'NoticeId' | 'sentTime'>>({
   type: 'all',
@@ -29,6 +29,7 @@ const loadNotices = async () => {
   loadingNotice.value = true
   try {
     notices.value = await fetchNotices() as Notice[]
+    console.log(notices.value)
   } finally {
     loadingNotice.value = false
   }
@@ -58,7 +59,7 @@ const handleSendNotice = async () => {
 }
 
 onMounted(() => {
-  if (!isLoggedIn.value || role.value !== 'admin') {
+  if (!isLoggedIn.value) {
     router.replace('/')
   }
   loadNotices()
@@ -90,7 +91,7 @@ const { inputClass, buttonClass, noPlaceholderInputClass } = useFormClasses()
           <li v-for="item in notices" :key="item.NoticeId" class="py-3">
             <div class="flex justify-between items-center">
               <span class="font-bold">{{item.title}}</span>
-              <span class="text-xs text-gray-400">{{item.type === 'all' ? 'All Users' : 'Only Provider'}}</span>
+              <span class="text-xs text-gray-400">{{item.targets === 'ALL' ? 'All Users' : 'Only Provider'}}</span>
             </div>
             <div class="flex justify-between items-center">
               <div :class="isDark ? 'text-gray-200' : 'text-gray-700'">{{item.content}}</div>

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { fetchTasks } from '@/api/noTokenAPI.ts'
+import { fetchTasksWithoutId } from '@/api/withTokenAPI.ts'
 import type { TaskCard } from '@/types/types'
 
 type TaskState = {
@@ -30,7 +30,7 @@ export const useTaskStore = defineStore('tasks', {
 
       this.loading = true;
       try {
-        this.taskCards = await fetchTasks();
+        this.taskCards = await fetchTasksWithoutId();
         this.error = null;
         this.fetched = true;
       } catch (error: any) {

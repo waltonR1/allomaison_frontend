@@ -1,22 +1,54 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref,  watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import Router from '@/router'
 
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
+import {useAdminStore} from '@/stores/adminStore.ts'
+import { useRoute } from 'vue-router'
 
 const theme  = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
-const userStore = useUserStore()
-const { role,avatarUrl,userName,isLoggedIn } = storeToRefs(userStore)
+let logout: () => void
+let role = ref<string | null>(null)
+let userName = ref<string | null>(null)
+let avatarUrl = ref<string | null>(null)
+let isLoggedIn = ref(false)
+
+const route = useRoute()
+const isAdmin = computed(() => route.path.includes('admin'))
+
+const updateUserInfo = () => {
+  if (!isAdmin.value) {
+    const userStore = useUserStore()
+    const userRefs = storeToRefs(userStore)
+    role = userRefs.role
+    userName = userRefs.userName
+    avatarUrl = userRefs.avatarUrl
+    isLoggedIn = userRefs.isLoggedIn
+    logout = userStore.logout
+  } else {
+    const adminStore = useAdminStore()
+    const adminRefs = storeToRefs(adminStore)
+    userName = adminRefs.adminName
+    avatarUrl = ref(null)
+    isLoggedIn = adminRefs.isLoggedIn
+    logout = adminStore.logout
+  }
+}
+updateUserInfo()
+
+watch(isAdmin, () => {
+  updateUserInfo()
+})
 
 const showCard = ref(false)
 const showImage = ref(true)
 
 const handleLogout = () => {
-  userStore.logout()
+  logout()
   Router.push('/')
 }
 
@@ -33,18 +65,18 @@ watch(() => avatarUrl, () => {
   <header :class="[isDark ? 'bg-gray-800' : 'bg-white','px-6 py-4 shadow flex justify-between items-center sticky top-0 z-10 transition duration-500']">
 
     <h1 :class="[isDark ? 'text-amber-600' : 'text-amber-400','text-3xl font-bold select-none']">
-      <router-link v-if="role !== 'admin'" to="/">AlloMaison</router-link>
-      <router-link v-else to="/admin">AlloMaison</router-link>
+      <router-link v-if="!isAdmin" to="/">AlloMaison</router-link>
+      <router-link v-else to="/adminLogin">AlloMaison</router-link>
     </h1>
 
     <nav class="flex items-center space-x-4">
-      <template v-if="role === 'admin'">
+      <template v-if="isAdmin">
         <router-link class="hover:text-amber-500 transition select-none" to="/admin/provider">Provider Application</router-link>
         <router-link class="hover:text-amber-500 transition select-none" to="/admin/notice">Send Notice</router-link>
         <router-link class="hover:text-amber-500 transition select-none" to="/admin/account">Admin Manager</router-link>
       </template>
       <template v-else>
-        <router-link v-if="role !== 'customer'" class="hover:text-amber-500 transition select-none" to="/tasks">Find Tasks</router-link>
+        <router-link v-if="role === 'provider'" class="hover:text-amber-500 transition select-none" to="/tasks">Find Tasks</router-link>
         <router-link class="hover:text-amber-500 transition select-none" to="/providers">Find Providers</router-link>
         <router-link class="hover:text-amber-500 transition select-none" to="/postTask">Post a Task</router-link>
         <router-link v-if="role !== 'provider'" class="hover:text-amber-500 transition select-none" to="/becomeProvider">Become a Provider</router-link>
@@ -61,18 +93,18 @@ watch(() => avatarUrl, () => {
 
           <div v-if="showCard" :class="[isDark ? 'bg-gray-800' : 'bg-white','absolute right-0 top-full w-64 rounded-2xl shadow-2xl p-4 z-10']">
             <div class="w-full text-center px-3 py-2 text-xl border-b mb-1 select-none ">{{ userName || 'Guest'}}</div>
-            <router-link v-if="role !== 'admin'" to="/auth/information" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Personal Information</router-link>
+            <router-link v-if="!isAdmin" to="/auth/information" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Personal Information</router-link>
             <router-link v-if="role === 'provider'" to="/auth/providerInfo" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Provider Information</router-link>
-            <router-link v-if="role !== 'admin'" to="/order" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">My Order</router-link>
+            <router-link v-if="!isAdmin" to="/order" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">My Order</router-link>
             <router-link v-if="role === 'provider'" to="/myTask" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">My Task</router-link>
-            <router-link v-if="role !== 'admin'" to="/chat" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Chat</router-link>
+            <router-link v-if="!isAdmin" to="/chat" :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200','block w-full text-center px-3 py-2 hover:text-amber-500 rounded-xl select-none']">Chat</router-link>
 
             <button @click="handleLogout"  :class="[isDark ? 'border border-amber-400 text-amber-400 hover:bg-amber-500 hover:text-white' : 'border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white', 'w-full text-center px-4 py-2 mt-4 rounded-lg font-semibold transition-colors select-none']">Logout</button>
           </div>
         </div>
       </template>
       <template v-else>
-        <router-link to="/auth/login" :class="[isDark? 'bg-amber-500 hover:bg-amber-600 text-white': 'bg-amber-400 hover:bg-amber-500 text-white','px-4 py-2 rounded-lg']">
+        <router-link  to="/auth/login" :class="[isDark? 'bg-amber-500 hover:bg-amber-600 text-white': 'bg-amber-400 hover:bg-amber-500 text-white','px-4 py-2 rounded-lg']">
           Login / Register
         </router-link>
       </template>

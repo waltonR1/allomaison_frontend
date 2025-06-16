@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { urls } from '@/utils/urls.ts'
-import type { Category, City, TaskCard, ProviderCard, loginForm, registerForm, AdminAccountForm } from '@/types/types'
+import type { Category, City, ProviderCard, loginForm, registerForm, AdminAccountForm } from '@/types/types'
 
 //获取categories
 export async function fetchCategories(): Promise<Category[]> {
@@ -13,70 +13,72 @@ export async function fetchCities(): Promise<City[]> {
 }
 
 //login
-// export async function login( loginForm: loginForm ) {
-//   return await axios.post(urls.login,
-//     { ...loginForm }, {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Accept': 'application/json'
-//       },
-//     })
-// }
-export async function login(loginForm: loginForm) {
-  const response =  await axios.get(urls.login, {
-    params: loginForm,
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
-  })
-  const data = response.data
-
-  if (!Array.isArray(data) || data.length === 0) {
-    throw new Error('Invalid email or password')
-  }
-
-  return data
+export async function login( loginForm: loginForm ) {
+  const response = await axios.post(urls.login,
+    { ...loginForm }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+    })
+  return response.data
 }
+// export async function login(loginForm: loginForm) {
+//   const response =  await axios.get(urls.login, {
+//     params: loginForm,
+//     headers: {
+//       'Content-Type': 'application/json',
+//       'Accept': 'application/json'
+//     }
+//   })
+//   const data = response.data
+//
+//   if (!Array.isArray(data) || data.length === 0) {
+//     throw new Error('Invalid email or password')
+//   }
+//
+//   return data[0]
+// }
 
 
 //admin login
-// export async function adminLogin( loginForm: loginForm ) {
-//   return await axios.post(urls.adminLogin,
-//     { ...loginForm }, {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Accept': 'application/json'
-//       },
-//     })
-// }
-export async function adminLogin(adminLoginForm: AdminAccountForm) {
-  const response =  await axios.get(urls.adminLogin, {
-    params: adminLoginForm,
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
-  })
-  const data = response.data
-
-  if (!Array.isArray(data) || data.length === 0) {
-    throw new Error('Invalid email or password')
-  }
-
-  return data
+export async function adminLogin( adminLoginForm: AdminAccountForm ) {
+  const response = await axios.post(urls.adminLogin,
+    { ...adminLoginForm }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+    })
+  return response.data
 }
+// export async function adminLogin(adminLoginForm: AdminAccountForm) {
+//   const response = await axios.get(urls.adminLogin, {
+//     params: adminLoginForm,
+//     headers: {
+//       'Content-Type': 'application/json',
+//       'Accept': 'application/json'
+//     }
+//   })
+//   const data = response.data
+//
+//   if (!Array.isArray(data) || data.length === 0) {
+//     throw new Error('Invalid email or password')
+//   }
+//
+//   return data
+// }
 
 
 
 //register
 export async function register(registerForm: registerForm) {
-  await axios.post(urls.register,{...registerForm},{
+  return (await axios.post(urls.register, { ...registerForm }, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     },
-  })
+  })).status
 }
 
 // 遍历provider
@@ -89,12 +91,12 @@ export async function fetchProviders(): Promise<ProviderCard[]> {
   }))
 }
 
-// 遍历task
-export async function fetchTasks(): Promise<TaskCard[]> {
-  const response = await axios.get<TaskCard[]>(urls.getTask)
-  return response.data.map(p => ({
-    ...p,
-    taskId: Number(p.taskId),
-    customerId: Number(p.customerId),
-  }))
+// 获取某个服务者的详细信息（评分 + 评论）
+export async function fetchProviderDetail(providerId: number) {
+  const response = await axios.get(urls.getProviderById, {
+    params: {
+      providerId
+    }
+  })
+  return response.data
 }

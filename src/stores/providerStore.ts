@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { fetchProviders } from '@/api/noTokenAPI.ts'
+import { fetchProviderDetail, fetchProviders } from '@/api/noTokenAPI.ts'
 import type { ProviderCard } from '@/types/types'
 
 type ProvidersState = {
@@ -40,5 +40,29 @@ export const useProvidersStore = defineStore('providers', {
         this.loading = false;
       }
     },
+
+    /** 按需加载 provider 的详细信息 */
+    async fetchProviderDetailIfNeeded(providerId: number): Promise<void> {
+      const target = this.providerCards.find(p => p.providerId === providerId);
+      if (!target) return;
+
+      try {
+        const detail = await fetchProviderDetail(providerId);
+        const { rating, customerReviews } = detail;
+
+        this.providerCards = this.providerCards.map(p =>
+          p.providerId === providerId
+            ? {
+              ...p,
+              rating,
+              customerReview: customerReviews,
+            }
+            : p
+        );
+      } catch (e: any) {
+        console.error(`Failed to fetch provider detail for ${providerId}:`, e);
+      }
+    }
   },
+  persist: true,
 });

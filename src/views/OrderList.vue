@@ -25,9 +25,7 @@ const selectedOrderId = ref<number>(-1)
 
 // 模拟加载
 onMounted(() => {
-  if (userId.value) {
-    orderStore.fetchOrders(userId.value)
-  }
+    orderStore.fetchOrders()
   if (!isLoggedIn.value) {
     router.replace('/')
   }
@@ -41,21 +39,21 @@ const filteredOrders = computed(() => {
 
 const statusOptions = [
   { value: 'All', label: 'All' },
-  { value: 'Pending', label: 'Pending' },
-  { value: 'Confirmed', label: 'Confirmed' },
-  { value: 'Completed', label: 'Completed' },
-  { value: 'Cancelled', label: 'Cancelled' },
+  { value: 'PENDING', label: 'PENDING' },
+  { value: 'CONFIRMED', label: 'CONFIRMED' },
+  { value: 'COMPLETED', label: 'COMPLETED' },
+  { value: 'CANCELLED', label: 'CANCELLED' },
 ]
 
 const statusColor = (status: string) => {
   switch (status) {
-    case 'Pending':
+    case 'PENDING':
       return 'text-yellow-500'
-    case 'Confirmed':
+    case 'CONFIRMED':
       return 'text-blue-500'
-    case 'Completed':
+    case 'COMPLETED':
       return 'text-green-600'
-    case 'Cancelled':
+    case 'CANCELLED':
       return 'text-rose-500'
     default:
       return ''
@@ -64,6 +62,7 @@ const statusColor = (status: string) => {
 
 import { useModal } from '@/utils/useModal'
 const { alert, confirm } = useModal()
+
 //conceal order
 const concealOrder = async (orderId: number) => {
   if (await confirm('Are you sure?')) {
@@ -75,16 +74,6 @@ const concealOrder = async (orderId: number) => {
   }
 }
 
-//restart order
-const restartOrder = async (orderId: number) => {
-  if (await confirm('Are you sure?')) {
-    try {
-      await orderStore.restart(orderId)
-    } catch (error: any) {
-      await alert(error.message || 'Conceal failed, please check your credentials')
-    }
-  }
-}
 
 // 开启评论框
 const reviewProvider = (orderId: number) => {
@@ -171,17 +160,17 @@ const { buttonClass } = useFormClasses()
             <button :class="[buttonClass, 'w-32']" @click="router.push({name:'orderDetail', params:{orderId : order.orderId}})">
               View
             </button>
-            <button v-if="order.status === 'Pending'" :class="[buttonClass, isDark ? 'bg-rose-500 hover:bg-rose-600' : 'bg-rose-400 hover:bg-rose-500', 'w-32']" @click="concealOrder(order.orderId)">
+            <button v-if="order.status === 'PENDING'" :class="[buttonClass, isDark ? 'bg-rose-500 hover:bg-rose-600' : 'bg-rose-400 hover:bg-rose-500', 'w-32']" @click="concealOrder(order.orderId)">
               Cancel
             </button>
-            <button v-if="order.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactProvider(order.providerId)">
+            <button v-if="order.status === 'CONFIRMED'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactProvider(order.providerId)">
               Contact
             </button>
-            <button v-if="order.status === 'Completed'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="reviewProvider(order.orderId)">
-              Review
+            <button v-if="order.status === 'CONFIRMED'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="confirmOrder(order.orderId)">
+              Completed
             </button>
-            <button v-if="order.status === 'Cancelled'" :class="[buttonClass, isDark ? 'bg-gray-500 hover:bg-gray-600' : 'bg-gray-400 hover:bg-gray-500', 'w-32']" @click="restartOrder(order.orderId)">
-              Post Again
+            <button v-if="order.status === 'COMPLETED'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="reviewProvider(order.orderId)">
+              Review
             </button>
           </div>
 

@@ -5,7 +5,7 @@ export type InfoMessage = {
   content: string
   type: string
   sentTime: string
-  isNew: boolean
+  recent: boolean
 }
 
 export type loginForm ={
@@ -14,7 +14,7 @@ export type loginForm ={
 }
 
 export type AdminAccountForm ={
-  username: string,
+  adminName: string,
   password: string,
 }
 
@@ -44,17 +44,17 @@ export type ProviderCard = {
   avatarUrl: string
   servicesOffered: string[]
   serviceArea: string
-  availabilityTime: string
   customerReview: {
     author: string
     content: string
   }[]
-  providerLabels: []
+  providerLabels: string[]
   priceRange: string
 }
 
 export type MyOrderCard = {
-  orderId: number
+  orderId?: number
+  taskId?: number
   providerId: number
   providerName: string
   customerId: number
@@ -68,7 +68,7 @@ export type MyOrderCard = {
   city: string
   budget: string
   providerContact: string
-  status: 'Pending' | 'Confirmed' | 'Completed' | 'Cancelled'
+  status: 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'CANCELLED'
   createdAt: string
 }
 
@@ -101,7 +101,7 @@ export type MyTaskCard = {
   city: string
   budget: string
   customerContact: string
-  status: 'Confirmed' | 'Completed' | 'Cancelled'
+  status: 'CONFIRMED' | 'COMPLETED' | 'CANCELLED'
   createdAt: string
 }
 
@@ -115,7 +115,7 @@ export type UserInfo = {
   email: string | null;
   avatarUrl: string | null;
   createdAt: string | null;
-  role: 'customer' | 'provider' | 'admin' | null;
+  role: 'customer' | 'provider' | null;
 }
 
 export type ProviderInfo = {
@@ -127,7 +127,6 @@ export type ProviderInfo = {
   description: string
   servicesOffered: string[]
   serviceArea: string
-  availabilityTime: string
   providerLabels: string[]
   priceRange: string
 }

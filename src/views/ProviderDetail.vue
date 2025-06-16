@@ -26,7 +26,12 @@ const providerId = Number(route.params.providerId)
 const provider = computed(() => providersStore.getById(providerId))
 
 //加载数据（若尚未加载)
-onMounted(() => providersStore.fetchProviders())
+onMounted(
+  () => {
+    providersStore.fetchProviders()
+    providersStore.fetchProviderDetailIfNeeded(providerId)
+  }
+)
 
 
 //头像显示失败回退
@@ -103,7 +108,6 @@ watch(() => provider.value?.avatarUrl, () => (showImage.value = true))
       <!-- 服务区域和时间 -->
       <div :class="[isDark ? 'text-gray-400' : 'text-gray-600']" class="mb-6 text-sm space-y-1">
         <p><strong>Service Area:</strong> {{ provider?.serviceArea }}</p>
-        <p><strong>Availability:</strong> {{ provider?.availabilityTime }}</p>
       </div>
 
       <!-- 客户评论 -->

@@ -33,9 +33,7 @@ const order = computed(() => orderStore.getById(orderId))
 
 //加载数据（若尚未加载)
 onMounted(() => {
-  if (userId.value) {
-    orderStore.fetchOrders(userId.value)
-  }
+  orderStore.fetchOrders()
   if (!isLoggedIn) {
     router.replace('/')
   }
@@ -48,17 +46,6 @@ const concealOrder = async (orderId: number) => {
   if (await confirm('Are you sure?')) {
     try {
       await orderStore.conceal(orderId)
-    } catch (error: any) {
-      await alert(error.message || 'Conceal failed, please check your credentials')
-    }
-  }
-}
-
-//restart order
-const restartOrder = async (orderId: number) => {
-  if (await confirm('Are you sure?')) {
-    try {
-      await orderStore.restart(orderId)
     } catch (error: any) {
       await alert(error.message || 'Conceal failed, please check your credentials')
     }
@@ -145,11 +132,11 @@ watchEffect(() => {
           <p class="font-semibold mb-1">Status</p>
           <p>{{ order.status }}</p>
         </div>
-        <div v-if="order.status === 'Confirmed' || order.status === 'Completed'">
+        <div v-if="order.status === 'CONFIRMED' || order.status === 'COMPLETED'">
           <p class="font-semibold mb-1">Provider Name</p>
           <p>{{ order.providerName }}</p>
         </div>
-        <div v-if="order.status === 'Confirmed' || order.status === 'Completed'">
+        <div v-if="order.status === 'CONFIRMED' || order.status === 'COMPLETED'">
           <p class="font-semibold mb-1">Contact</p>
           <p>{{ order.providerContact }}</p>
         </div>
@@ -169,17 +156,17 @@ watchEffect(() => {
       </section>
 
       <div class="flex justify-end items-center gap-3 mt-4">
-        <button v-if="order.status === 'Pending'" :class="[buttonClass, isDark ? 'bg-rose-500 hover:bg-rose-600' : 'bg-rose-400 hover:bg-rose-500', 'w-24']" @click="concealOrder(order.orderId)">
+        <button v-if="order.status === 'PENDING'" :class="[buttonClass, isDark ? 'bg-rose-500 hover:bg-rose-600' : 'bg-rose-400 hover:bg-rose-500', 'w-24']" @click="concealOrder(order.orderId)">
           Cancel
         </button>
-        <button v-if="order.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactProvider(order.providerId)">
+        <button v-if="order.status === 'CONFIRMED'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactProvider(order.providerId)">
           Contact
         </button>
-        <button v-if="order.status === 'Completed'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="reviewProvider">
-          Review
+        <button v-if="order.status === 'CONFIRMED'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="confirmOrder(order.orderId)">
+          Completed
         </button>
-        <button v-if="order.status === 'Cancelled'" :class="[buttonClass, isDark ? 'bg-gray-500 hover:bg-gray-600' : 'bg-gray-400 hover:bg-gray-500', 'w-32']" @click="restartOrder(order.orderId)">
-          Post Again
+        <button v-if="order.status === 'COMPLETED'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="reviewProvider">
+          Review
         </button>
       </div>
     </div>

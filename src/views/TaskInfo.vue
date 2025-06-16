@@ -131,10 +131,10 @@ watchEffect(() => {
       </section>
 
       <div class="flex justify-end items-center gap-3 mt-4">
-        <button v-if="task.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactCustomer(task.customerId)">
+        <button v-if="task.status === 'CONFIRMED'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactCustomer(task.customerId)">
           Contact
         </button>
-        <button v-if="task.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-rose-500 hover:bg-rose-600' : 'bg-rose-400 hover:bg-rose-500', 'w-32']" @click="concealTask(task.taskId)">
+        <button v-if="task.status === 'CONFIRMED'" :class="[buttonClass, isDark ? 'bg-rose-500 hover:bg-rose-600' : 'bg-rose-400 hover:bg-rose-500', 'w-32']" @click="concealTask(task.taskId)">
           Cancel
         </button>
       </div>

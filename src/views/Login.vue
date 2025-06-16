@@ -37,7 +37,7 @@ const submit = async () => {
 
 const { isLoggedIn } = storeToRefs(userStore)
 onMounted(() => {
-  if (!isLoggedIn) {
+  if (isLoggedIn.value) {
     router.replace('/')
   }
 })

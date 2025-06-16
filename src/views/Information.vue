@@ -22,7 +22,7 @@ const showImage = ref(true)
 const isEditing = ref(false)
 const fileInput = ref<HTMLInputElement | null>(null)
 const form = reactive<Partial<UserInfo>>({})
-
+const logout = userStore.logout
 // label 相关
 const readOnlyFields: Array<keyof UserInfo> = ['firstName', 'lastName', 'gender', 'birthday','email']
 const isReadOnly = (key: keyof UserInfo) => readOnlyFields.includes(key as any)
@@ -81,12 +81,14 @@ const cancelEdit = () => {
 
 const saveEdit = async () => {
   try {
-    if (userId.value) {
-      const res = await updateUserInfo(Number(userId.value), form)
+    if(form.userName) {
+      const res = await updateUserInfo(form.userName)
       if (res.status === 200) {
         userInfoStore.$patch({ ...form })
         userStore.$patch({ userName: form.userName })
         cancelEdit()
+        logout()
+        await router.replace('/auth/login')
       } else {
         console.warn('error while saving user info')
       }

@@ -4,17 +4,17 @@ import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
 import router from '@/router'
 
-import { useUserStore } from '@/stores/userStore.ts'
+import { useAdminStore } from '@/stores/adminStore.ts'
 import { useFormClasses } from '@/utils/useFormClasses.ts'
 
 const theme = useThemeStore()
-const userStore = useUserStore()
+const adminStore = useAdminStore()
 const { isDark } = storeToRefs(theme)
-const {role, isLoggedIn} = storeToRefs(userStore)
+const {isLoggedIn} = storeToRefs(adminStore)
 const { buttonClass } = useFormClasses()
 
 onMounted(() => {
-  if (!isLoggedIn.value || role.value !== 'admin') {
+  if (!isLoggedIn.value) {
     router.replace('/')
   }
 })

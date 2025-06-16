@@ -17,7 +17,6 @@ export const useProviderInfoStore = defineStore('providerInfo', {
     description:'',
     servicesOffered:[],
     serviceArea:'',
-    availabilityTime:'',
     providerLabels:[],
     priceRange:'',
     loading: false,
@@ -34,7 +33,7 @@ export const useProviderInfoStore = defineStore('providerInfo', {
 
       try {
         const response = await fetchProviderInfo(userId)
-        this.$patch(response[0])
+        this.$patch(response)
       } catch (error: any) {
         this.error = error.message || 'Loading provider info Failed'
         console.error('Loading provider info Failed:', this.error)

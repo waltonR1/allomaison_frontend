@@ -41,11 +41,11 @@ export const useMyTaskStore = defineStore('myTaskStore', {
 
     async conceal(taskId: number) {
       try {
-        const response = await changeTaskStatus(taskId,'Cancelled')
+        const response = await changeTaskStatus(taskId,'PENDING')
         if (response.status === 200) {
           const task = this.taskCards.find((o) => o.taskId === taskId)
           if (task) {
-            task.status = 'Cancelled'
+            task.status = 'CANCELLED'
           }
         }
       } catch (e: any) {
@@ -55,11 +55,11 @@ export const useMyTaskStore = defineStore('myTaskStore', {
 
     async complete(taskId: number) {
       try {
-        const response = await changeTaskStatus(taskId,'Completed')
+        const response = await changeTaskStatus(taskId,'COMPLETED')
         if (response.status === 200) {
           const task = this.taskCards.find((o) => o.taskId === taskId)
           if (task) {
-            task.status = 'Completed'
+            task.status = 'COMPLETED'
           }
         }
       } catch (e: any) {

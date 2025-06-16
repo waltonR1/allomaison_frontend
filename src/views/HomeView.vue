@@ -99,7 +99,7 @@ onMounted(async () => {
           </div>
           <div>
             <router-link :to="{ name: 'providerDetail', params: { providerId: providerCard.providerId } }" class="font-bold hover:underline">{{ providerCard.providerName }}</router-link>
-            <p class="text-sm text-gray-500 flex items-center"><span class="text-yellow-400 mr-1">★</span> {{ providerCard.rating }}/5</p>
+            <p class="text-sm text-gray-500 flex items-center">{{ providerCard.city }}</p>
           </div>
         </div>
         <p class="text-sm">{{ providerCard.description }}</p>

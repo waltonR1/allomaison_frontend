@@ -37,18 +37,18 @@ const filteredTasks = computed(() => {
 
 const statusOptions = [
   { value: 'All', label: 'All' },
-  { value: 'Confirmed', label: 'Confirmed' },
-  { value: 'Completed', label: 'Completed' },
-  { value: 'Cancelled', label: 'Cancelled' },
+  { value: 'CONFIRMED', label: 'CONFIRMED' },
+  { value: 'COMPLETED', label: 'COMPLETED' },
+  { value: 'CANCELLED', label: 'CANCELLED' },
 ]
 
 const statusColor = (status: string) => {
   switch (status) {
-    case 'Confirmed':
+    case 'CONFIRMED':
       return 'text-blue-500'
-    case 'Completed':
+    case 'COMPLETED':
       return 'text-green-600'
-    case 'Cancelled':
+    case 'CANCELLED':
       return 'text-rose-500'
     default:
       return ''
@@ -148,13 +148,13 @@ const { buttonClass } = useFormClasses()
             <button :class="[buttonClass, 'w-32']" @click="router.push({name:'taskInfo', params:{taskId : task.taskId}})">
               View
             </button>
-            <button v-if="task.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactCustomer(task.customerId)">
+            <button v-if="task.status === 'CONFIRMED'" :class="[buttonClass, isDark ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-emerald-400 hover:bg-emerald-500', 'w-32']" @click="contactCustomer(task.customerId)">
               Contact
             </button>
-            <button v-if="task.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="completeTask(task.taskId)">
+            <button v-if="task.status === 'CONFIRMED'" :class="[buttonClass, isDark ? 'bg-sky-500 hover:bg-sky-600' : 'bg-sky-400 hover:bg-sky-500', 'w-32']" @click="completeTask(task.taskId)">
               Completed
             </button>
-            <button v-if="task.status === 'Confirmed'" :class="[buttonClass, isDark ? 'bg-rose-500 hover:bg-rose-600' : 'bg-rose-400 hover:bg-rose-500', 'w-32']" @click="concealTask(task.taskId)">
+            <button v-if="task.status === 'CONFIRMED'" :class="[buttonClass, isDark ? 'bg-rose-500 hover:bg-rose-600' : 'bg-rose-400 hover:bg-rose-500', 'w-32']" @click="concealTask(task.taskId)">
               Cancel
             </button>
           </div>

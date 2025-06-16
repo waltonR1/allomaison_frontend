@@ -45,11 +45,13 @@ const submitRegister = async () => {
   }
   try {
     loading.value = true
-    await register(form)
+    const status =  await register(form)
 
+    if (status === 200) {
     // 或者提示邮箱验证？后端去发送？
     await alert('Successfully registered')
     await Router.push('/auth/login')
+    }
 
   } catch (error: any) {
     throw new Error(error.response?.data?.message || error.response?.data || 'register failed');

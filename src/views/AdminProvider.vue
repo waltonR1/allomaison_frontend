@@ -5,15 +5,15 @@ import router from '@/router'
 
 import { fetchProviderApplications, reviewProviderApplication } from '@/api/withTokenAPI'
 import { useThemeStore } from '@/stores/themeStore.ts'
-import { useUserStore } from '@/stores/userStore.ts'
+import { useAdminStore } from '@/stores/adminStore.ts'
 import type { AdminProviderApplication } from '@/types/types.ts'
 
 
 
 const theme = useThemeStore()
-const userStore = useUserStore()
+const adminStore = useAdminStore()
 const { isDark } = storeToRefs(theme)
-const {role, isLoggedIn} = storeToRefs(userStore)
+const {isLoggedIn} = storeToRefs(adminStore)
 
 const providerApplications = ref<AdminProviderApplication[]>([])
 const loadingProvider = ref<boolean>(false)
@@ -31,7 +31,6 @@ const loadProviderApplications = async (): Promise<void> => {
   loadingProvider.value = true
   try {
     providerApplications.value = await fetchProviderApplications() as AdminProviderApplication[]
-    console.log(providerApplications.value)
   } finally {
     loadingProvider.value = false
   }
@@ -45,7 +44,7 @@ const handleReview = async (applicationId: number, status: string): Promise<void
 }
 
 onMounted(() => {
-  if (!isLoggedIn.value || role.value !== 'admin') {
+  if (!isLoggedIn.value) {
     router.replace('/')
   }
   loadProviderApplications()
@@ -88,16 +87,16 @@ onMounted(() => {
               </button>
             </td>
             <td class="p-3">
-                <span :class="[{'text-yellow-600': item.status === 'pending','text-green-600': item.status === 'approved','text-red-600': item.status === 'rejected'},'font-semibold capitalize']">
+                <span :class="[{'text-yellow-600': item.status === 'PENDING','text-green-600': item.status === 'approved','text-red-600': item.status === 'rejected'},'font-semibold capitalize']">
                   {{ item.status }}
                 </span>
             </td>
             <td class="p-3 space-x-2">
-              <template v-if="item.status === 'pending'">
-                <button @click="handleReview(item.applicationId, 'approved')" :disabled="reviewingId === item.applicationId" class="px-3 py-1 w-20 bg-green-500 hover:bg-green-600 text-white rounded shadow disabled:opacity-50">
+              <template v-if="item.status === 'PENDING'">
+                <button @click="handleReview(item.applicationId, 'approve')" :disabled="reviewingId === item.applicationId" class="px-3 py-1 w-20 bg-green-500 hover:bg-green-600 text-white rounded shadow disabled:opacity-50">
                   {{ reviewingId === item.applicationId ? 'Processing…' : 'Approve' }}
                 </button>
-                <button @click="handleReview(item.applicationId, 'rejected')" :disabled="reviewingId === item.applicationId" class="mt-3 px-3 py-1 w-20 bg-red-500 hover:bg-red-600 text-white rounded shadow disabled:opacity-50">
+                <button @click="handleReview(item.applicationId, 'reject')" :disabled="reviewingId === item.applicationId" class="mt-3 px-3 py-1 w-20 bg-red-500 hover:bg-red-600 text-white rounded shadow disabled:opacity-50">
                   Reject
                 </button>
               </template>
@@ -121,7 +120,7 @@ onMounted(() => {
       <div :class="[isDark ? 'bg-gray-900 border border-amber-50' : 'bg-white', 'p-6 rounded-2xl shadow-lg w-96']">
         <h2 :class="[isDark ? 'text-white' : 'text-gray-800', 'text-xl font-bold mb-4']">Certifications</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <img v-for="(img, index) in currentCertImages" :key="index" :src="img" class="max-w-full max-h-80 object-contain border rounded" alt="certificate" />
+          <img v-for="(img, index) in currentCertImages" :key="index" :src="img.fileUrl" class="max-w-full max-h-80 object-contain border rounded" alt="certificate" />
         </div>
         <div class="text-center mt-4">
           <button @click="showCertModal = false" class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 text-gray-800">

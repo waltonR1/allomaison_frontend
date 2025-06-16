@@ -52,7 +52,7 @@ const cancelEdit = () => {
 
 const preprocessForm = (): Partial<ProviderInfo> => {
   const processed: Partial<ProviderInfo> = {}
-  const basicFields: Array<'category' |'city' | 'description' | 'serviceArea' | 'availabilityTime' | 'priceRange'> = ['category', 'city', 'description', 'serviceArea', 'availabilityTime', 'priceRange']
+  const basicFields: Array<'category' |'city' | 'description' | 'serviceArea' | 'priceRange'> = ['category', 'city', 'description', 'serviceArea',  'priceRange']
   basicFields.forEach((key) => {
     const val = form[key]
     if (val !== undefined && val !== null) {
@@ -162,14 +162,6 @@ onMounted(async () => {
                   <input v-model="form.serviceArea" :class="[inputClass, 'w-full text-lg']" placeholder="Example: Paris + 10km" />
                 </template>
                 <p v-else>{{ providerInfo.serviceArea.value || '—' }}</p>
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium mb-1">Availability</label>
-                <template v-if="isEditing">
-                  <input v-model="form.availabilityTime" :class="[inputClass, 'w-full text-lg']" placeholder="Example: Mon–Fri: 08:00–19:00" />
-                </template>
-                <p v-else>{{ providerInfo.availabilityTime.value || '—' }}</p>
               </div>
 
               <div>

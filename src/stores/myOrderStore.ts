@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { changeOrderStatus, fetchOrders, reviewOrder } from '@/api/withTokenAPI.ts'
+import { cancelOrder, fetchOrders, reviewOrder } from '@/api/withTokenAPI.ts'
 import type { MyOrderCard } from '@/types/types'
 
 type MyOrderState = {
@@ -24,12 +24,12 @@ export const useMyOrderStore = defineStore('myOrderStore', {
   },
 
   actions: {
-    async fetchOrders(customerId: number, force = false) {
+    async fetchOrders(force = false) {
       if (this.orderCards.length > 0 && !force) return;
 
       try {
         this.loading = true
-        this.orderCards = await fetchOrders(customerId)
+        this.orderCards = await fetchOrders()
         this.error = null
         this.fetched = true
       } catch (e: any) {
@@ -41,25 +41,11 @@ export const useMyOrderStore = defineStore('myOrderStore', {
 
     async conceal(orderId: number) {
       try {
-        const response = await changeOrderStatus(orderId,'Cancelled')
+        const response = await cancelOrder(orderId)
         if (response.status === 200) {
           const order = this.orderCards.find((o) => o.orderId === orderId)
           if (order) {
-            order.status = 'Cancelled'
-          }
-        }
-      } catch (e: any) {
-        this.error = e.message || 'Conceal Failed'
-      }
-    },
-
-    async restart(orderId: number) {
-      try {
-        const response = await changeOrderStatus(orderId,'Pending')
-        if (response.status === 200) {
-          const order = this.orderCards.find((o) => o.orderId === orderId)
-          if (order) {
-            order.status = 'Pending'
+            order.status = 'CANCELLED'
           }
         }
       } catch (e: any) {

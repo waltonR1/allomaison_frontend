@@ -4,14 +4,15 @@ import { storeToRefs } from 'pinia'
 
 import { useThemeStore } from '@/stores/themeStore.ts'
 import { useUserStore } from '@/stores/userStore.ts'
-import { fetchInfoMessages, markInfoMessageAsRead } from '@/api/withTokenAPI'
+import { fetchInfoMessages } from '@/api/withTokenAPI'
 import type { InfoMessage } from '@/types/types'
+import { useRoute } from 'vue-router'
 
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 
 const userStore = useUserStore()
-const { userId, isLoggedIn } = storeToRefs(userStore)
+const { isLoggedIn } = storeToRefs(userStore)
 
 const showPanel = ref(false)
 const isClicked = ref(false)
@@ -20,6 +21,8 @@ const isHovered = ref(false)
 const infoMessages = ref<InfoMessage[]>([])
 const loading = ref(false)
 
+const route = useRoute()
+const isAdmin = computed(() => route.path.includes('admin'))
 
 enum InfoMessageType {
   NOTICE = 'NOTICE',
@@ -30,9 +33,7 @@ enum InfoMessageType {
 const loadMessages = async () => {
   loading.value = true
   try {
-    if (userId.value) {
-      infoMessages.value = await fetchInfoMessages(userId.value)
-    }
+    infoMessages.value = await fetchInfoMessages()
   } catch (e: any) {
     throw new Error(e)
   } finally {
@@ -70,9 +71,8 @@ const getTypeColor = (type: InfoMessageType) => {
 const selectedMessage = ref<InfoMessage|null>(null)
 
 const openDetail = (msg: InfoMessage) => {
-  if (!msg.isNew) {
-    msg.isNew = true;
-    markInfoMessageAsRead(msg.announceId).catch(() => { msg.isNew = false })
+  if (!msg.recent) {
+    msg.recent = true;
   }
   selectedMessage.value = msg;
 }
@@ -90,18 +90,19 @@ watch(isLoggedIn, (val) => {
 })
 
 onMounted(() => {
-  if (isLoggedIn.value ) {}
+  if(!isAdmin){
   loadMessages()
+  }
 })
 </script>
 
 <template>
   <!-- 悬浮添加按钮 -->
-  <button @click="togglePanel" @mouseenter="isHovered = true" @mouseleave="isHovered = false" :class="[isDark ? 'bg-amber-500 hover:bg-amber-600' : 'bg-amber-400 hover:bg-amber-500', isDark ? 'dark:border dark:border-gray-700' : '', 'fixed bottom-8 right-8 text-white rounded-full w-14 h-14 text-3xl flex items-center justify-center shadow-lg transition-all duration-200 z-50']" :style="{ transform: transformStyle }">
+  <button v-if="!isAdmin" @click="togglePanel" @mouseenter="isHovered = true" @mouseleave="isHovered = false" :class="[isDark ? 'bg-amber-500 hover:bg-amber-600' : 'bg-amber-400 hover:bg-amber-500', isDark ? 'dark:border dark:border-gray-700' : '', 'fixed bottom-8 right-8 text-white rounded-full w-14 h-14 text-3xl flex items-center justify-center shadow-lg transition-all duration-200 z-50']" :style="{ transform: transformStyle }">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
     </svg>
-    <span v-if="infoMessages.filter(m=>!m.isNew).length" class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full px-1.5 py-0.5">{{ infoMessages.filter(m => !m.isNew).length
+    <span v-if="infoMessages.filter(m=>!m.recent).length" class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full px-1.5 py-0.5">{{ infoMessages.filter(m => !m.recent).length
       }}</span>
   </button>
 
@@ -116,7 +117,7 @@ onMounted(() => {
           <div @click="openDetail(msg)" class="cursor-pointer border rounded-lg px-3 py-2 flex flex-col gap-1 hover:bg-gray-50 transition-all duration-150" :class="getTypeColor(msg.type as InfoMessageType)">
             <div class="flex items-center justify-between">
               <span class="font-medium">{{ msg.title || 'No Title' }}</span>
-              <span class="text-xs" :class="msg.isNew ? 'opacity-60' : 'font-bold text-red-500'">{{ msg.isNew ? '' : 'New'
+              <span class="text-xs" :class="msg.recent ? 'opacity-60' : 'font-bold text-red-500'">{{ msg.recent ? '' : 'New'
                 }}</span>
             </div>
             <div class="text-xs text-gray-500">{{ msg.sentTime.slice(0, 16).replace('T', ' ') }}</div>
